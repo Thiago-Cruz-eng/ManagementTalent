@@ -1,13 +1,18 @@
+using System.Text.RegularExpressions;
+
 namespace ManagementTalent.Domain.Entity;
 
 public class JobParameterBase
 {
-    public Guid Id { get; set; } = Guid.NewGuid();
+    public string Id { get; set; } = Guid.NewGuid().ToString();
     public string JobParamTitle { get; set; }
     public string Description { get; set; }
     public string Observation { get; set; }
     public double Weight { get; set; }
-    public Seniority JobSeniorities { get; set; }
+    public GroupParameter GroupParameter { get; set; }
+    public List<Seniority> Seniorities { get; set; }
+    public List<JobParameterSeniority> JobParameterSeniorities { get; set; }
+
     
     private List<string> _validationErrors;
 
@@ -38,7 +43,7 @@ public class JobParameterBase
     
     private void ValidateGroupExist()
     {
-        if (JobSeniorities.SeniorityNumber <= 0)
+        if (Seniorities.Count <= 0)
             _validationErrors.Add("JobSeniorities.SeniorityGrid does not have a name.");
     }
 }

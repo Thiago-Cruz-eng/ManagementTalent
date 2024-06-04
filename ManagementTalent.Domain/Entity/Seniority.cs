@@ -5,6 +5,10 @@ public class Seniority
     public Guid Id { get; set; } = Guid.NewGuid();
     public string SeniorityName { get; set; }
     public int SeniorityNumber { get; set; }
+    public List<JobParameterBase> JobParameterBases { get; set; }
+    public List<JobParameterSeniority> JobParameterSeniorities { get; set; }
+
+    
     private List<string> _validationErrors;
 
     public void Validate()

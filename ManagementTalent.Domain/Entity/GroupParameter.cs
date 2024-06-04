@@ -2,9 +2,10 @@ namespace ManagementTalent.Domain.Entity;
 
 public class GroupParameter
 {
-    public Guid Id { get; set; } = Guid.NewGuid();
+    public string Id { get; set; } = Guid.NewGuid().ToString();
     public string GroupParamTitle { get; set; }
     public double Weight { get; set; }
+    public Assessment Assessment { get; set; }
     public List<JobParameterBase> Parameters { get; set; }
 
     public DateTime CreateAt { get; set; } = DateTime.UtcNow;

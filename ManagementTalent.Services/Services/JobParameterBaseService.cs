@@ -21,8 +21,7 @@ public class JobParameterBaseService
             JobParamTitle = jobParameterBaseDto.JobParamTitle,
             Description = jobParameterBaseDto.Description,
             Observation = jobParameterBaseDto.Observation,
-            Weight = jobParameterBaseDto.Weight,
-            JobSeniorities = jobParameterBaseDto.JobSeniorities
+            Weight = jobParameterBaseDto.Weight
         };
         
         jobParameterBase.Validate();
@@ -34,8 +33,7 @@ public class JobParameterBaseService
             JobParamTitle = jobParameterBase.JobParamTitle,
             Description = jobParameterBase.Description,
             Observation = jobParameterBase.Observation,
-            Weight = jobParameterBase.Weight,
-            JobSeniorities = jobParameterBase.JobSeniorities
+            Weight = jobParameterBase.Weight
         };
     }
     
@@ -47,7 +45,6 @@ public class JobParameterBaseService
         jobParameterBase.Description = jobParameterBaseDto.Description ?? jobParameterBase.Description;
         jobParameterBase.Observation = jobParameterBaseDto.Observation ?? jobParameterBase.Observation;
         jobParameterBase.Weight = jobParameterBaseDto.Weight ?? jobParameterBase.Weight;
-        jobParameterBase.JobSeniorities = jobParameterBaseDto.JobSeniorities ?? jobParameterBase.JobSeniorities;
         
         jobParameterBase.Validate();
  
@@ -67,8 +64,7 @@ public class JobParameterBaseService
             JobParamTitle = jobParameterBase.JobParamTitle,
             Description = jobParameterBase.Description,
             Observation = jobParameterBase.Observation,
-            Weight = jobParameterBase.Weight,
-            JobSeniorities = jobParameterBase.JobSeniorities
+            Weight = jobParameterBase.Weight
         };
     }
 
@@ -83,8 +79,7 @@ public class JobParameterBaseService
                 JobParamTitle = x.JobParamTitle,
                 Description = x.Description,
                 Observation = x.Observation,
-                Weight = x.Weight,
-                JobSeniorities = x.JobSeniorities
+                Weight = x.Weight
             });
         });
         return jobParameterBaseResponses;

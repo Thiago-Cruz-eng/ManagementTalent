@@ -8,6 +8,10 @@ public class GroupParameterConfig : IEntityTypeConfiguration<GroupParameter>
 {
     public void Configure(EntityTypeBuilder<GroupParameter> builder)
     {
-        
+        builder.HasKey(gp => gp.Id); 
+
+        builder.HasMany(gp => gp.Parameters)
+            .WithOne(jpb => jpb.GroupParameter)
+            .HasForeignKey(jpb => jpb.Id);
     }
 }

@@ -2,7 +2,7 @@ namespace ManagementTalent.Domain.Entity;
 
 public class Assessment
 {
-    public Guid Id { get; set; } = Guid.NewGuid();
+    public string Id { get; set; } = Guid.NewGuid().ToString();
     public Colab Collaborator { get; set; }
     public DateTime CreateAt { get; set; } = DateTime.Now;
     public DateTime? NextAssessment { get; set; } = DateTime.Now.AddYears(1);

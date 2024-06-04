@@ -8,5 +8,4 @@ public class GetJobParameterBaseResponse
     public string Description { get; set; }
     public string Observation { get; set; }
     public double Weight { get; set; }
-    public Seniority? JobSeniorities { get; set; }
 }

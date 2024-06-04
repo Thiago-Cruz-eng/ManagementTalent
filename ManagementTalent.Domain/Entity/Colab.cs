@@ -4,7 +4,6 @@ namespace ManagementTalent.Domain.Entity;
 
 public class Colab : IdentityUser
 {
-    public Guid Id { get; set; } = Guid.NewGuid();
     public Supervisor? Sup { get; set; }
     public string Name { get; set; }
     public DateTime DateOfCreation { get; set; } = DateTime.UtcNow;

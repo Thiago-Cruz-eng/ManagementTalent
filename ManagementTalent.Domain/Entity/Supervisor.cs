@@ -2,7 +2,7 @@ namespace ManagementTalent.Domain.Entity;
 
 public class Supervisor
 {
-    public Guid Id { get; set; } = Guid.NewGuid();
+    public string Id { get; set; } = Guid.NewGuid().ToString();
     public Supervisor? SupFather { get; set; }
     public string Name { get; set; }
     public string Company { get; set; }

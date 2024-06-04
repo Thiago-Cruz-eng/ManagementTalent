@@ -869,7 +869,8 @@
           "Microsoft.EntityFrameworkCore.Abstractions": "8.0.6",
           "Microsoft.Extensions.DependencyInjection": "9.0.0-preview.3.24172.9",
           "Microsoft.Extensions.Logging": "9.0.0-preview.3.24172.9",
-          "Microsoft.SqlServer.Server": "1.0.0"
+          "Microsoft.SqlServer.Server": "1.0.0",
+          "Pomelo.EntityFrameworkCore.MySql": "8.0.2"
         },
         "runtime": {
           "ManagementTalent.Infra.dll": {}
