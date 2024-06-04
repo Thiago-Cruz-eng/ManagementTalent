@@ -1,0 +1,301 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/marlongiona/RiderProjects/ManagementTalent/ManagementTalent/ManagementTalent.csproj": {}
+  },
+  "projects": {
+    "/home/marlongiona/RiderProjects/ManagementTalent/ManagementTalent.Domain/ManagementTalent.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/marlongiona/RiderProjects/ManagementTalent/ManagementTalent.Domain/ManagementTalent.Domain.csproj",
+        "projectName": "ManagementTalent.Domain",
+        "projectPath": "/home/marlongiona/RiderProjects/ManagementTalent/ManagementTalent.Domain/ManagementTalent.Domain.csproj",
+        "packagesPath": "/home/marlongiona/.nuget/packages/",
+        "outputPath": "/home/marlongiona/RiderProjects/ManagementTalent/ManagementTalent.Domain/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/marlongiona/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.Extensions.Identity.Stores": {
+              "target": "Package",
+              "version": "[8.0.5, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/home/marlongiona/.dotnet/sdk/8.0.203/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/marlongiona/RiderProjects/ManagementTalent/ManagementTalent.Infra/ManagementTalent.Infra.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/marlongiona/RiderProjects/ManagementTalent/ManagementTalent.Infra/ManagementTalent.Infra.csproj",
+        "projectName": "ManagementTalent.Infra",
+        "projectPath": "/home/marlongiona/RiderProjects/ManagementTalent/ManagementTalent.Infra/ManagementTalent.Infra.csproj",
+        "packagesPath": "/home/marlongiona/.nuget/packages/",
+        "outputPath": "/home/marlongiona/RiderProjects/ManagementTalent/ManagementTalent.Infra/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/marlongiona/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/home/marlongiona/RiderProjects/ManagementTalent/ManagementTalent.Domain/ManagementTalent.Domain.csproj": {
+                "projectPath": "/home/marlongiona/RiderProjects/ManagementTalent/ManagementTalent.Domain/ManagementTalent.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.0-preview.3.24172.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[9.0.0-preview.1.24081.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.0-preview.3.24172.4, )"
+            },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[9.0.0-preview.3.24172.9, )"
+            },
+            "Microsoft.Extensions.Logging": {
+              "target": "Package",
+              "version": "[9.0.0-preview.3.24172.9, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/home/marlongiona/.dotnet/sdk/8.0.203/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/marlongiona/RiderProjects/ManagementTalent/ManagementTalent.Services/ManagementTalent.Services.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/marlongiona/RiderProjects/ManagementTalent/ManagementTalent.Services/ManagementTalent.Services.csproj",
+        "projectName": "ManagementTalent.Services",
+        "projectPath": "/home/marlongiona/RiderProjects/ManagementTalent/ManagementTalent.Services/ManagementTalent.Services.csproj",
+        "packagesPath": "/home/marlongiona/.nuget/packages/",
+        "outputPath": "/home/marlongiona/RiderProjects/ManagementTalent/ManagementTalent.Services/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/marlongiona/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/home/marlongiona/RiderProjects/ManagementTalent/ManagementTalent.Domain/ManagementTalent.Domain.csproj": {
+                "projectPath": "/home/marlongiona/RiderProjects/ManagementTalent/ManagementTalent.Domain/ManagementTalent.Domain.csproj"
+              },
+              "/home/marlongiona/RiderProjects/ManagementTalent/ManagementTalent.Infra/ManagementTalent.Infra.csproj": {
+                "projectPath": "/home/marlongiona/RiderProjects/ManagementTalent/ManagementTalent.Infra/ManagementTalent.Infra.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/home/marlongiona/.dotnet/sdk/8.0.203/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/marlongiona/RiderProjects/ManagementTalent/ManagementTalent/ManagementTalent.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/marlongiona/RiderProjects/ManagementTalent/ManagementTalent/ManagementTalent.csproj",
+        "projectName": "ManagementTalent",
+        "projectPath": "/home/marlongiona/RiderProjects/ManagementTalent/ManagementTalent/ManagementTalent.csproj",
+        "packagesPath": "/home/marlongiona/.nuget/packages/",
+        "outputPath": "/home/marlongiona/RiderProjects/ManagementTalent/ManagementTalent/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/marlongiona/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/home/marlongiona/RiderProjects/ManagementTalent/ManagementTalent.Infra/ManagementTalent.Infra.csproj": {
+                "projectPath": "/home/marlongiona/RiderProjects/ManagementTalent/ManagementTalent.Infra/ManagementTalent.Infra.csproj"
+              },
+              "/home/marlongiona/RiderProjects/ManagementTalent/ManagementTalent.Services/ManagementTalent.Services.csproj": {
+                "projectPath": "/home/marlongiona/RiderProjects/ManagementTalent/ManagementTalent.Services/ManagementTalent.Services.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "EntityFramework": {
+              "target": "Package",
+              "version": "[6.5.0-preview2-24180-01, )"
+            },
+            "Microsoft.AspNetCore.OpenApi": {
+              "target": "Package",
+              "version": "[8.0.3, )"
+            },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[9.0.0-preview.3.24172.9, )"
+            },
+            "Microsoft.Extensions.DependencyInjection.Abstractions": {
+              "target": "Package",
+              "version": "[9.0.0-preview.3.24172.9, )"
+            },
+            "Pomelo.EntityFrameworkCore.MySql": {
+              "target": "Package",
+              "version": "[9.0.0-preview.1, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.4.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/home/marlongiona/.dotnet/sdk/8.0.203/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

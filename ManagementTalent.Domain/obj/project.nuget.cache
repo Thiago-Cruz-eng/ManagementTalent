@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "dgSpecHash": "tyR4/GnAGNAWCrPrkrDdE+XfNxRZ1bSMlD1reyNfHvPD9RD6Cs/DxyGZ1/tS1nuPr5QngyEiEC+9h+YMrRVi3w==",
+  "success": true,
+  "projectFilePath": "/home/marlongiona/RiderProjects/ManagementTalent/ManagementTalent.Domain/ManagementTalent.Domain.csproj",
+  "expectedPackageFiles": [
+    "/home/marlongiona/.nuget/packages/microsoft.aspnetcore.cryptography.internal/8.0.5/microsoft.aspnetcore.cryptography.internal.8.0.5.nupkg.sha512",
+    "/home/marlongiona/.nuget/packages/microsoft.aspnetcore.cryptography.keyderivation/8.0.5/microsoft.aspnetcore.cryptography.keyderivation.8.0.5.nupkg.sha512",
+    "/home/marlongiona/.nuget/packages/microsoft.extensions.caching.abstractions/8.0.0/microsoft.extensions.caching.abstractions.8.0.0.nupkg.sha512",
+    "/home/marlongiona/.nuget/packages/microsoft.extensions.dependencyinjection/8.0.0/microsoft.extensions.dependencyinjection.8.0.0.nupkg.sha512",
+    "/home/marlongiona/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/8.0.0/microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
+    "/home/marlongiona/.nuget/packages/microsoft.extensions.identity.core/8.0.5/microsoft.extensions.identity.core.8.0.5.nupkg.sha512",
+    "/home/marlongiona/.nuget/packages/microsoft.extensions.identity.stores/8.0.5/microsoft.extensions.identity.stores.8.0.5.nupkg.sha512",
+    "/home/marlongiona/.nuget/packages/microsoft.extensions.logging/8.0.0/microsoft.extensions.logging.8.0.0.nupkg.sha512",
+    "/home/marlongiona/.nuget/packages/microsoft.extensions.logging.abstractions/8.0.0/microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512",
+    "/home/marlongiona/.nuget/packages/microsoft.extensions.options/8.0.2/microsoft.extensions.options.8.0.2.nupkg.sha512",
+    "/home/marlongiona/.nuget/packages/microsoft.extensions.primitives/8.0.0/microsoft.extensions.primitives.8.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
