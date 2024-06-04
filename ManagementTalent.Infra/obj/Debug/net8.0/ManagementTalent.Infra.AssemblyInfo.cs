@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ManagementTalent.Infra")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+818c1cb7da12fd56e84abdc51c6095049ccf9aa6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+97cf989edbe2f8049d61853eba242145efc25e5e")]
 [assembly: System.Reflection.AssemblyProductAttribute("ManagementTalent.Infra")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ManagementTalent.Infra")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

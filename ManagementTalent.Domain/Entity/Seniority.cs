@@ -3,28 +3,30 @@ namespace ManagementTalent.Domain.Entity;
 public class Seniority
 {
     public Guid Id { get; set; } = Guid.NewGuid();
-    public Dictionary<string, int> SeniorityGrid { get; set; }
+    public string SeniorityName { get; set; }
+    public int SeniorityNumber { get; set; }
     private List<string> _validationErrors;
 
     public void Validate()
     {
         _validationErrors = new List<string>();
 
+        ValidateNullAndEmpty();
         ValidateGroupExist();
 
         if (_validationErrors.Any())
             throw new ArgumentException(string.Join(", ", _validationErrors));
     }
     
-    private void ValidateNullAndEmpty(string description)
+    private void ValidateNullAndEmpty()
     {
-        if (string.IsNullOrWhiteSpace(description))
+        if (string.IsNullOrWhiteSpace(SeniorityName))
             _validationErrors.Add("description is required.");
     }
     
     private void ValidateGroupExist()
     {
-        if (SeniorityGrid.Count <= 0)
-            _validationErrors.Add("SeniorityGrid does not have a name.");
+        if (SeniorityNumber <= 0)
+            _validationErrors.Add("SeniorityName does not have a name.");
     }
 }

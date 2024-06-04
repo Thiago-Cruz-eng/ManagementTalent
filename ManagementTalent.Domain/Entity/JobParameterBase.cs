@@ -38,7 +38,7 @@ public class JobParameterBase
     
     private void ValidateGroupExist()
     {
-        if (JobSeniorities.SeniorityGrid.Count <= 0)
+        if (JobSeniorities.SeniorityNumber <= 0)
             _validationErrors.Add("JobSeniorities.SeniorityGrid does not have a name.");
     }
 }

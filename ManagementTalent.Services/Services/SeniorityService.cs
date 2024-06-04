@@ -18,7 +18,8 @@ public class SeniorityService
     {
         var seniority = new Seniority
         {
-            SeniorityGrid = seniorityDto.SeniorityGrid
+            SeniorityName = seniorityDto.SeniorityName,
+            SeniorityNumber = seniorityDto.SeniorityNumber
         };
         
         seniority.Validate();
@@ -27,7 +28,8 @@ public class SeniorityService
         await _seniorityRepositorySql.SaveChange();
         return new CreateSeniorityResponse
         {
-            SeniorityGrid = seniority.SeniorityGrid
+            SeniorityName = seniority.SeniorityName,
+            SeniorityNumber = seniority.SeniorityNumber
         };
     }
     
@@ -35,7 +37,8 @@ public class SeniorityService
     {
         var seniority = await _seniorityRepositorySql.FindById(id);
         if (seniority == null) throw new ApplicationException("exercise not found");
-        seniority.SeniorityGrid = seniorityDto.SeniorityGrid;
+        seniority.SeniorityName = seniorityDto.SeniorityName ?? seniority.SeniorityName;
+        seniority.SeniorityNumber = seniorityDto.SeniorityNumber ?? seniority.SeniorityNumber;
         
         seniority.Validate();
  
@@ -52,7 +55,8 @@ public class SeniorityService
         var seniority = await _seniorityRepositorySql.FindById(id);
         return new GetSeniorityResponse
         {
-            SeniorityGrid = seniority.SeniorityGrid
+            SeniorityName = seniority.SeniorityName,
+            SeniorityNumber = seniority.SeniorityNumber
         };
     }
 
@@ -64,7 +68,8 @@ public class SeniorityService
         {
             seniorityResponses.Add(new GetSeniorityResponse
             {
-                SeniorityGrid = x.SeniorityGrid
+                SeniorityName = x.SeniorityName,
+                SeniorityNumber = x.SeniorityNumber
             });
         });
         return seniorityResponses;
@@ -72,8 +77,8 @@ public class SeniorityService
     
     public async Task DeleteSeniorityById(Guid id)
     {
-        var sup = await _seniorityRepositorySql.FindById(id);
-        _seniorityRepositorySql.Delete(sup);
+        var seniority = await _seniorityRepositorySql.FindById(id);
+        _seniorityRepositorySql.Delete(seniority);
         await _seniorityRepositorySql.SaveChange();
     }
 }
