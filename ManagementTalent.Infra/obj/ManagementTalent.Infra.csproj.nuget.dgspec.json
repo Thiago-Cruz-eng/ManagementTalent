@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/marlongiona/RiderProjects/ManagementTalent/ManagementTalent.Infra/ManagementTalent.Infra.csproj": {}
+    "C:\\Users\\thiago.cruz\\Documents\\Proj\\Pessoal\\ManagementTalent\\ManagementTalent.Infra\\ManagementTalent.Infra.csproj": {}
   },
   "projects": {
-    "/home/marlongiona/RiderProjects/ManagementTalent/ManagementTalent.Domain/ManagementTalent.Domain.csproj": {
+    "C:\\Users\\thiago.cruz\\Documents\\Proj\\Pessoal\\ManagementTalent\\ManagementTalent.Domain\\ManagementTalent.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/marlongiona/RiderProjects/ManagementTalent/ManagementTalent.Domain/ManagementTalent.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\thiago.cruz\\Documents\\Proj\\Pessoal\\ManagementTalent\\ManagementTalent.Domain\\ManagementTalent.Domain.csproj",
         "projectName": "ManagementTalent.Domain",
-        "projectPath": "/home/marlongiona/RiderProjects/ManagementTalent/ManagementTalent.Domain/ManagementTalent.Domain.csproj",
-        "packagesPath": "/home/marlongiona/.nuget/packages/",
-        "outputPath": "/home/marlongiona/RiderProjects/ManagementTalent/ManagementTalent.Domain/obj/",
+        "projectPath": "C:\\Users\\thiago.cruz\\Documents\\Proj\\Pessoal\\ManagementTalent\\ManagementTalent.Domain\\ManagementTalent.Domain.csproj",
+        "packagesPath": "C:\\Users\\thiago.cruz\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\thiago.cruz\\Documents\\Proj\\Pessoal\\ManagementTalent\\ManagementTalent.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/marlongiona/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\thiago.cruz\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -32,6 +32,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -59,21 +64,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/home/marlongiona/.dotnet/sdk/8.0.203/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.301/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "/home/marlongiona/RiderProjects/ManagementTalent/ManagementTalent.Infra/ManagementTalent.Infra.csproj": {
+    "C:\\Users\\thiago.cruz\\Documents\\Proj\\Pessoal\\ManagementTalent\\ManagementTalent.Infra\\ManagementTalent.Infra.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/marlongiona/RiderProjects/ManagementTalent/ManagementTalent.Infra/ManagementTalent.Infra.csproj",
+        "projectUniqueName": "C:\\Users\\thiago.cruz\\Documents\\Proj\\Pessoal\\ManagementTalent\\ManagementTalent.Infra\\ManagementTalent.Infra.csproj",
         "projectName": "ManagementTalent.Infra",
-        "projectPath": "/home/marlongiona/RiderProjects/ManagementTalent/ManagementTalent.Infra/ManagementTalent.Infra.csproj",
-        "packagesPath": "/home/marlongiona/.nuget/packages/",
-        "outputPath": "/home/marlongiona/RiderProjects/ManagementTalent/ManagementTalent.Infra/obj/",
+        "projectPath": "C:\\Users\\thiago.cruz\\Documents\\Proj\\Pessoal\\ManagementTalent\\ManagementTalent.Infra\\ManagementTalent.Infra.csproj",
+        "packagesPath": "C:\\Users\\thiago.cruz\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\thiago.cruz\\Documents\\Proj\\Pessoal\\ManagementTalent\\ManagementTalent.Infra\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/marlongiona/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\thiago.cruz\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -85,8 +90,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/home/marlongiona/RiderProjects/ManagementTalent/ManagementTalent.Domain/ManagementTalent.Domain.csproj": {
-                "projectPath": "/home/marlongiona/RiderProjects/ManagementTalent/ManagementTalent.Domain/ManagementTalent.Domain.csproj"
+              "C:\\Users\\thiago.cruz\\Documents\\Proj\\Pessoal\\ManagementTalent\\ManagementTalent.Domain\\ManagementTalent.Domain.csproj": {
+                "projectPath": "C:\\Users\\thiago.cruz\\Documents\\Proj\\Pessoal\\ManagementTalent\\ManagementTalent.Domain\\ManagementTalent.Domain.csproj"
               }
             }
           }
@@ -95,6 +100,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -107,17 +117,23 @@
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[9.0.0-preview.3.24172.4, )"
+              "version": "[8.0.6, )"
             },
-            "Microsoft.EntityFrameworkCore.SqlServer": {
+            "Microsoft.EntityFrameworkCore.Abstractions": {
               "target": "Package",
-              "version": "[9.0.0-preview.1.24081.2, )"
+              "version": "[8.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.6, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[9.0.0-preview.3.24172.4, )"
+              "version": "[8.0.6, )"
             },
             "Microsoft.Extensions.DependencyInjection": {
               "target": "Package",
@@ -126,6 +142,10 @@
             "Microsoft.Extensions.Logging": {
               "target": "Package",
               "version": "[9.0.0-preview.3.24172.9, )"
+            },
+            "Microsoft.SqlServer.Server": {
+              "target": "Package",
+              "version": "[1.0.0, )"
             }
           },
           "imports": [
@@ -144,7 +164,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/home/marlongiona/.dotnet/sdk/8.0.203/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.301/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

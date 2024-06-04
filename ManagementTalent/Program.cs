@@ -1,6 +1,7 @@
 using ManagementTalent.Infra.Interfaces;
 using ManagementTalent.Infra.MySql;
 using ManagementTalent.Infra.Repositories;
+using ManagementTalent.Services.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +22,16 @@ builder.Services.AddScoped<IJobParameterBaseRepositorySql, JobParameterBaseRepos
 builder.Services.AddScoped<IJobRoleRepositorySql, JobRoleRepositorySql>();
 builder.Services.AddScoped<ISeniorityRepositorySql, SeniorityRepositorySql>();
 builder.Services.AddScoped<ISupervisorRepositorySql, SupervisorRepositorySql>();
+
+builder.Services.AddScoped<AssessmentParamResultService>();
+builder.Services.AddScoped<AssessmentService>();
+builder.Services.AddScoped<AssessmentResultService>();
+builder.Services.AddScoped<ColabService>();
+builder.Services.AddScoped<GroupParameterService>();
+builder.Services.AddScoped<JobParameterBaseService>();
+builder.Services.AddScoped<JobRoleService>();
+builder.Services.AddScoped<SeniorityService>();
+builder.Services.AddScoped<SupervisorService>();
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
