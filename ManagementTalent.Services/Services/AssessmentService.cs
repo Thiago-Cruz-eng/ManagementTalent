@@ -19,8 +19,7 @@ public class AssessmentService
     {
         var assessment = new Assessment
         {
-            JobRoleId = assessmentDto.JobRoleId,
-            GroupParameters = assessmentDto.GroupParameters,
+            JobRoleId = assessmentDto.JobRoleId
         };
         
         assessment.Validate();
@@ -29,8 +28,7 @@ public class AssessmentService
         await _assessmentRepositorySql.SaveChange();
         return new CreateAssessmentResponse
         {
-            JobRoleId = assessment.JobRoleId,
-            GroupParameters = assessment.GroupParameters,
+            JobRoleId = assessment.JobRoleId
         };
     }
     
@@ -39,7 +37,6 @@ public class AssessmentService
         var assessment = await _assessmentRepositorySql.FindById(id);
         if (assessment == null) throw new ApplicationException("exercise not found");
         assessment.JobRoleId = assessmentDto.JobRoleId ?? assessment.JobRoleId;
-        assessment.GroupParameters = assessmentDto.GroupParameters ?? assessment.GroupParameters;   
         
         assessment.Validate();
  
@@ -56,8 +53,7 @@ public class AssessmentService
         var assessment = await _assessmentRepositorySql.FindById(id);
         return new GetAssessmentResponse
         {
-            JobRoleId = assessment.JobRoleId,
-            GroupParameters = assessment.GroupParameters,
+            JobRoleId = assessment.JobRoleId
         };
     }
 
@@ -69,8 +65,7 @@ public class AssessmentService
         {
             assessmentResponses.Add(new GetAssessmentResponse
             {
-                JobRoleId = x.JobRoleId,
-                GroupParameters = x.GroupParameters,
+                JobRoleId = x.JobRoleId
             });
         });
         return assessmentResponses;

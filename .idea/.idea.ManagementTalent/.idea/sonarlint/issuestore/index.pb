@@ -155,3 +155,17 @@ KManagementTalent.Services/Services/Dtos/Requests/UpdateAssessmentRequest.cs,0\
 LManagementTalent.Services/Services/Dtos/Response/UpdateAssessmentResponse.cs,7\1\71745446b42323a829c11fa235e3d0131f3478c1
 y
 IManagementTalent.Services/Services/Dtos/Response/GetAssessmentResponse.cs,c\b\cb97ec35625acacc9655af81452763f872b966bb
+k
+;ManagementTalent.Services/Services/GroupParameterService.cs,a\f\afa6e6a73e58985665257affe840dddc38d18ef7
+h
+8ManagementTalent/Controllers/GroupParameterController.cs,9\d\9dd80426698175f5716d842ac710b31604f4cd38
+
+OManagementTalent.Services/Services/Dtos/Requests/CreateGroupParameterRequest.cs,b\f\bf6a9eb099e6b2cbd054d078b0029efb11eaedf1
+
+OManagementTalent.Services/Services/Dtos/Requests/UpdateGroupParameterRequest.cs,f\3\f34377e8dcb443c2ee5e91315ca264cf40a050aa
+€
+PManagementTalent.Services/Services/Dtos/Response/CreateGroupParameterResponse.cs,7\3\7303863540f3f47b12ab69fee793d98fa6c2d09f
+}
+MManagementTalent.Services/Services/Dtos/Response/GetGroupParameterResponse.cs,b\7\b7f264d2e7e731751e711c1e0e3b3a9d1675f350
+q
+AManagementTalent.Infra/ConfigModel/AssessmentParamResultConfig.cs,e\0\e0246588c59acd79550477c3048ed2f947d89649

@@ -16,63 +16,63 @@ public class AssessmentController : ControllerBase
     }
     
     [HttpPost]
-    public async Task<IActionResult> CreateExercise([FromBody] CreateAssessmentRequest createExerciseDto)
+    public async Task<IActionResult> CreateAssessment([FromBody] CreateAssessmentRequest createAssessmentDto)
     {
         try
         {
-            var training = await _assessmentService.CreateAssessment(createExerciseDto);
-            return Ok(training);
+            var assessment = await _assessmentService.CreateAssessment(createAssessmentDto);
+            return Ok(assessment);
         }
         catch (Exception e)
         {
-            throw new Exception("error on add Exercise",e);
+            throw new Exception("error on add Assessment",e);
         }
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetExercise()
+    public async Task<IActionResult> GetAssessment()
     {
         try
         {
-            var training = await _assessmentService.GetAllAssessment();
-            return Ok(training);
+            var assessment = await _assessmentService.GetAllAssessment();
+            return Ok(assessment);
         }
         catch (Exception e)
         {
-            throw new Exception("error on get Exercise",e);
+            throw new Exception("error on get Assessment",e);
         }
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetExerciseById(Guid id)
+    public async Task<IActionResult> GetAssessmentById(Guid id)
     {
         try
         {
-            var training = await _assessmentService.GetAssessment(id);
-            return Ok(training);
+            var assessment = await _assessmentService.GetAssessment(id);
+            return Ok(assessment);
         }
         catch (Exception e)
         {
-            throw new Exception("error on get Exercise",e);
+            throw new Exception("error on get Assessment",e);
         }
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateExerciseById(Guid id, [FromBody] UpdateAssessmentRequest updateExerciseDto)
+    public async Task<IActionResult> UpdateAssessmentById(Guid id, [FromBody] UpdateAssessmentRequest updateAssessmentDto)
     {
         try
         {
-            var training = await _assessmentService.UpdateAssessment(id, updateExerciseDto);
-            return Ok(training);
+            var assessment = await _assessmentService.UpdateAssessment(id, updateAssessmentDto);
+            return Ok(assessment);
         }
         catch (Exception e)
         {
-            throw new Exception("error on update Exercise",e);
+            throw new Exception("error on update Assessment",e);
         }
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteExerciseById(Guid id)
+    public async Task<IActionResult> DeleteAssessmentById(Guid id)
     {
         try
         {
@@ -81,7 +81,7 @@ public class AssessmentController : ControllerBase
         }
         catch (Exception e)
         {
-            throw new Exception("error on delete Exercise",e);
+            throw new Exception("error on delete Assessment",e);
         }
     }
 }

@@ -6,6 +6,7 @@ public class GroupParameter
     public string GroupParamTitle { get; set; }
     public double Weight { get; set; }
     public DateTime CreateAt { get; set; } = DateTime.UtcNow;
+    public Guid AssessmentId { get; set; }
     public List<GroupParameterJobParameter> GroupParameterJobParameters { get; set; }
     
     private List<string> _validationErrors;
@@ -20,6 +21,8 @@ public class GroupParameter
         if (_validationErrors.Any())
             throw new ArgumentException(string.Join(", ", _validationErrors));
     }
+    
+    
     
     private void ValidateWeight()
     {

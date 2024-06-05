@@ -7,5 +7,5 @@ public class CreateGroupParameterRequest
 {
     public string GroupParamTitle { get; set; }
     public double Weight { get; set; }
-    public List<JobParameterBase> Parameters { get; set; }
+    public Guid AssessmentId { get; set; }
 }

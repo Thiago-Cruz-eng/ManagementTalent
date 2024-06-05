@@ -20,7 +20,8 @@ public class GroupParameterService
         var groupParameter = new GroupParameter
         {
             GroupParamTitle = groupParameterDto.GroupParamTitle,
-            Weight = groupParameterDto.Weight
+            Weight = groupParameterDto.Weight,
+            AssessmentId = groupParameterDto.AssessmentId
         };
         
         groupParameter.Validate();
@@ -31,6 +32,7 @@ public class GroupParameterService
         {
             GroupParamTitle = groupParameter.GroupParamTitle,
             Weight = groupParameter.Weight,
+            AssessmentId = groupParameterDto.AssessmentId
         };
     }
     
@@ -40,6 +42,7 @@ public class GroupParameterService
         if (groupParameter == null) throw new ApplicationException("exercise not found");
         groupParameter.GroupParamTitle = groupParameterDto.GroupParamTitle ?? groupParameter.GroupParamTitle;
         groupParameter.Weight = groupParameterDto.Weight ?? groupParameter.Weight;
+        groupParameter.AssessmentId = groupParameterDto.AssessmentId;
         
         groupParameter.Validate();
  
@@ -58,6 +61,7 @@ public class GroupParameterService
         {
             GroupParamTitle = groupParameter.GroupParamTitle,
             Weight = groupParameter.Weight,
+            AssessmentId = groupParameter.AssessmentId
         };
     }
 
@@ -71,6 +75,7 @@ public class GroupParameterService
             {
                 GroupParamTitle = x.GroupParamTitle,
                 Weight = x.Weight,
+                AssessmentId = x.AssessmentId
             });
         });
         return groupParameterResponses;

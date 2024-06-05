@@ -7,6 +7,4 @@ public class CreateAssessmentResponse
 {
     public Guid JobRoleId { get; set; }
     public DateTime CreateAt { get; set; } = DateTime.Now;
-    public DateTime? NextAssessment { get; set; } = DateTime.Now.AddYears(1);
-    public ICollection<GroupParameter> GroupParameters { get; set; }
 }
