@@ -20,11 +20,10 @@ public class SupervisorService
         {
             Name = supervisorDto.Name,
             Age = supervisorDto.Age,
-            SupFather = supervisorDto.SupFather,
+            SupFatherId = supervisorDto.SupFather,
             SinceAtInJob = supervisorDto.SinceAtInJob,
             Company = supervisorDto.Company
         };
-        sup.Colabs = supervisorDto.Colabs ?? sup.Colabs;
         
         sup.Validate();
  
@@ -32,12 +31,11 @@ public class SupervisorService
         await _supervisorRepositorySql.SaveChange();
         return new CreateSupervisorResponse
         {
-            SupFather = sup.SupFather,
+            SupFather = sup.SupFatherId,
             Name = sup.Name,
             Company = sup.Company,
             SinceAtInJob = sup.SinceAtInJob,
             Age = sup.Age,
-            Colabs = sup.Colabs
         };
     }
     
@@ -47,7 +45,6 @@ public class SupervisorService
         if (sup == null) throw new ApplicationException("exercise not found");
         sup.Name = supervisorDto.Name;
         sup.Age = supervisorDto.Age ?? 0;
-        sup.SupFather = supervisorDto.SupFather;
         sup.SinceAtInJob = supervisorDto.SinceAtInJob ?? DateTime.MinValue;
         sup.Company = supervisorDto.Company;
         sup.Colabs = supervisorDto.Colabs ?? sup.Colabs;
@@ -58,7 +55,7 @@ public class SupervisorService
         await _supervisorRepositorySql.SaveChange();
         return new UpdateSupervisorResponse
         {
-            SupFather = sup.SupFather,
+            SupFather = sup.SupFatherId,
             Name = sup.Name,
             Company = sup.Company,
             SinceAtInJob = sup.SinceAtInJob,
@@ -72,12 +69,11 @@ public class SupervisorService
         var sup = await _supervisorRepositorySql.FindById(id);
         return new GetSupervisorResponse
         {
-            SupFather = sup.SupFather,
+            SupFather = sup.SupFatherId,
             Name = sup.Name,
             Company = sup.Company,
             SinceAtInJob = sup.SinceAtInJob,
-            Age = sup.Age,
-            Colabs = sup.Colabs
+            Age = sup.Age
         };
     }
 
@@ -89,12 +85,11 @@ public class SupervisorService
         {
             supResponse.Add(new GetSupervisorResponse
             {
-                SupFather = x.SupFather,
+                SupFather = x.SupFatherId,
                 Name = x.Name,
                 Company = x.Company,
                 SinceAtInJob = x.SinceAtInJob,
                 Age = x.Age,
-                Colabs = x.Colabs
             });
         });
         return supResponse;

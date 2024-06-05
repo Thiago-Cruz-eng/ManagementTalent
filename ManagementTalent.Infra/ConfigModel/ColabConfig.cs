@@ -9,8 +9,8 @@ public class ColabConfig : IEntityTypeConfiguration<Colab>
     public void Configure(EntityTypeBuilder<Colab> builder)
     { 
         builder
-            .HasOne(u => u.Sup)
+            .HasOne(u => u.Supervisor)
             .WithMany(p => p.Colabs)
-            .HasForeignKey(u => u.Id);
+            .HasForeignKey(u => u.SupervisorId);
     }
 }

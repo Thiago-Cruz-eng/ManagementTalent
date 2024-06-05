@@ -5,6 +5,6 @@ namespace ManagementTalent.Services.Services.Dtos.Requests;
 
 public class CreateAssessmentRequest
 {
-    public Colab Collaborator { get; set; }
+    public Guid JobRoleId { get; set; }
     public List<GroupParameter> GroupParameters { get; set; }
 }

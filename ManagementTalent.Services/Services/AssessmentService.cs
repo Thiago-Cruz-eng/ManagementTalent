@@ -19,7 +19,7 @@ public class AssessmentService
     {
         var assessment = new Assessment
         {
-            Collaborator = assessmentDto.Collaborator,
+            JobRoleId = assessmentDto.JobRoleId,
             GroupParameters = assessmentDto.GroupParameters,
         };
         
@@ -29,7 +29,7 @@ public class AssessmentService
         await _assessmentRepositorySql.SaveChange();
         return new CreateAssessmentResponse
         {
-            Collaborator = assessment.Collaborator,
+            JobRoleId = assessment.JobRoleId,
             GroupParameters = assessment.GroupParameters,
         };
     }
@@ -38,7 +38,7 @@ public class AssessmentService
     {
         var assessment = await _assessmentRepositorySql.FindById(id);
         if (assessment == null) throw new ApplicationException("exercise not found");
-        assessment.Collaborator = assessmentDto.Collaborator ?? assessment.Collaborator;
+        assessment.JobRoleId = assessmentDto.JobRoleId ?? assessment.JobRoleId;
         assessment.GroupParameters = assessmentDto.GroupParameters ?? assessment.GroupParameters;   
         
         assessment.Validate();
@@ -56,7 +56,7 @@ public class AssessmentService
         var assessment = await _assessmentRepositorySql.FindById(id);
         return new GetAssessmentResponse
         {
-            Collaborator = assessment.Collaborator,
+            JobRoleId = assessment.JobRoleId,
             GroupParameters = assessment.GroupParameters,
         };
     }
@@ -69,7 +69,7 @@ public class AssessmentService
         {
             assessmentResponses.Add(new GetAssessmentResponse
             {
-                Collaborator = x.Collaborator,
+                JobRoleId = x.JobRoleId,
                 GroupParameters = x.GroupParameters,
             });
         });

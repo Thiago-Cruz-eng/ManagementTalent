@@ -3,7 +3,8 @@ namespace ManagementTalent.Domain.Entity.AvaliationContext;
 public class Assessment
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
-    public Colab Collaborator { get; set; }
+    public Guid JobRoleId { get; set; }
+    public JobRole JobRole { get; set; }
     public DateTime CreateAt { get; set; } = DateTime.UtcNow;
     public ICollection<GroupParameter> GroupParameters { get; set; }
     
@@ -12,9 +13,7 @@ public class Assessment
     public void Validate()
     {
         _validationErrors = new List<string>();
-
-        ValidateColab(Collaborator);
-
+        
         if (_validationErrors.Any())
             throw new ArgumentException(string.Join(", ", _validationErrors));
     }
@@ -25,9 +24,9 @@ public class Assessment
             _validationErrors.Add("GroupParameters does not have a name.");
     }
 
-    private void ValidateColab(Colab collaborator)
+    private void ValidateColab(string collaborator)
     {
-        if (string.IsNullOrWhiteSpace(collaborator.Name))
+        if (string.IsNullOrWhiteSpace(collaborator))
             _validationErrors.Add("collaborator.Name does not have a name.");
     }
 }

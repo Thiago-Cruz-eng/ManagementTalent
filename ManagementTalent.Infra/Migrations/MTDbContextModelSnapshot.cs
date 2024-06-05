@@ -27,15 +27,15 @@ namespace ManagementTalent.Infra.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("varchar(255)");
 
-                    b.Property<string>("CollaboratorId")
-                        .HasColumnType("varchar(255)");
-
                     b.Property<DateTime>("CreateAt")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<Guid>("JobRoleId")
+                        .HasColumnType("char(36)");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("CollaboratorId");
+                    b.HasIndex("JobRoleId");
 
                     b.ToTable("Assessments");
                 });
@@ -204,6 +204,10 @@ namespace ManagementTalent.Infra.Migrations
                     b.Property<DateTime>("StartAt")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<string>("SupervisorId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("tinyint(1)");
 
@@ -223,6 +227,8 @@ namespace ManagementTalent.Infra.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.HasIndex("SeniorityId");
+
+                    b.HasIndex("SupervisorId");
 
                     b.ToTable("AspNetUsers", (string)null);
                 });
@@ -336,12 +342,10 @@ namespace ManagementTalent.Infra.Migrations
                     b.Property<DateTime>("SinceAtInJob")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("SupFatherId")
-                        .HasColumnType("varchar(255)");
+                    b.Property<Guid?>("SupFatherId")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("SupFatherId");
 
                     b.ToTable("Supervisors");
                 });
@@ -480,11 +484,13 @@ namespace ManagementTalent.Infra.Migrations
 
             modelBuilder.Entity("ManagementTalent.Domain.Entity.AvaliationContext.Assessment", b =>
                 {
-                    b.HasOne("ManagementTalent.Domain.Entity.Colab", "Collaborator")
+                    b.HasOne("ManagementTalent.Domain.Entity.JobRole", "JobRole")
                         .WithMany()
-                        .HasForeignKey("CollaboratorId");
+                        .HasForeignKey("JobRoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Collaborator");
+                    b.Navigation("JobRole");
                 });
 
             modelBuilder.Entity("ManagementTalent.Domain.Entity.AvaliationContext.GroupParameter", b =>
@@ -545,12 +551,6 @@ namespace ManagementTalent.Infra.Migrations
 
             modelBuilder.Entity("ManagementTalent.Domain.Entity.Colab", b =>
                 {
-                    b.HasOne("ManagementTalent.Domain.Entity.Supervisor", "Sup")
-                        .WithMany("Colabs")
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("ManagementTalent.Domain.Entity.JobRole", "JobRole")
                         .WithMany()
                         .HasForeignKey("JobRoleId")
@@ -563,11 +563,17 @@ namespace ManagementTalent.Infra.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("ManagementTalent.Domain.Entity.Supervisor", "Supervisor")
+                        .WithMany("Colabs")
+                        .HasForeignKey("SupervisorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("JobRole");
 
                     b.Navigation("Seniority");
 
-                    b.Navigation("Sup");
+                    b.Navigation("Supervisor");
                 });
 
             modelBuilder.Entity("ManagementTalent.Domain.Entity.ResultContext.AssessmentParamResult", b =>
@@ -599,15 +605,6 @@ namespace ManagementTalent.Infra.Migrations
                         .IsRequired();
 
                     b.Navigation("AssessmentResult");
-                });
-
-            modelBuilder.Entity("ManagementTalent.Domain.Entity.Supervisor", b =>
-                {
-                    b.HasOne("ManagementTalent.Domain.Entity.Supervisor", "SupFather")
-                        .WithMany()
-                        .HasForeignKey("SupFatherId");
-
-                    b.Navigation("SupFather");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

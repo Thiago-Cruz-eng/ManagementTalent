@@ -18,11 +18,11 @@ public class ColabService
     {
         var colab = new Colab()
         {
-            Sup = colabDto.Sup,
             Name = colabDto.Name,
             StartAt = colabDto.StartAt,
-            Seniority = colabDto.Seniority,
-            JobRole = colabDto.JobRole 
+            SeniorityId = colabDto.SeniorityId,
+            JobRoleId = colabDto.JobRoleId,
+            SupervisorId = colabDto.SupervisorId
         };
         
         colab.Validate();
@@ -31,11 +31,11 @@ public class ColabService
         await _colabRepositorySql.SaveChange();
         return new CreateColabResponse
         {
-            Sup = colab.Sup,
             Name = colab.Name,
             StartAt = colab.StartAt,
-            Seniority = colab.Seniority,
-            JobRole = colab.JobRole 
+            SeniorityId = colab.SeniorityId,
+            JobRoleId = colab.JobRoleId,
+            SupervisorId = colabDto.SupervisorId
         };
     }
     
@@ -43,11 +43,11 @@ public class ColabService
     {
         var colab = await _colabRepositorySql.FindById(id);
         if (colab == null) throw new ApplicationException("exercise not found");
-        colab.Sup = colabDto.Sup ?? colab.Sup;
         colab.Name = colabDto.Name ?? colab.Name;
         colab.StartAt = colabDto.StartAt ?? colab.StartAt;
-        colab.Seniority = colabDto.Seniority ?? colab.Seniority;
-        colab.JobRole = colabDto.JobRole ?? colab.JobRole; 
+        colab.SeniorityId = colabDto.SeniorityId ?? colab.SeniorityId;
+        colab.JobRoleId = colabDto.JobRoleId ?? colab.JobRoleId;
+        colab.SupervisorId = colabDto.SupervisorId;
         
         colab.Validate();
  
@@ -64,11 +64,11 @@ public class ColabService
         var colab = await _colabRepositorySql.FindById(id);
         return new GetColabResponse
         {
-            Supervisor = colab.Sup?.Name,
             Name = colab.Name,
             StartAt = colab.StartAt,
-            Seniority = colab.Seniority,
-            JobRole = colab.JobRole 
+            SeniorityId = colab.SeniorityId,
+            JobRoleId = colab.JobRoleId,
+            SupervisorId = colab.SupervisorId 
         };
     }
 
@@ -80,11 +80,11 @@ public class ColabService
         {
             colabResponse.Add(new GetColabResponse
             {
-                Supervisor = x.Sup.Name,
                 Name = x.Name,
                 StartAt = x.StartAt,
-                Seniority = x.Seniority,
-                JobRole = x.JobRole 
+                SeniorityId = x.SeniorityId,
+                JobRoleId = x.JobRoleId,
+                SupervisorId = x.SupervisorId 
             });
         });
         return colabResponse;

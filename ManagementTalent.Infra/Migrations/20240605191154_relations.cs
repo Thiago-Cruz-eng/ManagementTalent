@@ -74,8 +74,7 @@ namespace ManagementTalent.Infra.Migrations
                 {
                     Id = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    SupFatherId = table.Column<string>(type: "varchar(255)", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    SupFatherId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
                     Name = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Company = table.Column<string>(type: "longtext", nullable: false)
@@ -86,11 +85,6 @@ namespace ManagementTalent.Infra.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Supervisors", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Supervisors_Supervisors_SupFatherId",
-                        column: x => x.SupFatherId,
-                        principalTable: "Supervisors",
-                        principalColumn: "Id");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -120,6 +114,27 @@ namespace ManagementTalent.Infra.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "Assessments",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    JobRoleId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    CreateAt = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Assessments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Assessments_JobRoles_JobRoleId",
+                        column: x => x.JobRoleId,
+                        principalTable: "JobRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "Senioritys",
                 columns: table => new
                 {
@@ -142,6 +157,30 @@ namespace ManagementTalent.Infra.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "GroupParameters",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    GroupParamTitle = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Weight = table.Column<double>(type: "double", nullable: false),
+                    CreateAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    AssessmentId = table.Column<string>(type: "varchar(255)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GroupParameters", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_GroupParameters_Assessments_AssessmentId",
+                        column: x => x.AssessmentId,
+                        principalTable: "Assessments",
+                        principalColumn: "Id");
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "AspNetUsers",
                 columns: table => new
                 {
@@ -151,8 +190,10 @@ namespace ManagementTalent.Infra.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     DateOfCreation = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     StartAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    SeniorityId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     JobRoleId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    SeniorityId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    SupervisorId = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     UserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     NormalizedUserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
@@ -192,8 +233,8 @@ namespace ManagementTalent.Infra.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_AspNetUsers_Supervisors_Id",
-                        column: x => x.Id,
+                        name: "FK_AspNetUsers_Supervisors_SupervisorId",
+                        column: x => x.SupervisorId,
                         principalTable: "Supervisors",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -221,6 +262,33 @@ namespace ManagementTalent.Infra.Migrations
                         name: "FK_JobParameterSeniority_Senioritys_SeniorityId",
                         column: x => x.SeniorityId,
                         principalTable: "Senioritys",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "GroupParameterJobParameter",
+                columns: table => new
+                {
+                    GroupParameterId = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    JobParameterBaseId = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GroupParameterJobParameter", x => new { x.GroupParameterId, x.JobParameterBaseId });
+                    table.ForeignKey(
+                        name: "FK_GroupParameterJobParameter_GroupParameters_GroupParameterId",
+                        column: x => x.GroupParameterId,
+                        principalTable: "GroupParameters",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_GroupParameterJobParameter_JobParameterBases_JobParameterBas~",
+                        column: x => x.JobParameterBaseId,
+                        principalTable: "JobParameterBases",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
@@ -350,27 +418,6 @@ namespace ManagementTalent.Infra.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Assessments",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "varchar(255)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    CollaboratorId = table.Column<string>(type: "varchar(255)", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreateAt = table.Column<DateTime>(type: "datetime(6)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Assessments", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Assessments_AspNetUsers_CollaboratorId",
-                        column: x => x.CollaboratorId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
                 name: "GroupParameterResults",
                 columns: table => new
                 {
@@ -395,30 +442,6 @@ namespace ManagementTalent.Infra.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "GroupParameters",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "varchar(255)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    GroupParamTitle = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Weight = table.Column<double>(type: "double", nullable: false),
-                    CreateAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    AssessmentId = table.Column<string>(type: "varchar(255)", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_GroupParameters", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_GroupParameters_Assessments_AssessmentId",
-                        column: x => x.AssessmentId,
-                        principalTable: "Assessments",
-                        principalColumn: "Id");
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
                 name: "AssessmentParamResults",
                 columns: table => new
                 {
@@ -438,33 +461,6 @@ namespace ManagementTalent.Infra.Migrations
                         name: "FK_AssessmentParamResults_GroupParameterResults_GroupParameterR~",
                         column: x => x.GroupParameterResultId,
                         principalTable: "GroupParameterResults",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "GroupParameterJobParameter",
-                columns: table => new
-                {
-                    GroupParameterId = table.Column<string>(type: "varchar(255)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    JobParameterBaseId = table.Column<string>(type: "varchar(255)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_GroupParameterJobParameter", x => new { x.GroupParameterId, x.JobParameterBaseId });
-                    table.ForeignKey(
-                        name: "FK_GroupParameterJobParameter_GroupParameters_GroupParameterId",
-                        column: x => x.GroupParameterId,
-                        principalTable: "GroupParameters",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_GroupParameterJobParameter_JobParameterBases_JobParameterBas~",
-                        column: x => x.JobParameterBaseId,
-                        principalTable: "JobParameterBases",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
@@ -512,6 +508,11 @@ namespace ManagementTalent.Infra.Migrations
                 column: "SeniorityId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_SupervisorId",
+                table: "AspNetUsers",
+                column: "SupervisorId");
+
+            migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
@@ -528,9 +529,9 @@ namespace ManagementTalent.Infra.Migrations
                 column: "CollaboratorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Assessments_CollaboratorId",
+                name: "IX_Assessments_JobRoleId",
                 table: "Assessments",
-                column: "CollaboratorId");
+                column: "JobRoleId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_GroupParameterJobParameter_JobParameterBaseId",
@@ -556,11 +557,6 @@ namespace ManagementTalent.Infra.Migrations
                 name: "IX_Senioritys_JobRoleId",
                 table: "Senioritys",
                 column: "JobRoleId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Supervisors_SupFatherId",
-                table: "Supervisors",
-                column: "SupFatherId");
         }
 
         /// <inheritdoc />

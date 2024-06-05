@@ -3,7 +3,7 @@ namespace ManagementTalent.Domain.Entity;
 public class Supervisor
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
-    public Supervisor? SupFather { get; set; }
+    public Guid? SupFatherId { get; set; }
     public string Name { get; set; }
     public string Company { get; set; }
     public DateTime SinceAtInJob { get; set; }
