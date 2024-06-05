@@ -124,7 +124,7 @@ namespace ManagementTalent.Infra.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    JobRoleNameId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    JobRoleId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     SeniorityName = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     SeniorityNumber = table.Column<int>(type: "int", nullable: false)
@@ -133,8 +133,8 @@ namespace ManagementTalent.Infra.Migrations
                 {
                     table.PrimaryKey("PK_Senioritys", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Senioritys_JobRoles_JobRoleNameId",
-                        column: x => x.JobRoleNameId,
+                        name: "FK_Senioritys_JobRoles_JobRoleId",
+                        column: x => x.JobRoleId,
                         principalTable: "JobRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -428,7 +428,7 @@ namespace ManagementTalent.Infra.Migrations
                     Observation = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Result = table.Column<int>(type: "int", nullable: false),
-                    GroupParameterResultId = table.Column<string>(type: "varchar(255)", nullable: true)
+                    GroupParameterResultId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -438,7 +438,8 @@ namespace ManagementTalent.Infra.Migrations
                         name: "FK_AssessmentParamResults_GroupParameterResults_GroupParameterR~",
                         column: x => x.GroupParameterResultId,
                         principalTable: "GroupParameterResults",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -552,9 +553,9 @@ namespace ManagementTalent.Infra.Migrations
                 column: "SeniorityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Senioritys_JobRoleNameId",
+                name: "IX_Senioritys_JobRoleId",
                 table: "Senioritys",
-                column: "JobRoleNameId");
+                column: "JobRoleId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Supervisors_SupFatherId",

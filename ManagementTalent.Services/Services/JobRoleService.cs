@@ -19,7 +19,6 @@ public class JobRoleService
         var jobRole = new JobRole
         {
             JobTitle = jobRoleDto.JobTitle,
-            Seniorities = jobRoleDto.Seniorities
         };
         
         jobRole.Validate();
@@ -28,8 +27,7 @@ public class JobRoleService
         await _jobRoleRepositorySql.SaveChange();
         return new CreateJobRoleResponse
         {
-            JobTitle = jobRole.JobTitle,
-            Seniorities = jobRoleDto.Seniorities
+            JobTitle = jobRole.JobTitle
         };
     }
     
@@ -38,7 +36,6 @@ public class JobRoleService
         var jobRole = await _jobRoleRepositorySql.FindById(id);
         if (jobRole == null) throw new ApplicationException("exercise not found");
         jobRole.JobTitle = jobRoleDto.JobTitle ?? jobRole.JobTitle;
-        jobRole.Seniorities = jobRoleDto.Seniorities ?? jobRole.Seniorities;
         
         jobRole.Validate();
  
@@ -56,7 +53,6 @@ public class JobRoleService
         return new GetJobRoleResponse
         {
             JobTitle = jobRole.JobTitle,
-            Seniorities = jobRole.Seniorities
 
         };
     }
@@ -69,8 +65,7 @@ public class JobRoleService
         {
             jobRoleResponses.Add(new GetJobRoleResponse
             {
-                JobTitle = x.JobTitle,
-                Seniorities = x.Seniorities
+                JobTitle = x.JobTitle
             });
         });
         return jobRoleResponses;

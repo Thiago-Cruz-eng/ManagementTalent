@@ -115,3 +115,5 @@ r
 BManagementTalent.Domain/Entity/AvaliationContext/GroupParameter.cs,6\e\6ec56906294fbf94d4a76c2648697bcd61ff5f4a
 n
 >ManagementTalent.Domain/Entity/AvaliationContext/Assessment.cs,8\d\8dcfcfc2acee1c96daff6e6f08dd78d1f07151d4
+q
+AManagementTalent.Services/Services/GroupParameterResultService.cs,d\3\d33426db9f83ea9bb305339270de681e8a7f107e

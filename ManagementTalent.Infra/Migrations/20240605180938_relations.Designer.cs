@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ManagementTalent.Infra.Migrations
 {
     [DbContext(typeof(MTDbContext))]
-    [Migration("20240605161514_relations")]
+    [Migration("20240605180938_relations")]
     partial class relations
     {
         /// <inheritdoc />
@@ -129,7 +129,7 @@ namespace ManagementTalent.Infra.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<Guid>("JobRoleNameId")
+                    b.Property<Guid>("JobRoleId")
                         .HasColumnType("char(36)");
 
                     b.Property<string>("SeniorityName")
@@ -141,7 +141,7 @@ namespace ManagementTalent.Infra.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("JobRoleNameId");
+                    b.HasIndex("JobRoleId");
 
                     b.ToTable("Senioritys");
                 });
@@ -256,6 +256,7 @@ namespace ManagementTalent.Infra.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("GroupParameterResultId")
+                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("Observation")
@@ -538,7 +539,7 @@ namespace ManagementTalent.Infra.Migrations
                 {
                     b.HasOne("ManagementTalent.Domain.Entity.JobRole", "JobRoleName")
                         .WithMany("Seniorities")
-                        .HasForeignKey("JobRoleNameId")
+                        .HasForeignKey("JobRoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -576,7 +577,9 @@ namespace ManagementTalent.Infra.Migrations
                 {
                     b.HasOne("ManagementTalent.Domain.Entity.ResultContext.GroupParameterResult", "GroupParameterResult")
                         .WithMany("AssessmentParam")
-                        .HasForeignKey("GroupParameterResultId");
+                        .HasForeignKey("GroupParameterResultId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("GroupParameterResult");
                 });

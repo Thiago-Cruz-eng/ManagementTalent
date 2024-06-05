@@ -3,6 +3,7 @@ namespace ManagementTalent.Domain.Entity.AvaliationContext;
 public class Seniority
 {
     public Guid Id { get; set; } = Guid.NewGuid();
+    public Guid JobRoleId { get; set; }
     public JobRole JobRoleName { get; set; }
     public string SeniorityName { get; set; }
     public int SeniorityNumber { get; set; }
