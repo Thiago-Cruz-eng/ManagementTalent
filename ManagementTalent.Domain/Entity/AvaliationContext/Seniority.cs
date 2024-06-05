@@ -3,9 +3,9 @@ namespace ManagementTalent.Domain.Entity.AvaliationContext;
 public class Seniority
 {
     public Guid Id { get; set; } = Guid.NewGuid();
+    public JobRole JobRoleName { get; set; }
     public string SeniorityName { get; set; }
     public int SeniorityNumber { get; set; }
-    public List<JobParameterBase> JobParameterBases { get; set; }
     public List<JobParameterSeniority> JobParameterSeniorities { get; set; }
 
     
@@ -15,17 +15,10 @@ public class Seniority
     {
         _validationErrors = new List<string>();
 
-        ValidateNullAndEmpty();
         ValidateGroupExist();
 
         if (_validationErrors.Any())
             throw new ArgumentException(string.Join(", ", _validationErrors));
-    }
-    
-    private void ValidateNullAndEmpty()
-    {
-        if (string.IsNullOrWhiteSpace(SeniorityName))
-            _validationErrors.Add("description is required.");
     }
     
     private void ValidateGroupExist()

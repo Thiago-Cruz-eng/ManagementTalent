@@ -1,7 +1,7 @@
-﻿using ManagementTalent.Domain.ConfigModel;
-using ManagementTalent.Domain.Entity;
+﻿using ManagementTalent.Domain.Entity;
 using ManagementTalent.Domain.Entity.AvaliationContext;
 using ManagementTalent.Domain.Entity.ResultContext;
+using ManagementTalent.Infra.ConfigModel;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 

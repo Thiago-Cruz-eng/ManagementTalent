@@ -2,7 +2,7 @@ using ManagementTalent.Domain.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace ManagementTalent.Domain.ConfigModel;
+namespace ManagementTalent.Infra.ConfigModel;
 
 public class JobRoleConfig : IEntityTypeConfiguration<JobRole>
 {

@@ -30,7 +30,8 @@ public class SeniorityService
         return new CreateSeniorityResponse
         {
             SeniorityName = seniority.SeniorityName,
-            SeniorityNumber = seniority.SeniorityNumber
+            SeniorityNumber = seniority.SeniorityNumber,
+            JobRoleName = seniority.JobRoleName
         };
     }
     
@@ -38,8 +39,9 @@ public class SeniorityService
     {
         var seniority = await _seniorityRepositorySql.FindById(id);
         if (seniority == null) throw new ApplicationException("exercise not found");
-        seniority.SeniorityName = seniorityDto.SeniorityName ?? seniority.SeniorityName;
+        seniority.JobRoleName = seniorityDto.JobRoleName ?? seniority.JobRoleName;
         seniority.SeniorityNumber = seniorityDto.SeniorityNumber ?? seniority.SeniorityNumber;
+        seniority.SeniorityName = seniorityDto.SeniorityName;
         
         seniority.Validate();
  
@@ -56,8 +58,9 @@ public class SeniorityService
         var seniority = await _seniorityRepositorySql.FindById(id);
         return new GetSeniorityResponse
         {
-            SeniorityName = seniority.SeniorityName,
-            SeniorityNumber = seniority.SeniorityNumber
+            JobRoleName = seniority.JobRoleName,
+            SeniorityNumber = seniority.SeniorityNumber,
+            SeniorityName = seniority.SeniorityName
         };
     }
 
@@ -69,8 +72,9 @@ public class SeniorityService
         {
             seniorityResponses.Add(new GetSeniorityResponse
             {
-                SeniorityName = x.SeniorityName,
-                SeniorityNumber = x.SeniorityNumber
+                JobRoleName = x.JobRoleName,
+                SeniorityNumber = x.SeniorityNumber,
+                SeniorityName = x.SeniorityName
             });
         });
         return seniorityResponses;

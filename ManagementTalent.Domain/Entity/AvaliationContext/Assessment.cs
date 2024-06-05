@@ -5,7 +5,7 @@ public class Assessment
     public string Id { get; set; } = Guid.NewGuid().ToString();
     public Colab Collaborator { get; set; }
     public DateTime CreateAt { get; set; } = DateTime.UtcNow;
-    public List<GroupParameter> GroupParameters { get; set; }
+    public ICollection<GroupParameter> GroupParameters { get; set; }
     
     private List<string> _validationErrors;
 
@@ -14,7 +14,6 @@ public class Assessment
         _validationErrors = new List<string>();
 
         ValidateColab(Collaborator);
-        ValidateGroupExist(GroupParameters);
 
         if (_validationErrors.Any())
             throw new ArgumentException(string.Join(", ", _validationErrors));

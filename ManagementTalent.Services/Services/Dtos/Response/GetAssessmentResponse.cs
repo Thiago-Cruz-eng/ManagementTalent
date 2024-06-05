@@ -7,5 +7,5 @@ public class GetAssessmentResponse
 {
     public Colab Collaborator { get; set; }
     public DateTime CreateAt { get; set; } = DateTime.Now;
-    public List<GroupParameter> GroupParameters { get; set; }
+    public ICollection<GroupParameter> GroupParameters { get; set; }
 }

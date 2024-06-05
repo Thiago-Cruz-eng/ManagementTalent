@@ -1,19 +1,13 @@
-using ManagementTalent.Domain.Entity;
 using ManagementTalent.Domain.Entity.AvaliationContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace ManagementTalent.Domain.ConfigModel;
+namespace ManagementTalent.Infra.ConfigModel;
 
 public class JobParameterBaseConfig : IEntityTypeConfiguration<JobParameterBase>
 {
     public void Configure(EntityTypeBuilder<JobParameterBase> builder)
     {
-        builder.HasKey(jpb => jpb.Id); 
-
-        builder 
-            .HasMany(e => e.Seniorities)
-            .WithMany(e => e.JobParameterBases)
-            .UsingEntity<JobParameterSeniority>();
+        
     }
 }

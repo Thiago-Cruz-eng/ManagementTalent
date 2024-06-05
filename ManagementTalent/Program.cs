@@ -22,6 +22,7 @@ builder.Services.AddScoped<IJobParameterBaseRepositorySql, JobParameterBaseRepos
 builder.Services.AddScoped<IJobRoleRepositorySql, JobRoleRepositorySql>();
 builder.Services.AddScoped<ISeniorityRepositorySql, SeniorityRepositorySql>();
 builder.Services.AddScoped<ISupervisorRepositorySql, SupervisorRepositorySql>();
+builder.Services.AddScoped<IGroupParameterResultRepositorySql, GroupParameterResultRepositorySql>();
 
 builder.Services.AddScoped<AssessmentParamResultService>();
 builder.Services.AddScoped<AssessmentService>();
