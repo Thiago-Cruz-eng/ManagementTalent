@@ -27,3 +27,16 @@ C:/Users/thiago.cruz/Documents/Proj/Pessoal/ManagementTalent/ManagementTalent.Do
 C:/Users/thiago.cruz/Documents/Proj/Pessoal/ManagementTalent/ManagementTalent.Domain/obj/Debug/net8.0/refint/ManagementTalent.Domain.dll
 C:/Users/thiago.cruz/Documents/Proj/Pessoal/ManagementTalent/ManagementTalent.Domain/obj/Debug/net8.0/ManagementTalent.Domain.pdb
 C:/Users/thiago.cruz/Documents/Proj/Pessoal/ManagementTalent/ManagementTalent.Domain/obj/Debug/net8.0/ref/ManagementTalent.Domain.dll
+C:\Users\thiago.cruz\Documents\Proj\Pessoal\ManagementTalent\ManagementTalent.Domain\bin\Debug\net8.0\ManagementTalent.Domain.deps.json
+C:\Users\thiago.cruz\Documents\Proj\Pessoal\ManagementTalent\ManagementTalent.Domain\bin\Debug\net8.0\ManagementTalent.Domain.dll
+C:\Users\thiago.cruz\Documents\Proj\Pessoal\ManagementTalent\ManagementTalent.Domain\bin\Debug\net8.0\ManagementTalent.Domain.pdb
+C:\Users\thiago.cruz\Documents\Proj\Pessoal\ManagementTalent\ManagementTalent.Domain\obj\Debug\net8.0\ManagementTalent.Domain.csproj.AssemblyReference.cache
+C:\Users\thiago.cruz\Documents\Proj\Pessoal\ManagementTalent\ManagementTalent.Domain\obj\Debug\net8.0\ManagementTalent.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\thiago.cruz\Documents\Proj\Pessoal\ManagementTalent\ManagementTalent.Domain\obj\Debug\net8.0\ManagementTalent.Domain.AssemblyInfoInputs.cache
+C:\Users\thiago.cruz\Documents\Proj\Pessoal\ManagementTalent\ManagementTalent.Domain\obj\Debug\net8.0\ManagementTalent.Domain.AssemblyInfo.cs
+C:\Users\thiago.cruz\Documents\Proj\Pessoal\ManagementTalent\ManagementTalent.Domain\obj\Debug\net8.0\ManagementTalent.Domain.csproj.CoreCompileInputs.cache
+C:\Users\thiago.cruz\Documents\Proj\Pessoal\ManagementTalent\ManagementTalent.Domain\obj\Debug\net8.0\ManagementTalent.Domain.sourcelink.json
+C:\Users\thiago.cruz\Documents\Proj\Pessoal\ManagementTalent\ManagementTalent.Domain\obj\Debug\net8.0\ManagementTalent.Domain.dll
+C:\Users\thiago.cruz\Documents\Proj\Pessoal\ManagementTalent\ManagementTalent.Domain\obj\Debug\net8.0\refint\ManagementTalent.Domain.dll
+C:\Users\thiago.cruz\Documents\Proj\Pessoal\ManagementTalent\ManagementTalent.Domain\obj\Debug\net8.0\ManagementTalent.Domain.pdb
+C:\Users\thiago.cruz\Documents\Proj\Pessoal\ManagementTalent\ManagementTalent.Domain\obj\Debug\net8.0\ref\ManagementTalent.Domain.dll

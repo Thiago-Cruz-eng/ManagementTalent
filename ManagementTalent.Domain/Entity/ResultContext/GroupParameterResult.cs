@@ -7,4 +7,5 @@ public class GroupParameterResult
     public double Weight { get; set; }
     public DateTime CreateAt { get; set; } = DateTime.UtcNow;
     public List<AssessmentParamResult> AssessmentParam { get; set; }
+    public AssessmentResult AssessmentResult { get; set; }
 }

@@ -9,6 +9,8 @@ public class GroupParameterResultConfig: IEntityTypeConfiguration<GroupParameter
 {
     public void Configure(EntityTypeBuilder<GroupParameterResult> builder)
     {
-       
+        builder
+            .HasMany(gpr => gpr.AssessmentParam)
+            .WithOne(apr => apr.GroupParameterResult);
     }
 }

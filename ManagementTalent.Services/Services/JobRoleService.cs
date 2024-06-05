@@ -19,7 +19,7 @@ public class JobRoleService
         var jobRole = new JobRole
         {
             JobTitle = jobRoleDto.JobTitle,
-            GroupParam = jobRoleDto.GroupParam
+            Seniorities = jobRoleDto.Seniorities
         };
         
         jobRole.Validate();
@@ -29,7 +29,7 @@ public class JobRoleService
         return new CreateJobRoleResponse
         {
             JobTitle = jobRole.JobTitle,
-            GroupParam = jobRole.GroupParam
+            Seniorities = jobRoleDto.Seniorities
         };
     }
     
@@ -38,7 +38,7 @@ public class JobRoleService
         var jobRole = await _jobRoleRepositorySql.FindById(id);
         if (jobRole == null) throw new ApplicationException("exercise not found");
         jobRole.JobTitle = jobRoleDto.JobTitle ?? jobRole.JobTitle;
-        jobRole.GroupParam = jobRoleDto.GroupParam ?? jobRole.GroupParam;
+        jobRole.Seniorities = jobRoleDto.Seniorities ?? jobRole.Seniorities;
         
         jobRole.Validate();
  
@@ -56,7 +56,8 @@ public class JobRoleService
         return new GetJobRoleResponse
         {
             JobTitle = jobRole.JobTitle,
-            GroupParam = jobRole.GroupParam
+            Seniorities = jobRole.Seniorities
+
         };
     }
 
@@ -69,7 +70,7 @@ public class JobRoleService
             jobRoleResponses.Add(new GetJobRoleResponse
             {
                 JobTitle = x.JobTitle,
-                GroupParam = x.GroupParam
+                Seniorities = x.Seniorities
             });
         });
         return jobRoleResponses;

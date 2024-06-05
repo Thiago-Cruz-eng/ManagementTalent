@@ -10,6 +10,8 @@ public class AssessmentParamResult
 
     [Range(1, 4, ErrorMessage = "O valor de 'Resultado' deve estar entre 1 e 100.")]
     public int Result { get; set; }
+    public GroupParameterResult GroupParameterResult { get; set; }
+
     
     private List<string> _validationErrors;
 

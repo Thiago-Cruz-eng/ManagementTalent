@@ -8,6 +8,5 @@ public class SeniorityConfig : IEntityTypeConfiguration<Seniority>
 {
     public void Configure(EntityTypeBuilder<Seniority> builder)
     {
-        
     }
 }

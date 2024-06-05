@@ -9,14 +9,15 @@ public class JobParameterSeniorityConfig : IEntityTypeConfiguration<JobParameter
     public void Configure(EntityTypeBuilder<JobParameterSeniority> builder)
     {
         builder
-            .HasKey(js => new { js.JobParameterBaseId, js.SeniorityId });
+            .HasKey(js => new { js.JobParametersBaseId, js.SeniorityId });
         
         builder
             .HasOne(js => js.JobParameterBase)
             .WithMany(jp => jp.JobParameterSeniorities)
-            .HasForeignKey(js => js.JobParameterBaseId);
+            .HasForeignKey(js => js.JobParametersBaseId);
         builder
             .HasOne(js => js.Seniority)
             .WithMany(s => s.JobParameterSeniorities)
-            .HasForeignKey(js => js.SeniorityId);    }
+            .HasForeignKey(js => js.SeniorityId);    
+    }
 }
