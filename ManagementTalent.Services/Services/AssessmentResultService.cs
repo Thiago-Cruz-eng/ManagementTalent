@@ -1,4 +1,5 @@
 using ManagementTalent.Domain.Entity;
+using ManagementTalent.Domain.Entity.ResultContext;
 using ManagementTalent.Infra.Interfaces;
 using ManagementTalent.Services.Services.Dtos.Requests;
 using ManagementTalent.Services.Services.Dtos.Response;
@@ -19,11 +20,9 @@ public class AssessmentResultService
         var assessmentResult = new AssessmentResult
         {
             Collaborator = assessmentResultDto.Collaborator,
-            AssessmentParam = assessmentResultDto.AssessmentParam,
-            Description = assessmentResultDto.Description,
-            Observation = assessmentResultDto.Observation,
-            SupervisorName = assessmentResultDto.SupervisorName,
-            Result = assessmentResultDto.Result
+            GroupParameterResults = assessmentResultDto.GroupParameterResults,
+            Result = assessmentResultDto.Result,
+            NextAssessment = DateTime.UtcNow.AddYears(1)
         };
         
         assessmentResult.Validate();
@@ -33,11 +32,8 @@ public class AssessmentResultService
         return new CreateAssessmentResultResponse
         {
             Collaborator = assessmentResult.Collaborator,
-            AssessmentParam = assessmentResult.AssessmentParam,
-            Description = assessmentResult.Description,
-            Observation = assessmentResult.Observation,
-            SupervisorName = assessmentResult.SupervisorName,
-            Result = assessmentResult.Result
+            Result = assessmentResult.Result,
+            NextAssessment = assessmentResult.NextAssessment
         };
     }
     
@@ -46,10 +42,7 @@ public class AssessmentResultService
         var assessmentResult = await _assessmentResultRepositorySql.FindById(id);
         if (assessmentResult == null) throw new ApplicationException("exercise not found");
         assessmentResult.Collaborator = assessmentResultDto.Collaborator ?? assessmentResult.Collaborator;
-        assessmentResult.AssessmentParam = assessmentResultDto.Type ?? assessmentResult.AssessmentParam;
-        assessmentResult.Description = assessmentResultDto.Description ?? assessmentResult.Description;
-        assessmentResult.Observation = assessmentResultDto.Observation ?? assessmentResult.Observation;
-        assessmentResult.SupervisorName = assessmentResultDto.SupervisorName ?? assessmentResult.SupervisorName;
+        assessmentResult.GroupParameterResults = assessmentResultDto.GroupParameterResults ?? assessmentResult.GroupParameterResults;
         assessmentResult.Result = assessmentResultDto.Result ?? assessmentResult.Result;    
         
         assessmentResult.Validate();
@@ -68,11 +61,9 @@ public class AssessmentResultService
         return new GetAssessmentResultResponse
         {
             Collaborator = assessmentResult.Collaborator,
-            AssessmentParam = assessmentResult.AssessmentParam,
-            Description = assessmentResult.Description,
-            Observation = assessmentResult.Observation,
-            SupervisorName = assessmentResult.SupervisorName,
-            Result = assessmentResult.Result
+            GroupParameterResults =  assessmentResult.GroupParameterResults,
+            Result = assessmentResult.Result,
+            NextAssessment = assessmentResult.NextAssessment
         };
     }
 
@@ -85,11 +76,9 @@ public class AssessmentResultService
             assessmentResultResponses.Add(new GetAssessmentResultResponse
             {
                 Collaborator = x.Collaborator,
-                AssessmentParam = x.AssessmentParam,
-                Description = x.Description,
-                Observation = x.Observation,
-                SupervisorName = x.SupervisorName,
-                Result = x.Result
+                GroupParameterResults = x.GroupParameterResults,
+                Result = x.Result,
+                NextAssessment = x.NextAssessment
             });
         });
         return assessmentResultResponses;

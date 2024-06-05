@@ -1,4 +1,5 @@
 using ManagementTalent.Domain.Entity;
+using ManagementTalent.Domain.Entity.AvaliationContext;
 using ManagementTalent.Infra.Interfaces;
 using ManagementTalent.Services.Services.Dtos.Requests;
 using ManagementTalent.Services.Services.Dtos.Response;

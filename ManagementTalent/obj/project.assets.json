@@ -4010,19 +4010,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\thiago.cruz\\.nuget\\packages\\": {}
+    "/home/marlongiona/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\thiago.cruz\\Documents\\Proj\\Pessoal\\ManagementTalent\\ManagementTalent\\ManagementTalent.csproj",
+      "projectUniqueName": "/home/marlongiona/RiderProjects/ManagementTalent/ManagementTalent/ManagementTalent.csproj",
       "projectName": "ManagementTalent",
-      "projectPath": "C:\\Users\\thiago.cruz\\Documents\\Proj\\Pessoal\\ManagementTalent\\ManagementTalent\\ManagementTalent.csproj",
-      "packagesPath": "C:\\Users\\thiago.cruz\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\thiago.cruz\\Documents\\Proj\\Pessoal\\ManagementTalent\\ManagementTalent\\obj\\",
+      "projectPath": "/home/marlongiona/RiderProjects/ManagementTalent/ManagementTalent/ManagementTalent.csproj",
+      "packagesPath": "/home/marlongiona/.nuget/packages/",
+      "outputPath": "/home/marlongiona/RiderProjects/ManagementTalent/ManagementTalent/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\thiago.cruz\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/home/marlongiona/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -4034,11 +4034,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\thiago.cruz\\Documents\\Proj\\Pessoal\\ManagementTalent\\ManagementTalent.Infra\\ManagementTalent.Infra.csproj": {
-              "projectPath": "C:\\Users\\thiago.cruz\\Documents\\Proj\\Pessoal\\ManagementTalent\\ManagementTalent.Infra\\ManagementTalent.Infra.csproj"
+            "/home/marlongiona/RiderProjects/ManagementTalent/ManagementTalent.Infra/ManagementTalent.Infra.csproj": {
+              "projectPath": "/home/marlongiona/RiderProjects/ManagementTalent/ManagementTalent.Infra/ManagementTalent.Infra.csproj"
             },
-            "C:\\Users\\thiago.cruz\\Documents\\Proj\\Pessoal\\ManagementTalent\\ManagementTalent.Services\\ManagementTalent.Services.csproj": {
-              "projectPath": "C:\\Users\\thiago.cruz\\Documents\\Proj\\Pessoal\\ManagementTalent\\ManagementTalent.Services\\ManagementTalent.Services.csproj"
+            "/home/marlongiona/RiderProjects/ManagementTalent/ManagementTalent.Services/ManagementTalent.Services.csproj": {
+              "projectPath": "/home/marlongiona/RiderProjects/ManagementTalent/ManagementTalent.Services/ManagementTalent.Services.csproj"
             }
           }
         }
@@ -4047,11 +4047,6 @@
         "warnAsError": [
           "NU1605"
         ]
-      },
-      "restoreAuditProperties": {
-        "enableAudit": "true",
-        "auditLevel": "low",
-        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -4112,7 +4107,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.301/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/home/marlongiona/.dotnet/sdk/8.0.203/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

@@ -32,6 +32,7 @@ builder.Services.AddScoped<JobParameterBaseService>();
 builder.Services.AddScoped<JobRoleService>();
 builder.Services.AddScoped<SeniorityService>();
 builder.Services.AddScoped<SupervisorService>();
+builder.Services.AddScoped<GroupParameterResultService>();
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

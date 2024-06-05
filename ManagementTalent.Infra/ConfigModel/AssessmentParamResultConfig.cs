@@ -1,4 +1,5 @@
 using ManagementTalent.Domain.Entity;
+using ManagementTalent.Domain.Entity.ResultContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

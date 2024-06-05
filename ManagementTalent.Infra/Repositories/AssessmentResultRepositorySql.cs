@@ -1,4 +1,5 @@
 using ManagementTalent.Domain.Entity;
+using ManagementTalent.Domain.Entity.ResultContext;
 using ManagementTalent.Infra.BaseRepository;
 using ManagementTalent.Infra.Interfaces;
 using ManagementTalent.Infra.MySql;

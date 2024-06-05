@@ -1,3 +1,5 @@
+using ManagementTalent.Domain.Entity.AvaliationContext;
+
 namespace ManagementTalent.Domain.Entity;
 
 public class JobRole

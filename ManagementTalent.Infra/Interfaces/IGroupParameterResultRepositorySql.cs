@@ -1,10 +1,9 @@
-using ManagementTalent.Domain.Entity;
 using ManagementTalent.Domain.Entity.ResultContext;
 using ManagementTalent.Infra.BaseRepository;
 
 namespace ManagementTalent.Infra.Interfaces;
 
-public interface IAssessmentParamResultRepositorySql : IBaseRepositorySql<Guid, AssessmentParamResult>
+public interface IGroupParameterResultRepositorySql : IBaseRepositorySql<Guid, GroupParameterResult>
 {
     
 }

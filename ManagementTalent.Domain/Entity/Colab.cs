@@ -1,3 +1,4 @@
+using ManagementTalent.Domain.Entity.AvaliationContext;
 using Microsoft.AspNetCore.Identity;
 
 namespace ManagementTalent.Domain.Entity;
@@ -8,8 +9,8 @@ public class Colab : IdentityUser
     public string Name { get; set; }
     public DateTime DateOfCreation { get; set; } = DateTime.UtcNow;
     public DateTime StartAt { get; set; }
-    public string Seniority { get; set; }
-    public string JobRole { get; set; }
+    public Seniority Seniority { get; set; }
+    public JobRole JobRole { get; set; }
     
     private List<string> _validationErrors;
 
@@ -18,8 +19,6 @@ public class Colab : IdentityUser
         _validationErrors = new List<string>();
 
         ValidateNullAndEmpty(Name);
-        ValidateNullAndEmpty(Seniority);
-        ValidateNullAndEmpty(JobRole);
         ValidateStartAt();
 
         if (_validationErrors.Any())

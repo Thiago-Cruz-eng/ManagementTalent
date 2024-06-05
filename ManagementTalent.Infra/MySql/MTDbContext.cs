@@ -1,5 +1,7 @@
 ﻿using ManagementTalent.Domain.ConfigModel;
 using ManagementTalent.Domain.Entity;
+using ManagementTalent.Domain.Entity.AvaliationContext;
+using ManagementTalent.Domain.Entity.ResultContext;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +17,7 @@ namespace ManagementTalent.Infra.MySql
         public DbSet<JobRole> JobRoles { get; set; }
         public DbSet<JobParameterBase> JobParameterBases { get; set; }
         public DbSet<GroupParameter> GroupParameters { get; set; }
+        public DbSet<GroupParameterResult> GroupParameterResults { get; set; }
         public DbSet<AssessmentResult> AssessmentResults { get; set; }
         public DbSet<AssessmentParamResult> AssessmentParamResults { get; set; }
         public DbSet<Assessment> Assessments { get; set; }
@@ -30,6 +33,7 @@ namespace ManagementTalent.Infra.MySql
             modelBuilder.ApplyConfiguration(new AssessmentResultConfig());
             modelBuilder.ApplyConfiguration(new AssessmentParamResultConfig());
             modelBuilder.ApplyConfiguration(new AssessmentConfig());
+            modelBuilder.ApplyConfiguration(new GroupParameterConfig());
             
             base.OnModelCreating(modelBuilder);
         }

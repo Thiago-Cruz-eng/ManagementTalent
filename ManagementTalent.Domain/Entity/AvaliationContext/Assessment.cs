@@ -1,11 +1,10 @@
-namespace ManagementTalent.Domain.Entity;
+namespace ManagementTalent.Domain.Entity.AvaliationContext;
 
 public class Assessment
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
     public Colab Collaborator { get; set; }
-    public DateTime CreateAt { get; set; } = DateTime.Now;
-    public DateTime? NextAssessment { get; set; } = DateTime.Now.AddYears(1);
+    public DateTime CreateAt { get; set; } = DateTime.UtcNow;
     public List<GroupParameter> GroupParameters { get; set; }
     
     private List<string> _validationErrors;

@@ -1,4 +1,5 @@
 using ManagementTalent.Domain.Entity;
+using ManagementTalent.Domain.Entity.AvaliationContext;
 using ManagementTalent.Infra.Interfaces;
 using ManagementTalent.Services.Services.Dtos.Requests;
 using ManagementTalent.Services.Services.Dtos.Response;
@@ -19,7 +20,6 @@ public class AssessmentService
         var assessment = new Assessment
         {
             Collaborator = assessmentDto.Collaborator,
-            NextAssessment = assessmentDto.NextAssessment,
             GroupParameters = assessmentDto.GroupParameters,
         };
         
@@ -30,7 +30,6 @@ public class AssessmentService
         return new CreateAssessmentResponse
         {
             Collaborator = assessment.Collaborator,
-            NextAssessment = assessment.NextAssessment,
             GroupParameters = assessment.GroupParameters,
         };
     }
@@ -40,7 +39,6 @@ public class AssessmentService
         var assessment = await _assessmentRepositorySql.FindById(id);
         if (assessment == null) throw new ApplicationException("exercise not found");
         assessment.Collaborator = assessmentDto.Collaborator ?? assessment.Collaborator;
-        assessment.NextAssessment = assessmentDto.NextAssessment ?? assessment.NextAssessment;
         assessment.GroupParameters = assessmentDto.GroupParameters ?? assessment.GroupParameters;   
         
         assessment.Validate();
@@ -59,7 +57,6 @@ public class AssessmentService
         return new GetAssessmentResponse
         {
             Collaborator = assessment.Collaborator,
-            NextAssessment = assessment.NextAssessment,
             GroupParameters = assessment.GroupParameters,
         };
     }
@@ -73,7 +70,6 @@ public class AssessmentService
             assessmentResponses.Add(new GetAssessmentResponse
             {
                 Collaborator = x.Collaborator,
-                NextAssessment = x.NextAssessment,
                 GroupParameters = x.GroupParameters,
             });
         });

@@ -1,15 +1,12 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace ManagementTalent.Domain.Entity;
+namespace ManagementTalent.Domain.Entity.ResultContext;
 
-public class AssessmentResult
+public class AssessmentParamResult
 {
     public Guid Id { get; set; } = Guid.NewGuid();
-    public Colab Collaborator { get; set; }
-    public List<AssessmentParamResult> AssessmentParam { get; set; }
     public string Description { get; set; }
     public string Observation { get; set; }
-    public string SupervisorName { get; set; }
 
     [Range(1, 4, ErrorMessage = "O valor de 'Resultado' deve estar entre 1 e 100.")]
     public int Result { get; set; }
@@ -21,8 +18,6 @@ public class AssessmentResult
         _validationErrors = new List<string>();
 
         ValidateNullAndEmpty(Description);
-        ValidateNullAndEmpty(SupervisorName);
-        ValidateColab(Collaborator);
         ValidateResult();
 
         if (_validationErrors.Any())
@@ -39,11 +34,5 @@ public class AssessmentResult
     {
         if (string.IsNullOrWhiteSpace(description))
             _validationErrors.Add("description is required.");
-    }
-    
-    private void ValidateColab(Colab collaborator)
-    {
-        if (string.IsNullOrWhiteSpace(collaborator.Name))
-            _validationErrors.Add("collaborator.Name does not have a name.");
     }
 }

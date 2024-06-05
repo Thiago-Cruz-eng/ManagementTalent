@@ -1,4 +1,4 @@
-namespace ManagementTalent.Domain.Entity;
+namespace ManagementTalent.Domain.Entity.AvaliationContext;
 
 public class Seniority
 {

@@ -1,6 +1,4 @@
-using System.Text.RegularExpressions;
-
-namespace ManagementTalent.Domain.Entity;
+namespace ManagementTalent.Domain.Entity.AvaliationContext;
 
 public class JobParameterBase
 {
@@ -22,7 +20,6 @@ public class JobParameterBase
 
         ValidateWeight();
         ValidateNullAndEmpty(JobParamTitle);
-        ValidateNullAndEmpty(Description);
         ValidateGroupExist();
 
         if (_validationErrors.Any())
