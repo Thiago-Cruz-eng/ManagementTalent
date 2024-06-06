@@ -27,7 +27,9 @@ public class GroupParameterService
         groupParameter.Validate();
  
         await _groupParameterRepositorySql.Save(groupParameter);
+        if (groupParameterDto.JobParameterIds.Count > 0) groupParameter.IntegrateJobParameter(groupParameterDto.JobParameterIds);
         await _groupParameterRepositorySql.SaveChange();
+       
         return new CreateGroupParameterResponse
         {
             GroupParamTitle = groupParameter.GroupParamTitle,
@@ -47,6 +49,7 @@ public class GroupParameterService
         groupParameter.Validate();
  
         await _groupParameterRepositorySql.Update(groupParameter);
+        if (groupParameterDto.JobParameterIds.Count > 0) groupParameter.IntegrateJobParameter(groupParameterDto.JobParameterIds);
         await _groupParameterRepositorySql.SaveChange();
         return new UpdateGroupParameterResponse
         {

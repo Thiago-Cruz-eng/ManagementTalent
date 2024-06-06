@@ -8,4 +8,5 @@ public class CreateJobParameterBaseRequest
     public string Description { get; set; }
     public string Observation { get; set; }
     public double Weight { get; set; }
+    public List<string> GroupParameterIds { get; set; }
 }

@@ -11,6 +11,21 @@ public class GroupParameter
     
     private List<string> _validationErrors;
 
+    public void IntegrateJobParameter(List<string> ids)
+    {
+        ids.ForEach(id =>
+        {
+            GroupParameterJobParameters = new List<GroupParameterJobParameter>
+            {
+                new()
+                {
+                    GroupParameterId = Id,
+                    JobParameterBaseId = id
+                }
+            };
+        });
+    }
+
     public void Validate()
     {
         _validationErrors = new List<string>();

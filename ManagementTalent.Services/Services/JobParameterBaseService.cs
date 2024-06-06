@@ -28,6 +28,7 @@ public class JobParameterBaseService
         jobParameterBase.Validate();
  
         await _jobParameterBaseRepositorySql.Save(jobParameterBase);
+        if(jobParameterBaseDto.GroupParameterIds.Count > 0) jobParameterBase.IntegrateGroupParameter(jobParameterBaseDto.GroupParameterIds);
         await _jobParameterBaseRepositorySql.SaveChange();
         return new CreateJobParameterBaseResponse
         {
@@ -50,6 +51,7 @@ public class JobParameterBaseService
         jobParameterBase.Validate();
  
         await _jobParameterBaseRepositorySql.Update(jobParameterBase);
+        if(jobParameterBaseDto.GroupParameterIds.Count > 0) jobParameterBase.IntegrateGroupParameter(jobParameterBaseDto.GroupParameterIds);
         await _jobParameterBaseRepositorySql.SaveChange();
         return new UpdateJobParameterBaseResponse
         {
