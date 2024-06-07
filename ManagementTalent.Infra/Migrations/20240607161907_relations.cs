@@ -46,7 +46,8 @@ namespace ManagementTalent.Infra.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Observation = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Weight = table.Column<double>(type: "double", nullable: false)
+                    Weight = table.Column<double>(type: "double", nullable: false),
+                    Expected = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -138,7 +139,8 @@ namespace ManagementTalent.Infra.Migrations
                 name: "Senioritys",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    Id = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     JobRoleId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     SeniorityName = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -166,7 +168,7 @@ namespace ManagementTalent.Infra.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Weight = table.Column<double>(type: "double", nullable: false),
                     CreateAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    AssessmentId = table.Column<string>(type: "varchar(255)", nullable: true)
+                    AssessmentId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -176,7 +178,8 @@ namespace ManagementTalent.Infra.Migrations
                         name: "FK_GroupParameters_Assessments_AssessmentId",
                         column: x => x.AssessmentId,
                         principalTable: "Assessments",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -191,7 +194,8 @@ namespace ManagementTalent.Infra.Migrations
                     DateOfCreation = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     StartAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     JobRoleId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    SeniorityId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    SeniorityId = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     SupervisorId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     UserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
@@ -247,7 +251,8 @@ namespace ManagementTalent.Infra.Migrations
                 {
                     JobParametersBaseId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    SeniorityId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci")
+                    SeniorityId = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
@@ -400,8 +405,11 @@ namespace ManagementTalent.Infra.Migrations
                 name: "AssessmentResults",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    CollaboratorId = table.Column<string>(type: "varchar(255)", nullable: true)
+                    Id = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    SupervisorId = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CollaboratorId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     NextAssessment = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     Result = table.Column<int>(type: "int", nullable: false)
@@ -413,7 +421,8 @@ namespace ManagementTalent.Infra.Migrations
                         name: "FK_AssessmentResults_AspNetUsers_CollaboratorId",
                         column: x => x.CollaboratorId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -427,7 +436,8 @@ namespace ManagementTalent.Infra.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Weight = table.Column<double>(type: "double", nullable: false),
                     CreateAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    AssessmentResultId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci")
+                    AssessmentResultId = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
@@ -446,11 +456,14 @@ namespace ManagementTalent.Infra.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    JobParamTitle = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     Description = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Observation = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Result = table.Column<int>(type: "int", nullable: false),
+                    Weight = table.Column<double>(type: "double", nullable: false),
+                    Reality = table.Column<int>(type: "int", nullable: false),
                     GroupParameterResultId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },

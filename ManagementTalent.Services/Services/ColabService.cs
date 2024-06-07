@@ -20,7 +20,7 @@ public class ColabService
         {
             Name = colabDto.Name,
             StartAt = colabDto.StartAt,
-            SeniorityId = colabDto.SeniorityId,
+            SeniorityId = colabDto.SeniorityId.ToString(),
             JobRoleId = colabDto.JobRoleId,
             SupervisorId = colabDto.SupervisorId
         };
@@ -45,7 +45,7 @@ public class ColabService
         if (colab == null) throw new ApplicationException("exercise not found");
         colab.Name = colabDto.Name ?? colab.Name;
         colab.StartAt = colabDto.StartAt ?? colab.StartAt;
-        colab.SeniorityId = colabDto.SeniorityId ?? colab.SeniorityId;
+        colab.SeniorityId = colabDto.SeniorityId.ToString() ?? colab.SeniorityId;
         colab.JobRoleId = colabDto.JobRoleId ?? colab.JobRoleId;
         colab.SupervisorId = colabDto.SupervisorId;
         

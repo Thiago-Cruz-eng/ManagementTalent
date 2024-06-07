@@ -9,5 +9,6 @@ public class CreateJobParameterBaseResponse
     public string? Description { get; set; }
     public string? Observation { get; set; }
     public double? Weight { get; set; }
+    public double? Expected { get; set; }
     public Seniority? JobSeniorities { get; set; }
 }

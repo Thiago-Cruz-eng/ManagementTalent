@@ -6,10 +6,12 @@ namespace ManagementTalent.Services.Services;
 public class GroupParameterResultService
 {
     private readonly IGroupParameterResultRepositorySql _groupParameterResultRepositorySql;
+    private readonly IAssessmentResultRepositorySql _assessmentResultRepositorySql;
 
-    public GroupParameterResultService(IGroupParameterResultRepositorySql groupParameterResultRepositorySql)
+    public GroupParameterResultService(IGroupParameterResultRepositorySql groupParameterResultRepositorySql, IAssessmentResultRepositorySql assessmentResultRepositorySql)
     {
         _groupParameterResultRepositorySql = groupParameterResultRepositorySql;
+        _assessmentResultRepositorySql = assessmentResultRepositorySql;
     }
 
     public async Task<GroupParameterResult> CreateGroupParameterResult(GroupParameterResult groupParameterResultDto)
@@ -34,10 +36,26 @@ public class GroupParameterResultService
         var groupParameterResult = await _groupParameterResultRepositorySql.FindById(id);
         return groupParameterResult;
     }
+    
+    public async Task<List<GroupParameterResult>> GetGroupParameterByAssessmentResult(Guid assessmentResultId)
+    {
+        var assessmentResult = await _assessmentResultRepositorySql.FindById(assessmentResultId);
+        var groups = await _groupParameterResultRepositorySql.FindAll();
+        var groupsByAssessmentResult = groups
+            .Select(x => x.AssessmentResultId)
+            .Where(assessmentId => assessmentResult.Id == assessmentId)
+            .ToList();
+        var group = new List<GroupParameterResult>();
+        foreach (var id in groupsByAssessmentResult)
+        {
+            group.Add(await GetGroupParameterResult(Guid.Parse(id)));
+        }
+        return group;
+    }
 
     public async Task<List<GroupParameterResult>> GetAllGroupParameterResult()
     {
-        return await _groupParameterResultRepositorySql.FindAll();;
+        return await _groupParameterResultRepositorySql.FindAll();
     }
     
     public async Task DeleteGroupParameterResultById(Guid id)

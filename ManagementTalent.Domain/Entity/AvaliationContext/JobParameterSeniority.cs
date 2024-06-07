@@ -7,6 +7,6 @@ public class JobParameterSeniority
     public string JobParametersBaseId { get; set; } = Guid.NewGuid().ToString();
     public JobParameterBase JobParameterBase { get; set; }
 
-    public Guid SeniorityId { get; set; }
+    public string SeniorityId { get; set; }
     public Seniority Seniority { get; set; }
 }

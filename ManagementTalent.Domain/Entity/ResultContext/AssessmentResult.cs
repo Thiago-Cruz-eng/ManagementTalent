@@ -4,11 +4,14 @@ namespace ManagementTalent.Domain.Entity.ResultContext;
 
 public class AssessmentResult
 {
-    public Guid Id { get; set; } = Guid.NewGuid();
-    public Colab Collaborator { get; set; }
+    public string Id { get; set; } = Guid.NewGuid().ToString();
+
+    public string SupervisorId { get; set; }
+    public string CollaboratorId { get; set; }
     public DateTime? NextAssessment { get; set; } = DateTime.UtcNow.AddYears(1);
-    public List<GroupParameterResult> GroupParameterResults { get; set; }
     public int Result { get; set; }
+    public Colab Collaborator { get; set; }
+    public List<GroupParameterResult> GroupParameterResults { get; set; }
     
     private List<string> _validationErrors;
 

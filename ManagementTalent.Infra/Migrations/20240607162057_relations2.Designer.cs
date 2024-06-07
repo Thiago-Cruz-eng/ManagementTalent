@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ManagementTalent.Infra.Migrations
 {
     [DbContext(typeof(MTDbContext))]
-    [Migration("20240605191154_relations")]
-    partial class relations
+    [Migration("20240607162057_relations2")]
+    partial class relations2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -49,6 +49,7 @@ namespace ManagementTalent.Infra.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("AssessmentId")
+                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.Property<DateTime>("CreateAt")
@@ -92,6 +93,9 @@ namespace ManagementTalent.Infra.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<int>("Expected")
+                        .HasColumnType("int");
+
                     b.Property<string>("JobParamTitle")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -113,8 +117,8 @@ namespace ManagementTalent.Infra.Migrations
                     b.Property<string>("JobParametersBaseId")
                         .HasColumnType("varchar(255)");
 
-                    b.Property<Guid>("SeniorityId")
-                        .HasColumnType("char(36)");
+                    b.Property<string>("SeniorityId")
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("JobParametersBaseId", "SeniorityId");
 
@@ -125,9 +129,8 @@ namespace ManagementTalent.Infra.Migrations
 
             modelBuilder.Entity("ManagementTalent.Domain.Entity.AvaliationContext.Seniority", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(255)");
 
                     b.Property<Guid>("JobRoleId")
                         .HasColumnType("char(36)");
@@ -201,8 +204,9 @@ namespace ManagementTalent.Infra.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("longtext");
 
-                    b.Property<Guid>("SeniorityId")
-                        .HasColumnType("char(36)");
+                    b.Property<string>("SeniorityId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
 
                     b.Property<DateTime>("StartAt")
                         .HasColumnType("datetime(6)");
@@ -265,12 +269,19 @@ namespace ManagementTalent.Infra.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
+                    b.Property<string>("JobParamTitle")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<string>("Observation")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("Result")
+                    b.Property<int>("RealityResult")
                         .HasColumnType("int");
+
+                    b.Property<double>("Weight")
+                        .HasColumnType("double");
 
                     b.HasKey("Id");
 
@@ -281,11 +292,11 @@ namespace ManagementTalent.Infra.Migrations
 
             modelBuilder.Entity("ManagementTalent.Domain.Entity.ResultContext.AssessmentResult", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("CollaboratorId")
+                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.Property<DateTime?>("NextAssessment")
@@ -293,6 +304,10 @@ namespace ManagementTalent.Infra.Migrations
 
                     b.Property<int>("Result")
                         .HasColumnType("int");
+
+                    b.Property<string>("SupervisorId")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -306,8 +321,9 @@ namespace ManagementTalent.Infra.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("varchar(255)");
 
-                    b.Property<Guid>("AssessmentResultId")
-                        .HasColumnType("char(36)");
+                    b.Property<string>("AssessmentResultId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
 
                     b.Property<DateTime>("CreateAt")
                         .HasColumnType("datetime(6)");
@@ -500,7 +516,9 @@ namespace ManagementTalent.Infra.Migrations
                 {
                     b.HasOne("ManagementTalent.Domain.Entity.AvaliationContext.Assessment", null)
                         .WithMany("GroupParameters")
-                        .HasForeignKey("AssessmentId");
+                        .HasForeignKey("AssessmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ManagementTalent.Domain.Entity.AvaliationContext.GroupParameterJobParameter", b =>
@@ -594,7 +612,9 @@ namespace ManagementTalent.Infra.Migrations
                 {
                     b.HasOne("ManagementTalent.Domain.Entity.Colab", "Collaborator")
                         .WithMany()
-                        .HasForeignKey("CollaboratorId");
+                        .HasForeignKey("CollaboratorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Collaborator");
                 });

@@ -22,20 +22,23 @@ public class JobParameterBaseService
             JobParamTitle = jobParameterBaseDto.JobParamTitle,
             Description = jobParameterBaseDto.Description,
             Observation = jobParameterBaseDto.Observation,
-            Weight = jobParameterBaseDto.Weight
+            Weight = jobParameterBaseDto.Weight,
+            Expected = jobParameterBaseDto.Expected
         };
         
         jobParameterBase.Validate();
  
         await _jobParameterBaseRepositorySql.Save(jobParameterBase);
-        if(jobParameterBaseDto.GroupParameterIds.Count > 0) jobParameterBase.IntegrateGroupParameter(jobParameterBaseDto.GroupParameterIds);
+        if(jobParameterBaseDto.GroupParameterIds?.Count > 0) jobParameterBase.IntegrateGroupParameter(jobParameterBaseDto.GroupParameterIds);
+        if(jobParameterBaseDto.SenioritiesIds?.Count > 0) jobParameterBase.IntegrateSeniority(jobParameterBaseDto.SenioritiesIds);
         await _jobParameterBaseRepositorySql.SaveChange();
         return new CreateJobParameterBaseResponse
         {
             JobParamTitle = jobParameterBase.JobParamTitle,
             Description = jobParameterBase.Description,
             Observation = jobParameterBase.Observation,
-            Weight = jobParameterBase.Weight
+            Weight = jobParameterBase.Weight,
+            Expected = jobParameterBase.Expected
         };
     }
     
@@ -47,11 +50,13 @@ public class JobParameterBaseService
         jobParameterBase.Description = jobParameterBaseDto.Description ?? jobParameterBase.Description;
         jobParameterBase.Observation = jobParameterBaseDto.Observation ?? jobParameterBase.Observation;
         jobParameterBase.Weight = jobParameterBaseDto.Weight ?? jobParameterBase.Weight;
+        jobParameterBase.Expected = jobParameterBaseDto.Expected ?? jobParameterBase.Expected;
         
         jobParameterBase.Validate();
  
         await _jobParameterBaseRepositorySql.Update(jobParameterBase);
-        if(jobParameterBaseDto.GroupParameterIds.Count > 0) jobParameterBase.IntegrateGroupParameter(jobParameterBaseDto.GroupParameterIds);
+        if(jobParameterBaseDto.GroupParameterIds?.Count > 0) jobParameterBase.IntegrateGroupParameter(jobParameterBaseDto.GroupParameterIds);
+        if(jobParameterBaseDto.SenioritiesIds?.Count > 0) jobParameterBase.IntegrateSeniority(jobParameterBaseDto.SenioritiesIds);
         await _jobParameterBaseRepositorySql.SaveChange();
         return new UpdateJobParameterBaseResponse
         {
@@ -82,7 +87,8 @@ public class JobParameterBaseService
                 JobParamTitle = x.JobParamTitle,
                 Description = x.Description,
                 Observation = x.Observation,
-                Weight = x.Weight
+                Weight = x.Weight,
+                Expected = x.Expected
             });
         });
         return jobParameterBaseResponses;

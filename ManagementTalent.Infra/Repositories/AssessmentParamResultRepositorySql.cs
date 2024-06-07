@@ -8,7 +8,18 @@ namespace ManagementTalent.Infra.Repositories;
 
 public class AssessmentParamResultRepositorySql : EntityFrameworkRepositorySqlAbstract<Guid, AssessmentParamResult>, IAssessmentParamResultRepositorySql
 {
+    private MTDbContext _context;
     public AssessmentParamResultRepositorySql(MTDbContext context) : base(context)
     {
+    }
+
+    public Task SaveRange(List<AssessmentParamResult> jobParamBaseToMap)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<AssessmentParamResult> GetAssessmentParamResultByGroupParameterResul(Guid groupParameterResultId)
+    {
+        throw new NotImplementedException();
     }
 }

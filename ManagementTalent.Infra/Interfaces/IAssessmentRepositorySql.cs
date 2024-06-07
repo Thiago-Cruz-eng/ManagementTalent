@@ -6,5 +6,5 @@ namespace ManagementTalent.Infra.Interfaces;
 
 public interface IAssessmentRepositorySql : IBaseRepositorySql<Guid, Assessment>
 {
-    
+    public Task<Assessment> GetAssessmentByJobRole(string jobRoleId);
 }

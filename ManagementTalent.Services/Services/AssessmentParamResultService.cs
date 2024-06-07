@@ -10,10 +10,12 @@ namespace ManagementTalent.Services.Services;
 public class AssessmentParamResultService
 {
     private readonly IAssessmentParamResultRepositorySql _assessmentParamResultRepositorySql;
+    private readonly IGroupParameterResultRepositorySql _groupParameterResultRepositorySql;
 
-    public AssessmentParamResultService(IAssessmentParamResultRepositorySql assessmentParamResultRepositorySql)
+    public AssessmentParamResultService(IAssessmentParamResultRepositorySql assessmentParamResultRepositorySql, IGroupParameterResultRepositorySql groupParameterResultRepositorySql)
     {
         _assessmentParamResultRepositorySql = assessmentParamResultRepositorySql;
+        _groupParameterResultRepositorySql = groupParameterResultRepositorySql;
     }
 
     public async Task<CreateAssessmentParamResultResponse> CreateAssessmentParamResult(CreateAssessmentParamResultRequest assessmentParamResultDto)
@@ -22,7 +24,7 @@ public class AssessmentParamResultService
         {
             Description = assessmentParamResultDto.Description,
             Observation = assessmentParamResultDto.Observation,
-            Result = assessmentParamResultDto.Result
+            RealityResult = assessmentParamResultDto.Result
         };
         
         assessmentParamResult.Validate();
@@ -33,7 +35,7 @@ public class AssessmentParamResultService
         {
             Description = assessmentParamResult.Description,
             Observation = assessmentParamResult.Observation,
-            Result = assessmentParamResult.Result
+            Result = assessmentParamResult.RealityResult
         };
     }
     
@@ -43,7 +45,7 @@ public class AssessmentParamResultService
         if (assessmentParamResult == null) throw new ApplicationException("exercise not found");
         assessmentParamResult.Description = assessmentParamResultDto.Description ?? assessmentParamResult.Description;
         assessmentParamResult.Observation = assessmentParamResultDto.Observation ?? assessmentParamResult.Observation;
-        assessmentParamResult.Result = assessmentParamResultDto.Result ?? assessmentParamResult.Result;    
+        assessmentParamResult.RealityResult = assessmentParamResultDto.Result ?? assessmentParamResult.RealityResult;    
         
         assessmentParamResult.Validate();
  
@@ -62,8 +64,25 @@ public class AssessmentParamResultService
         {
             Description = assessmentParamResult.Description,
             Observation = assessmentParamResult.Observation,
-            Result = assessmentParamResult.Result
+            Result = assessmentParamResult.RealityResult
         };
+    }
+    
+    private async Task<AssessmentParamResult> GetAssessmentParamResultByGroupParameterResultId(Guid GroupParameterResultId)
+    {
+        var assessmentParamResult = await _assessmentParamResultRepositorySql.GetAssessmentParamResultByGroupParameterResul(GroupParameterResultId);
+        return assessmentParamResult;
+    }
+    
+    public async Task<List<AssessmentParamResult>> GetAssessmentParamByGroupResult(List<Guid> groupParamIds)
+    {
+        var jobParams = new List<AssessmentParamResult>();
+        foreach (var groupParamId in groupParamIds)
+        {
+            jobParams.Add(await GetAssessmentParamResultByGroupParameterResultId(groupParamId));
+        }
+        
+        return jobParams;
     }
 
     public async Task<List<GetAssessmentParamResultResponse>> GetAllAssessmentParamResult()
@@ -76,7 +95,7 @@ public class AssessmentParamResultService
             {
                 Description = x.Description,
                 Observation = x.Observation,
-                Result = x.Result
+                Result = x.RealityResult
             });
         });
         return assessmentParamResultResponses;

@@ -7,5 +7,5 @@ public class CreateSeniorityResponse
     public JobRole JobRoleName { get; set; }
     public string SeniorityName { get; set; }
 
-    public int SeniorityNumber { get; set; }
+    public int SeniorityRelevanceInWorkDay { get; set; }
 }

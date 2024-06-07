@@ -5,11 +5,14 @@ namespace ManagementTalent.Domain.Entity.ResultContext;
 public class AssessmentParamResult
 {
     public Guid Id { get; set; } = Guid.NewGuid();
+    public string JobParamTitle { get; set; }
     public string Description { get; set; }
     public string Observation { get; set; }
+    public double Weight { get; set; }
 
     [Range(1, 4, ErrorMessage = "O valor de 'Resultado' deve estar entre 1 e 100.")]
-    public int Result { get; set; }
+    public int RealityResult { get; set; }
+    public string GroupParameterResultId { get; set; }
     public GroupParameterResult GroupParameterResult { get; set; }
 
     
@@ -28,7 +31,7 @@ public class AssessmentParamResult
 
     private void ValidateResult()
     {
-        if (Result <= 0)
+        if (RealityResult <= 0)
             _validationErrors.Add("Result is required.");
     }
 

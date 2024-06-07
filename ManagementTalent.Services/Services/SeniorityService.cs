@@ -20,9 +20,10 @@ public class SeniorityService
         var seniority = new Seniority
         {
             SeniorityName = seniorityDto.SeniorityName,
-            SeniorityNumber = seniorityDto.SeniorityNumber,
+            SeniorityRelevanceInWorkDay = seniorityDto.SeniorityRelevanceInWorkDay,
             JobRoleId = seniorityDto.JobRoleId
         };
+        if(seniorityDto.SenioritiesIds?.Count > 0) seniority.IntegrateSeniority(seniorityDto.SenioritiesIds);
         
         seniority.Validate();
  
@@ -31,7 +32,7 @@ public class SeniorityService
         return new CreateSeniorityResponse
         {
             SeniorityName = seniority.SeniorityName,
-            SeniorityNumber = seniority.SeniorityNumber,
+            SeniorityRelevanceInWorkDay = seniority.SeniorityRelevanceInWorkDay,
             JobRoleName = seniority.JobRoleName
         };
     }
@@ -41,8 +42,9 @@ public class SeniorityService
         var seniority = await _seniorityRepositorySql.FindById(id);
         if (seniority == null) throw new ApplicationException("exercise not found");
         seniority.JobRoleId = seniorityDto.JobRoleId ?? seniority.JobRoleId;
-        seniority.SeniorityNumber = seniorityDto.SeniorityNumber ?? seniority.SeniorityNumber;
+        seniority.SeniorityRelevanceInWorkDay = seniorityDto.SeniorityRelevanceInWorkDay ?? seniority.SeniorityRelevanceInWorkDay;
         seniority.SeniorityName = seniorityDto.SeniorityName;
+        if(seniorityDto.SenioritiesIds?.Count > 0) seniority.IntegrateSeniority(seniorityDto.SenioritiesIds);
         
         seniority.Validate();
  
@@ -60,7 +62,7 @@ public class SeniorityService
         return new GetSeniorityResponse
         {
             JobRoleId = seniority.JobRoleId,
-            SeniorityNumber = seniority.SeniorityNumber,
+            SeniorityRelevanceInWorkDay = seniority.SeniorityRelevanceInWorkDay,
             SeniorityName = seniority.SeniorityName
         };
     }
@@ -74,7 +76,7 @@ public class SeniorityService
             seniorityResponses.Add(new GetSeniorityResponse
             {
                 JobRoleId = x.JobRoleId,
-                SeniorityNumber = x.SeniorityNumber,
+                SeniorityRelevanceInWorkDay = x.SeniorityRelevanceInWorkDay,
                 SeniorityName = x.SeniorityName
             });
         });

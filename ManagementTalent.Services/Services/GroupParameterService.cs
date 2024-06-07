@@ -21,13 +21,13 @@ public class GroupParameterService
         {
             GroupParamTitle = groupParameterDto.GroupParamTitle,
             Weight = groupParameterDto.Weight,
-            AssessmentId = groupParameterDto.AssessmentId
+            AssessmentId = groupParameterDto.AssessmentId.ToString()
         };
         
         groupParameter.Validate();
  
         await _groupParameterRepositorySql.Save(groupParameter);
-        if (groupParameterDto.JobParameterIds.Count > 0) groupParameter.IntegrateJobParameter(groupParameterDto.JobParameterIds);
+        if (groupParameterDto.JobParameterIds?.Count > 0) groupParameter.IntegrateJobParameter(groupParameterDto.JobParameterIds);
         await _groupParameterRepositorySql.SaveChange();
        
         return new CreateGroupParameterResponse
@@ -44,12 +44,12 @@ public class GroupParameterService
         if (groupParameter == null) throw new ApplicationException("exercise not found");
         groupParameter.GroupParamTitle = groupParameterDto.GroupParamTitle ?? groupParameter.GroupParamTitle;
         groupParameter.Weight = groupParameterDto.Weight ?? groupParameter.Weight;
-        groupParameter.AssessmentId = groupParameterDto.AssessmentId;
+        groupParameter.AssessmentId = groupParameterDto.AssessmentId.ToString();
         
         groupParameter.Validate();
  
         await _groupParameterRepositorySql.Update(groupParameter);
-        if (groupParameterDto.JobParameterIds.Count > 0) groupParameter.IntegrateJobParameter(groupParameterDto.JobParameterIds);
+        if (groupParameterDto.JobParameterIds?.Count > 0) groupParameter.IntegrateJobParameter(groupParameterDto.JobParameterIds);
         await _groupParameterRepositorySql.SaveChange();
         return new UpdateGroupParameterResponse
         {
@@ -64,7 +64,7 @@ public class GroupParameterService
         {
             GroupParamTitle = groupParameter.GroupParamTitle,
             Weight = groupParameter.Weight,
-            AssessmentId = groupParameter.AssessmentId
+            AssessmentId = Guid.Parse(groupParameter.AssessmentId)
         };
     }
 
@@ -78,7 +78,7 @@ public class GroupParameterService
             {
                 GroupParamTitle = x.GroupParamTitle,
                 Weight = x.Weight,
-                AssessmentId = x.AssessmentId
+                AssessmentId = Guid.Parse(x.AssessmentId)
             });
         });
         return groupParameterResponses;

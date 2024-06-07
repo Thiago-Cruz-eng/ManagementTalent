@@ -6,7 +6,7 @@ public class GroupParameter
     public string GroupParamTitle { get; set; }
     public double Weight { get; set; }
     public DateTime CreateAt { get; set; } = DateTime.UtcNow;
-    public Guid AssessmentId { get; set; }
+    public string AssessmentId { get; set; }
     public List<GroupParameterJobParameter> GroupParameterJobParameters { get; set; }
     
     private List<string> _validationErrors;

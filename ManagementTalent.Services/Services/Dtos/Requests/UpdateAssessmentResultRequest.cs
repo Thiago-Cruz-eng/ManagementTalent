@@ -5,8 +5,15 @@ namespace ManagementTalent.Services.Services.Dtos.Requests;
 
 public class UpdateAssessmentResultRequest
 {
-    public Colab? Collaborator { get; set; }
-    public List<GroupParameterResult>? GroupParameterResults { get; set; }
-    public string? SupervisorName { get; set; }
-    public int? Result { get; set; }
+    public string CollaboratorId { get; set; }
+    public int Result { get; set; }
+    public DateTime? NextAssessment { get; set; }
+
+    public List<JobParam> JobParams { get; set; }
+}
+
+public class JobParam
+{
+    public string Id { get; set; }
+    public int RealityResult { get; set; }
 }

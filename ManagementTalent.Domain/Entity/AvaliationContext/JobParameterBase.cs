@@ -7,6 +7,7 @@ public class JobParameterBase
     public string Description { get; set; }
     public string Observation { get; set; }
     public double Weight { get; set; }
+    public int Expected { get; set; }
     public List<GroupParameterJobParameter> GroupParameterJobParameters { get; set; }
     public List<JobParameterSeniority> JobParameterSeniorities { get; set; }
     
@@ -22,6 +23,21 @@ public class JobParameterBase
                 {
                     GroupParameterId = id,
                     JobParameterBaseId = Id
+                }
+            };
+        });
+    }
+    
+    public void IntegrateSeniority(List<string> ids)
+    {
+        ids.ForEach(id =>
+        {
+            JobParameterSeniorities = new List<JobParameterSeniority>
+            {
+                new()
+                {
+                    JobParametersBaseId = Id,
+                    SeniorityId = id,
                 }
             };
         });
