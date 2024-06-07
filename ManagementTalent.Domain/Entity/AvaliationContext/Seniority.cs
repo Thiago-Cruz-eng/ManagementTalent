@@ -11,16 +11,15 @@ public class Seniority
     
     public void IntegrateSeniority(List<string> ids)
     {
+        var list = new List<JobParameterSeniority>();
         ids.ForEach(id =>
         {
-            JobParameterSeniorities = new List<JobParameterSeniority>
+            list.Add(new JobParameterSeniority
             {
-                new()
-                {
-                    JobParametersBaseId = id,
-                    SeniorityId = Id,
-                }
-            };
+                JobParametersBaseId = id,
+                SeniorityId = Id,
+            });
+            JobParameterSeniorities = list;
         });
     }
 

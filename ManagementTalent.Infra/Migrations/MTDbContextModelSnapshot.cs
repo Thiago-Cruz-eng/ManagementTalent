@@ -136,7 +136,7 @@ namespace ManagementTalent.Infra.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("SeniorityNumber")
+                    b.Property<int>("SeniorityRelevanceInWorkDay")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -321,6 +321,10 @@ namespace ManagementTalent.Infra.Migrations
                     b.Property<string>("AssessmentResultId")
                         .IsRequired()
                         .HasColumnType("varchar(255)");
+
+                    b.Property<string>("AssessmentTamplateId")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<DateTime>("CreateAt")
                         .HasColumnType("datetime(6)");

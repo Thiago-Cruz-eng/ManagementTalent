@@ -27,10 +27,10 @@ public class JobParameterBaseService
         };
         
         jobParameterBase.Validate();
- 
-        await _jobParameterBaseRepositorySql.Save(jobParameterBase);
+        
         if(jobParameterBaseDto.GroupParameterIds?.Count > 0) jobParameterBase.IntegrateGroupParameter(jobParameterBaseDto.GroupParameterIds);
         if(jobParameterBaseDto.SenioritiesIds?.Count > 0) jobParameterBase.IntegrateSeniority(jobParameterBaseDto.SenioritiesIds);
+        await _jobParameterBaseRepositorySql.Save(jobParameterBase);
         await _jobParameterBaseRepositorySql.SaveChange();
         return new CreateJobParameterBaseResponse
         {

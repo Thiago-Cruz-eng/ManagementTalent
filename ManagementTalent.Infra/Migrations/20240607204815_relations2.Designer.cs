@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ManagementTalent.Infra.Migrations
 {
     [DbContext(typeof(MTDbContext))]
-    [Migration("20240607162057_relations2")]
+    [Migration("20240607204815_relations2")]
     partial class relations2
     {
         /// <inheritdoc />
@@ -139,7 +139,7 @@ namespace ManagementTalent.Infra.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("SeniorityNumber")
+                    b.Property<int>("SeniorityRelevanceInWorkDay")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -324,6 +324,10 @@ namespace ManagementTalent.Infra.Migrations
                     b.Property<string>("AssessmentResultId")
                         .IsRequired()
                         .HasColumnType("varchar(255)");
+
+                    b.Property<string>("AssessmentTamplateId")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<DateTime>("CreateAt")
                         .HasColumnType("datetime(6)");

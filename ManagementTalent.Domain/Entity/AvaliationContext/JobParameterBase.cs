@@ -15,31 +15,29 @@ public class JobParameterBase
 
     public void IntegrateGroupParameter(List<string> ids)
     {
+        var list = new List<GroupParameterJobParameter>();
         ids.ForEach(id =>
         {
-            GroupParameterJobParameters = new List<GroupParameterJobParameter>
+            list.Add(new GroupParameterJobParameter
             {
-                new()
-                {
-                    GroupParameterId = id,
-                    JobParameterBaseId = Id
-                }
-            };
+                GroupParameterId = id,
+                JobParameterBaseId = Id
+            });
+            GroupParameterJobParameters = list;
         });
     }
     
     public void IntegrateSeniority(List<string> ids)
     {
+        var list = new List<JobParameterSeniority>();
         ids.ForEach(id =>
         {
-            JobParameterSeniorities = new List<JobParameterSeniority>
+            list.Add(new JobParameterSeniority
             {
-                new()
-                {
-                    JobParametersBaseId = Id,
-                    SeniorityId = id,
-                }
-            };
+                JobParametersBaseId = Id,
+                SeniorityId = id,
+            });
+            JobParameterSeniorities = list;
         });
     }
     public void Validate()

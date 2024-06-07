@@ -114,10 +114,10 @@ public class AssessmentResultService
         await _assessmentParamResultRepositorySql.SaveRange(jobParamBaseToMap);
     }
 
-    public async Task<UpdateAssessmentResultResponse> UpdateAssessmentResult(Guid id, UpdateAssessmentResultRequest assessmentResultDto)
+    public async Task<UpdateAssessmentResultResponse> UpdateAssessmentResult(Guid assessmentId, UpdateAssessmentResultRequest assessmentResultDto)
     {
         var colab = await _colabRepositorySql.FindById(Guid.Parse(assessmentResultDto.CollaboratorId));
-        var assessmentResult = await _assessmentResultRepositorySql.FindById(id);
+        var assessmentResult = await _assessmentResultRepositorySql.FindById(assessmentId);
         if (assessmentResult == null) throw new ApplicationException("exercise not found");
         assessmentResult.CollaboratorId = colab.Id;
         assessmentResult.SupervisorId = colab.SupervisorId;

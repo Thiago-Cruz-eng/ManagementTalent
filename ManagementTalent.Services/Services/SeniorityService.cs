@@ -23,7 +23,7 @@ public class SeniorityService
             SeniorityRelevanceInWorkDay = seniorityDto.SeniorityRelevanceInWorkDay,
             JobRoleId = seniorityDto.JobRoleId
         };
-        if(seniorityDto.SenioritiesIds?.Count > 0) seniority.IntegrateSeniority(seniorityDto.SenioritiesIds);
+        if(seniorityDto.JobParamIds?.Count > 0) seniority.IntegrateSeniority(seniorityDto.JobParamIds);
         
         seniority.Validate();
  
@@ -44,7 +44,7 @@ public class SeniorityService
         seniority.JobRoleId = seniorityDto.JobRoleId ?? seniority.JobRoleId;
         seniority.SeniorityRelevanceInWorkDay = seniorityDto.SeniorityRelevanceInWorkDay ?? seniority.SeniorityRelevanceInWorkDay;
         seniority.SeniorityName = seniorityDto.SeniorityName;
-        if(seniorityDto.SenioritiesIds?.Count > 0) seniority.IntegrateSeniority(seniorityDto.SenioritiesIds);
+        if(seniorityDto.JobParamIds?.Count > 0) seniority.IntegrateSeniority(seniorityDto.JobParamIds);
         
         seniority.Validate();
  

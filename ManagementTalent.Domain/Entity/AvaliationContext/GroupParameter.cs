@@ -10,19 +10,18 @@ public class GroupParameter
     public List<GroupParameterJobParameter> GroupParameterJobParameters { get; set; }
     
     private List<string> _validationErrors;
-
+    
     public void IntegrateJobParameter(List<string> ids)
     {
+        var list = new List<GroupParameterJobParameter>();
         ids.ForEach(id =>
         {
-            GroupParameterJobParameters = new List<GroupParameterJobParameter>
+            list.Add(new GroupParameterJobParameter
             {
-                new()
-                {
-                    GroupParameterId = Id,
-                    JobParameterBaseId = id
-                }
-            };
+                GroupParameterId = Id,
+                JobParameterBaseId = id
+            });
+            GroupParameterJobParameters = list;
         });
     }
 

@@ -7,5 +7,5 @@ public class UpdateSeniorityRequest
     public Guid? JobRoleId { get; set; }
     public int? SeniorityRelevanceInWorkDay { get; set; }
     public string? SeniorityName { get; set; }
-    public List<string>? SenioritiesIds { get; set; }
+    public List<string>? JobParamIds { get; set; }
 }
