@@ -3,7 +3,7 @@ using ManagementTalent.Infra.BaseRepository;
 
 namespace ManagementTalent.Infra.Interfaces;
 
-public interface ISupervisorRepositorySql : IBaseRepositorySql<Guid, Supervisor>
+public interface ISupervisorRepositorySql : IBaseRepositorySql<string, Supervisor>
 {
     
 }

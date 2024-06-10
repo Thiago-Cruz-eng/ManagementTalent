@@ -18,6 +18,7 @@ public class AssessmentResultService
     private readonly IGroupParameterResultRepositorySql _groupParameterResultRepositorySql;
     private readonly IJobParameterBaseRepositorySql _jobParameterBaseRepositorySql;
     private readonly IAssessmentParamResultRepositorySql _assessmentParamResultRepositorySql;
+    private readonly ISupervisorRepositorySql _supervisorRepositorySql;
 
     public AssessmentResultService(IAssessmentResultRepositorySql assessmentResultRepositorySql, IColabRepositorySql colabRepositorySql, IJobRoleRepositorySql jobRoleRepositorySql, IAssessmentRepositorySql assessmentRepositorySql, IGroupParameterRepositorySql groupParameterRepositorySql, IGroupParameterResultRepositorySql groupParameterResultRepositorySql, IJobParameterBaseRepositorySql jobParameterBaseRepositorySql, ISeniorityRepositorySql seniorityRepositorySql, IAssessmentParamResultRepositorySql assessmentParamResultRepositorySql)
     {
@@ -37,6 +38,7 @@ public class AssessmentResultService
         var colab = await _colabRepositorySql.FindById(assessmentResultDto.CollaboratorId);
         var getJobRole = await _jobRoleRepositorySql.FindById(colab.JobRoleId);
         var seniority = await _seniorityRepositorySql.FindById(colab.SeniorityId);
+        var supervisor = await _supervisorRepositorySql.FindById(colab.SupervisorId);
         var getAssessmentByJobRole = await _assessmentRepositorySql.GetAssessmentByJobRole(getJobRole.Id.ToString());
         var getGroupParamsByAssessmentId =
             await _groupParameterRepositorySql.GetGroupParamsByAssessment(getAssessmentByJobRole.Id);
@@ -46,14 +48,17 @@ public class AssessmentResultService
             CollaboratorId = assessmentResultDto.CollaboratorId,
             SupervisorId = colab.SupervisorId,
             NextAssessment = DateTime.UtcNow.AddYears(1),
-            Result = 0
+            Result = 0,
+            ActualJobName = getJobRole.JobTitle,
+            ActualSeniorityName = seniority.SeniorityName,
+            ActualSupervisorName = supervisor.Name
         };
         assessmentResult.Validate();
         
         await _assessmentResultRepositorySql.Save(assessmentResult);
         await _assessmentResultRepositorySql.SaveChange();
 
-        var groupIds = await SaveActualGroupParamResultInAssessmentResult(getGroupParamsByAssessmentId, assessmentResult.Id, colab.SeniorityId);
+        var groupIds = await SaveActualGroupParamResultInAssessmentResult(getGroupParamsByAssessmentId, assessmentResult.Id);
         await _groupParameterResultRepositorySql.SaveChange();
         
         foreach (var groupId in groupIds)
@@ -84,7 +89,7 @@ public class AssessmentResultService
         }
     }
 
-    private async Task<List<string>> SaveActualGroupParamResultInAssessmentResult(List<GroupParameter> getGroupParamsByAssessmentId, string assessmentResultId, string seniorityId)
+    private async Task<List<string>> SaveActualGroupParamResultInAssessmentResult(List<GroupParameter> getGroupParamsByAssessmentId, string assessmentResultId)
     {
         var groupsParamToMap = new List<GroupParameterResult>();
         getGroupParamsByAssessmentId?.ForEach(x =>
@@ -94,8 +99,7 @@ public class AssessmentResultService
                 GroupParamTitle = x.GroupParamTitle,
                 Weight = x.Weight,
                 AssessmentResultId = assessmentResultId,
-                AssessmentTamplateId = x.AssessmentId,
-                ActualSeniorityId = seniorityId
+                AssessmentTamplateId = x.AssessmentId
             });
         });
 

@@ -41,7 +41,7 @@ public class SupervisorService
     
     public async Task<UpdateSupervisorResponse> UpdateSupervisor(Guid id, UpdateSupervisorRequest supervisorDto)
     {
-        var sup = await _supervisorRepositorySql.FindById(id);
+        var sup = await _supervisorRepositorySql.FindById(id.ToString());
         if (sup == null) throw new ApplicationException("exercise not found");
         sup.Name = supervisorDto.Name;
         sup.Age = supervisorDto.Age ?? 0;
@@ -66,7 +66,7 @@ public class SupervisorService
     
     public async Task<GetSupervisorResponse> GetSupervisor(Guid id)
     {
-        var sup = await _supervisorRepositorySql.FindById(id);
+        var sup = await _supervisorRepositorySql.FindById(id.ToString());
         return new GetSupervisorResponse
         {
             SupFather = sup.SupFatherId,
@@ -97,7 +97,7 @@ public class SupervisorService
     
     public async Task DeleteSupervisorById(Guid id)
     {
-        var sup = await _supervisorRepositorySql.FindById(id);
+        var sup = await _supervisorRepositorySql.FindById(id.ToString());
         _supervisorRepositorySql.Delete(sup);
         await _supervisorRepositorySql.SaveChange();
     }

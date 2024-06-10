@@ -221,3 +221,5 @@ l
 <ManagementTalent.Infra/Interfaces/ISeniorityRepositorySql.cs,d\0\d045807ee54b297ad70f5e78a24a91e2c597ed39
 s
 CManagementTalent.Infra/Interfaces/IAssessmentResultRepositorySql.cs,f\3\f38a0f94e389b9ae549fef6c49e061bf6f3dc510
+n
+>ManagementTalent.Infra/Repositories/SupervisorRepositorySql.cs,f\e\fed92a181afd31ddc6847c1f56dab8228190e9c9

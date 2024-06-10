@@ -5,7 +5,7 @@ using ManagementTalent.Infra.MySql;
 
 namespace ManagementTalent.Infra.Repositories;
 
-public class SupervisorRepositorySql : EntityFrameworkRepositorySqlAbstract<Guid, Supervisor>, ISupervisorRepositorySql
+public class SupervisorRepositorySql : EntityFrameworkRepositorySqlAbstract<string, Supervisor>, ISupervisorRepositorySql
 {
     public SupervisorRepositorySql(MTDbContext context) : base(context)
     {

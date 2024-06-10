@@ -1,3 +1,4 @@
 
-Šcsharpsquid:S112€"@'System.ApplicationException' should not be thrown by user code.(Ğ’¸8ğÇ‰œÿ1J$f18c6b30-99c3-4eca-8725-a41359ad0273
-“csharpsquid:S107"EConstructor has 9 parameters, which is greater than the 7 authorized.(†’ì’şÿÿÿÿ8—Îì€2J$0af3be00-c56e-4b90-a6c8-9a9617a82391
+”csharpsquid:S3459"ERemove unassigned field '_supervisorRepositorySql', or set its value.(®Şˆèøÿÿÿÿ8Îİ¯œ€2J$a0eb75a9-e24a-4400-ac70-e21e408a7908
+Šcsharpsquid:S112„"@'System.ApplicationException' should not be thrown by user code.(Ğ’¸8ğÇ‰œÿ1J$31ff35f8-c5d1-448b-99fb-0c1fbee55713
+“csharpsquid:S107"EConstructor has 9 parameters, which is greater than the 7 authorized.(†’ì’şÿÿÿÿ8—Îì€2J$a1945016-9f65-4355-9726-b5b3a74bd97c
