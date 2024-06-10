@@ -12,6 +12,7 @@ public class AssessmentParamResult
 
     [Range(1, 4, ErrorMessage = "O valor de 'Resultado' deve estar entre 1 e 100.")]
     public int? RealityResult { get; set; }
+    public int Expected { get; set; }
     public DateTime CreateAt { get; set; } = DateTime.UtcNow;
     public string GroupParameterResultId { get; set; }
     public GroupParameterResult GroupParameterResult { get; set; }

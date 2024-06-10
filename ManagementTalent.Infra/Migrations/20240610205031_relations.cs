@@ -413,6 +413,12 @@ namespace ManagementTalent.Infra.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     NextAssessment = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     CreateAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    ActualSeniorityName = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ActualJobName = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ActualSupervisorName = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     Result = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -440,8 +446,6 @@ namespace ManagementTalent.Infra.Migrations
                     AssessmentResultId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     AssessmentTamplateId = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ActualSeniorityId = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -470,6 +474,7 @@ namespace ManagementTalent.Infra.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Weight = table.Column<double>(type: "double", nullable: true),
                     RealityResult = table.Column<int>(type: "int", nullable: true),
+                    Expected = table.Column<int>(type: "int", nullable: false),
                     CreateAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     GroupParameterResultId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")

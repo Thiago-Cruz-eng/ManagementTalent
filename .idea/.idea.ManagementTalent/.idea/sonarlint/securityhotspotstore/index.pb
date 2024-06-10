@@ -223,3 +223,9 @@ s
 CManagementTalent.Infra/Interfaces/IAssessmentResultRepositorySql.cs,f\3\f38a0f94e389b9ae549fef6c49e061bf6f3dc510
 n
 >ManagementTalent.Infra/Repositories/SupervisorRepositorySql.cs,f\e\fed92a181afd31ddc6847c1f56dab8228190e9c9
+†
+VManagementTalent.Services/Services/Dtos/Requests/CreateAssessmentParamResultRequest.cs,d\2\d2fcd8c32666d0db61fa85f1e31b1452e459d3a2
+‡
+WManagementTalent.Services/Services/Dtos/Response/CreateAssessmentParamResultResponse.cs,3\7\37e48cf63cb7bfe95f02e16edb19142949ee82f3
+„
+TManagementTalent.Services/Services/Dtos/Response/GetAssessmentParamResultResponse.cs,a\1\a19413b3db3bbf2fd2ff2ff3bf6b3bc62f099e05

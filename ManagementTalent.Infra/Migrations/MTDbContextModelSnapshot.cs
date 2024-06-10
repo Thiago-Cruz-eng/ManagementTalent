@@ -264,6 +264,9 @@ namespace ManagementTalent.Infra.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<int>("Expected")
+                        .HasColumnType("int");
+
                     b.Property<string>("GroupParameterResultId")
                         .IsRequired()
                         .HasColumnType("varchar(255)");
@@ -294,6 +297,18 @@ namespace ManagementTalent.Infra.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("varchar(255)");
 
+                    b.Property<string>("ActualJobName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ActualSeniorityName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ActualSupervisorName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<string>("CollaboratorId")
                         .IsRequired()
                         .HasColumnType("varchar(255)");
@@ -322,10 +337,6 @@ namespace ManagementTalent.Infra.Migrations
                 {
                     b.Property<string>("Id")
                         .HasColumnType("varchar(255)");
-
-                    b.Property<string>("ActualSeniorityId")
-                        .IsRequired()
-                        .HasColumnType("longtext");
 
                     b.Property<string>("AssessmentResultId")
                         .IsRequired()

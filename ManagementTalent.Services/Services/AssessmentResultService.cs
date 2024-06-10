@@ -1,9 +1,12 @@
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 using ManagementTalent.Domain.Entity;
 using ManagementTalent.Domain.Entity.AvaliationContext;
 using ManagementTalent.Domain.Entity.ResultContext;
 using ManagementTalent.Infra.Interfaces;
 using ManagementTalent.Services.Services.Dtos.Requests;
 using ManagementTalent.Services.Services.Dtos.Response;
+using Document = System.Reflection.Metadata.Document;
 
 namespace ManagementTalent.Services.Services;
 
@@ -20,7 +23,7 @@ public class AssessmentResultService
     private readonly IAssessmentParamResultRepositorySql _assessmentParamResultRepositorySql;
     private readonly ISupervisorRepositorySql _supervisorRepositorySql;
 
-    public AssessmentResultService(IAssessmentResultRepositorySql assessmentResultRepositorySql, IColabRepositorySql colabRepositorySql, IJobRoleRepositorySql jobRoleRepositorySql, IAssessmentRepositorySql assessmentRepositorySql, IGroupParameterRepositorySql groupParameterRepositorySql, IGroupParameterResultRepositorySql groupParameterResultRepositorySql, IJobParameterBaseRepositorySql jobParameterBaseRepositorySql, ISeniorityRepositorySql seniorityRepositorySql, IAssessmentParamResultRepositorySql assessmentParamResultRepositorySql)
+    public AssessmentResultService(IAssessmentResultRepositorySql assessmentResultRepositorySql, IColabRepositorySql colabRepositorySql, IJobRoleRepositorySql jobRoleRepositorySql, IAssessmentRepositorySql assessmentRepositorySql, IGroupParameterRepositorySql groupParameterRepositorySql, IGroupParameterResultRepositorySql groupParameterResultRepositorySql, IJobParameterBaseRepositorySql jobParameterBaseRepositorySql, ISeniorityRepositorySql seniorityRepositorySql, IAssessmentParamResultRepositorySql assessmentParamResultRepositorySql, ISupervisorRepositorySql supervisorRepositorySql)
     {
         _assessmentResultRepositorySql = assessmentResultRepositorySql;
         _colabRepositorySql = colabRepositorySql;
@@ -31,6 +34,7 @@ public class AssessmentResultService
         _jobParameterBaseRepositorySql = jobParameterBaseRepositorySql;
         _seniorityRepositorySql = seniorityRepositorySql;
         _assessmentParamResultRepositorySql = assessmentParamResultRepositorySql;
+        _supervisorRepositorySql = supervisorRepositorySql;
     }
 
     public async Task<CreateAssessmentResultResponse> CreateAssessmentResult(CreateAssessmentResultRequest assessmentResultDto)
@@ -119,6 +123,7 @@ public class AssessmentResultService
                 Observation = x.Observation,
                 Weight = x.Weight,
                 RealityResult = 1,
+                Expected = 0,
                 GroupParameterResultId = groupId
             });
         });
@@ -143,6 +148,7 @@ public class AssessmentResultService
             var jobParamResult = await _assessmentParamResultRepositorySql.FindById(jobParam.Id);
             if (string.IsNullOrWhiteSpace(jobParamResult.JobParamTitle)) continue;
             jobParamResult.RealityResult = jobParam.RealityResult;
+            jobParamResult.Expected = jobParamResult.Expected;
             await _assessmentParamResultRepositorySql.Update(jobParamResult);
         } 
         
@@ -165,6 +171,11 @@ public class AssessmentResultService
             Result = assessmentResult.Result ?? 0,
             NextAssessment = assessmentResult.NextAssessment
         };
+    }
+    
+    public async Task<List<AssessmentResult>> GetAssessmentResultByColabId(string colabId)
+    {
+       return await _assessmentResultRepositorySql.GetAssessmentResultByColabId(colabId);
     }
 
     public async Task<List<GetAssessmentResultResponse>> GetAllAssessmentResult()
@@ -191,4 +202,88 @@ public class AssessmentResultService
         _assessmentResultRepositorySql.Delete(assessmentResult);
         await _assessmentResultRepositorySql.SaveChange();
     }
+
+    public async Task<byte[]> ReturnMetricsWithResultInPdf(Guid colabId)
+    {
+        var listFullAssessmentResult = new List<FullAssessmentResult>();
+
+        var colab = await _colabRepositorySql.FindById(colabId.ToString());
+        var assessmentResult = await GetAssessmentResultByColabId(colab.Id);
+        foreach (var result in assessmentResult)
+        {
+            var fullAssessmentResult = new FullAssessmentResult();
+            fullAssessmentResult.AssessmentResult = result;
+            var groups = await _groupParameterResultRepositorySql.FindAll();
+            fullAssessmentResult.GroupParameterResults = groups.Where(x => x.AssessmentResultId == result.Id).ToList();
+            foreach (var groupParameterResult in groups.Where(x => x.AssessmentResultId == result.Id))
+            {
+                var jobParams = await _assessmentParamResultRepositorySql.FindAll();
+                fullAssessmentResult.AssessmentParamResults =
+                    jobParams.Where(x => x.GroupParameterResultId == groupParameterResult.Id).ToList();
+            }
+            listFullAssessmentResult.Add(fullAssessmentResult);
+        }
+
+        using var memoryStream = new MemoryStream();
+        var document = new iTextSharp.text.Document(PageSize.A4);
+        var writer = PdfWriter.GetInstance(document, memoryStream);
+        document.Open();
+        var firstRegisterToMakeMetrics =  listFullAssessmentResult.FirstOrDefault()!;
+        var paragraph = new Paragraph($"Colaborador: {firstRegisterToMakeMetrics.AssessmentResult.Collaborator.Name}" +
+                                      $"Supervisor {firstRegisterToMakeMetrics.AssessmentResult.ActualSupervisorName}" +
+                                      $"Cargo {firstRegisterToMakeMetrics.AssessmentResult.ActualJobName} " +
+                                      $"Senioridade {firstRegisterToMakeMetrics.AssessmentResult.ActualSeniorityName} " +
+                                      $"Ultima avaliação {firstRegisterToMakeMetrics.AssessmentResult.NextAssessment!.Value.Date} " +
+                                      $"Resultado da ultlima avalição {firstRegisterToMakeMetrics.AssessmentResult.Result}")
+        {
+            Alignment = Element.ALIGN_CENTER,
+            Font = new Font(Font.FontFamily.TIMES_ROMAN, 18f)
+        };
+        document.Add(paragraph);
+        AddTableContent(document, listFullAssessmentResult);
+        document.Close();
+        writer.Close();
+
+        return memoryStream.ToArray();
+    }
+
+    private void AddTableContent(iTextSharp.text.Document document, List<FullAssessmentResult> assessment)
+    {
+        foreach (var assessmentResult in assessment)
+        {
+            var table = CreateItemTable(assessmentResult);
+        
+            document.Add(table);
+        }
+    }
+    
+    private PdfPTable CreateItemTable(FullAssessmentResult assessment)
+    {
+        var table = new PdfPTable(7)
+        {
+            WidthPercentage = 100f
+        };
+        foreach (var groupParameter in assessment.GroupParameterResults)
+        {
+            table.AddCell(groupParameter.GroupParamTitle);
+            foreach (var assessmentParamResult in assessment.AssessmentParamResults)
+            {
+                table.AddCell(assessmentParamResult.JobParamTitle);
+                table.AddCell(assessmentParamResult.Description);
+                table.AddCell(assessmentParamResult.Observation);
+                table.AddCell(assessmentParamResult.Weight.ToString());
+                table.AddCell(assessmentParamResult.Expected.ToString());
+                table.AddCell(assessmentParamResult.RealityResult.ToString());
+            }
+        }
+
+        return table;
+    }
+}
+
+internal class FullAssessmentResult
+{
+    public AssessmentResult AssessmentResult { get; set; }
+    public List<GroupParameterResult> GroupParameterResults { get; set; }
+    public List<AssessmentParamResult> AssessmentParamResults { get; set; }
 }

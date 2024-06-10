@@ -427,3 +427,5 @@ C:\Users\thiago.cruz\Documents\Proj\Pessoal\ManagementTalent\ManagementTalent\ob
 C:\Users\thiago.cruz\Documents\Proj\Pessoal\ManagementTalent\ManagementTalent\obj\Debug\net8.0\ManagementTalent.pdb
 C:\Users\thiago.cruz\Documents\Proj\Pessoal\ManagementTalent\ManagementTalent\obj\Debug\net8.0\ManagementTalent.genruntimeconfig.cache
 C:\Users\thiago.cruz\Documents\Proj\Pessoal\ManagementTalent\ManagementTalent\obj\Debug\net8.0\ref\ManagementTalent.dll
+C:\Users\thiago.cruz\Documents\Proj\Pessoal\ManagementTalent\ManagementTalent\bin\Debug\net8.0\BouncyCastle.Crypto.dll
+C:\Users\thiago.cruz\Documents\Proj\Pessoal\ManagementTalent\ManagementTalent\bin\Debug\net8.0\itextsharp.dll

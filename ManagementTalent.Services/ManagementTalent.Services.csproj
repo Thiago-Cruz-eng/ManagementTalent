@@ -11,4 +11,8 @@
       <ProjectReference Include="..\ManagementTalent.Infra\ManagementTalent.Infra.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="iTextSharp" Version="5.5.13.3" />
+    </ItemGroup>
+
 </Project>

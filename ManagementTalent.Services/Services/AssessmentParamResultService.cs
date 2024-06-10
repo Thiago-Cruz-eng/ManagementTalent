@@ -24,7 +24,8 @@ public class AssessmentParamResultService
         {
             Description = assessmentParamResultDto.Description,
             Observation = assessmentParamResultDto.Observation,
-            RealityResult = assessmentParamResultDto.Result
+            RealityResult = assessmentParamResultDto.Result,
+            Expected = assessmentParamResultDto.Expected
         };
         
         assessmentParamResult.Validate();
@@ -35,7 +36,8 @@ public class AssessmentParamResultService
         {
             Description = assessmentParamResult.Description,
             Observation = assessmentParamResult.Observation,
-            Result = assessmentParamResult.RealityResult ?? 0
+            Result = assessmentParamResult.RealityResult ?? 0,
+            Expected = assessmentParamResult.Expected
         };
     }
     
@@ -46,6 +48,7 @@ public class AssessmentParamResultService
         assessmentParamResult.Description = assessmentParamResultDto.Description ?? assessmentParamResult.Description;
         assessmentParamResult.Observation = assessmentParamResultDto.Observation ?? assessmentParamResult.Observation;
         assessmentParamResult.RealityResult = assessmentParamResultDto.Result ?? assessmentParamResult.RealityResult;    
+        assessmentParamResult.Expected = assessmentParamResultDto.Result ?? assessmentParamResult.Expected;    
         
         assessmentParamResult.Validate();
  
@@ -64,7 +67,8 @@ public class AssessmentParamResultService
         {
             Description = assessmentParamResult.Description,
             Observation = assessmentParamResult.Observation,
-            Result = assessmentParamResult.RealityResult ?? 0
+            Result = assessmentParamResult.RealityResult ?? 0,
+            Expected = assessmentParamResult.Expected
         };
     }
     
@@ -95,7 +99,8 @@ public class AssessmentParamResultService
             {
                 Description = x.Description,
                 Observation = x.Observation,
-                Result = x.RealityResult ?? 0
+                Result = x.RealityResult ?? 0,
+                Expected = x.Expected
             });
         });
         return assessmentParamResultResponses;

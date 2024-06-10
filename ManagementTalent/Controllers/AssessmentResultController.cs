@@ -84,4 +84,19 @@ public class AssessmentResultController : ControllerBase
             throw new Exception("error on delete Exercise",e);
         }
     }
+    [HttpGet("metrics/colab/{id}")]
+    public async Task<IActionResult> ReturnMetricsWithResultInPdf(Guid id)
+    {
+        try
+        {
+            var pdf = await _assessmentResultService.ReturnMetricsWithResultInPdf(id);
+            return File(pdf, "application/pdf", $"{DateTime.Now}-{id}.pdf");
+        }
+        catch (Exception e)
+        {
+            throw new Exception("error on get Exercise",e);
+        }
+    }
+
+    
 }
