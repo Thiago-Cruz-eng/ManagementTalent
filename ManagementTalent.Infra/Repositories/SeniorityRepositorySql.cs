@@ -6,7 +6,7 @@ using ManagementTalent.Infra.MySql;
 
 namespace ManagementTalent.Infra.Repositories;
 
-public class SeniorityRepositorySql : EntityFrameworkRepositorySqlAbstract<Guid, Seniority>, ISeniorityRepositorySql
+public class SeniorityRepositorySql : EntityFrameworkRepositorySqlAbstract<string, Seniority>, ISeniorityRepositorySql
 {
     public SeniorityRepositorySql(MTDbContext context) : base(context)
     {

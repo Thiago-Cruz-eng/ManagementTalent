@@ -3,6 +3,7 @@ using ManagementTalent.Domain.Entity.AvaliationContext;
 using ManagementTalent.Infra.BaseRepository;
 using ManagementTalent.Infra.Interfaces;
 using ManagementTalent.Infra.MySql;
+using Microsoft.EntityFrameworkCore;
 
 namespace ManagementTalent.Infra.Repositories;
 
@@ -14,14 +15,22 @@ public class GroupParameterRepositorySql : EntityFrameworkRepositorySqlAbstract<
         _context = context;
     }
 
-    public Task<List<GroupParameter>> GetGroupParamsByAssessment(string assessmentId)
+    public async Task<List<GroupParameter>> GetGroupParamsByAssessment(string assessmentId)
     {
-        throw new NotImplementedException();
-
+        return _context.GroupParameters.Where(x => x.AssessmentId == assessmentId).ToList();
     }
 
-    public Task<List<JobParameterBase>> GetJobParameterByGroup(string groupParamId)
+    public async Task<List<JobParameterBase>> GetJobParameterByGroup(string groupParamId)
     {
-        throw new NotImplementedException();
+        var jobParamIds = await _context.GroupParameterJobParameter
+            .Where(x => x.GroupParameterId == groupParamId)
+            .Select(x => x.JobParameterBaseId)
+            .ToListAsync();
+        
+        var jobParams = await _context.JobParameterBases
+            .Where(param => jobParamIds.Contains(param.Id))
+            .ToListAsync();
+
+        return jobParams;
     }
 }

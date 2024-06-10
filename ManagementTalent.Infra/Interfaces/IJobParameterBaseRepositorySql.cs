@@ -7,5 +7,5 @@ namespace ManagementTalent.Infra.Interfaces;
 
 public interface IJobParameterBaseRepositorySql : IBaseRepositorySql<Guid, JobParameterBase>
 {
-    Task<List<JobParameterBase>> GetActualParamByColabSeniority(List<JobParameterBase> jobParam, string seniorityId);
+    Task<List<JobParameterBase>> GetActualJobParamByColabSeniority(List<JobParameterBase> jobParam, string seniorityId);
 }

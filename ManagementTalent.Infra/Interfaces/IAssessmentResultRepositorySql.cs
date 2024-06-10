@@ -4,7 +4,7 @@ using ManagementTalent.Infra.BaseRepository;
 
 namespace ManagementTalent.Infra.Interfaces;
 
-public interface IAssessmentResultRepositorySql : IBaseRepositorySql<Guid, AssessmentResult>
+public interface IAssessmentResultRepositorySql : IBaseRepositorySql<string, AssessmentResult>
 {
     
 }

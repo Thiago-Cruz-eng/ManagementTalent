@@ -4,8 +4,8 @@ using ManagementTalent.Infra.BaseRepository;
 
 namespace ManagementTalent.Infra.Interfaces;
 
-public interface IAssessmentParamResultRepositorySql : IBaseRepositorySql<Guid, AssessmentParamResult>
+public interface IAssessmentParamResultRepositorySql : IBaseRepositorySql<string, AssessmentParamResult>
 {
     Task SaveRange(List<AssessmentParamResult> jobParamBaseToMap);
-    Task<AssessmentParamResult> GetAssessmentParamResultByGroupParameterResul(Guid groupParameterResultId);
+    Task<List<AssessmentParamResult>> GetAssessmentParamResultByGroupParameterResul(Guid groupParameterResultId);
 }

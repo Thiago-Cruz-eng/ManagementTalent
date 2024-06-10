@@ -3,7 +3,7 @@ using ManagementTalent.Infra.BaseRepository;
 
 namespace ManagementTalent.Infra.Interfaces;
 
-public interface IColabRepositorySql : IBaseRepositorySql<Guid, Colab>
+public interface IColabRepositorySql : IBaseRepositorySql<string, Colab>
 {
     
 }

@@ -15,31 +15,36 @@ public class JobParameterBaseService
         _jobParameterBaseRepositorySql = jobParameterBaseRepositorySql;
     }
 
-    public async Task<CreateJobParameterBaseResponse> CreateJobParameterBase(CreateJobParameterBaseRequest jobParameterBaseDto)
+    public async Task<List<CreateJobParameterBaseResponse>> CreateJobParameterBase(List<CreateJobParameterBaseRequest> jobParameterBases)
     {
-        var jobParameterBase = new JobParameterBase
+        var jobParam = new List<CreateJobParameterBaseResponse>();
+        foreach (var jobParameterBaseDto in jobParameterBases)
         {
-            JobParamTitle = jobParameterBaseDto.JobParamTitle,
-            Description = jobParameterBaseDto.Description,
-            Observation = jobParameterBaseDto.Observation,
-            Weight = jobParameterBaseDto.Weight,
-            Expected = jobParameterBaseDto.Expected
-        };
+            var jobParameterBase = new JobParameterBase
+            {
+                JobParamTitle = jobParameterBaseDto.JobParamTitle,
+                Description = jobParameterBaseDto.Description,
+                Observation = jobParameterBaseDto.Observation,
+                Weight = jobParameterBaseDto.Weight,
+                Expected = jobParameterBaseDto.Expected
+            };
+
+            jobParameterBase.Validate();
         
-        jobParameterBase.Validate();
-        
-        if(jobParameterBaseDto.GroupParameterIds?.Count > 0) jobParameterBase.IntegrateGroupParameter(jobParameterBaseDto.GroupParameterIds);
-        if(jobParameterBaseDto.SenioritiesIds?.Count > 0) jobParameterBase.IntegrateSeniority(jobParameterBaseDto.SenioritiesIds);
-        await _jobParameterBaseRepositorySql.Save(jobParameterBase);
-        await _jobParameterBaseRepositorySql.SaveChange();
-        return new CreateJobParameterBaseResponse
-        {
-            JobParamTitle = jobParameterBase.JobParamTitle,
-            Description = jobParameterBase.Description,
-            Observation = jobParameterBase.Observation,
-            Weight = jobParameterBase.Weight,
-            Expected = jobParameterBase.Expected
-        };
+            if(jobParameterBaseDto.GroupParameterIds?.Count > 0) jobParameterBase.IntegrateGroupParameter(jobParameterBaseDto.GroupParameterIds);
+            if(jobParameterBaseDto.SenioritiesIds?.Count > 0) jobParameterBase.IntegrateSeniority(jobParameterBaseDto.SenioritiesIds);
+            await _jobParameterBaseRepositorySql.Save(jobParameterBase);
+            await _jobParameterBaseRepositorySql.SaveChange();
+            jobParam.Add(new CreateJobParameterBaseResponse
+            {
+                JobParamTitle = jobParameterBase.JobParamTitle,
+                Description = jobParameterBase.Description,
+                Observation = jobParameterBase.Observation,
+                Weight = jobParameterBase.Weight,
+                Expected = jobParameterBase.Expected
+            });
+        }
+        return jobParam;
     }
     
     public async Task<UpdateJobParameterBaseResponse> UpdateJobParameterBase(Guid id, UpdateJobParameterBaseRequest jobParameterBaseDto)

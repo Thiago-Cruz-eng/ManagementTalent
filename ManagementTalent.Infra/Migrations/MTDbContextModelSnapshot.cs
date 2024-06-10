@@ -254,9 +254,11 @@ namespace ManagementTalent.Infra.Migrations
 
             modelBuilder.Entity("ManagementTalent.Domain.Entity.ResultContext.AssessmentParamResult", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<DateTime>("CreateAt")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -274,10 +276,10 @@ namespace ManagementTalent.Infra.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("RealityResult")
+                    b.Property<int?>("RealityResult")
                         .HasColumnType("int");
 
-                    b.Property<double>("Weight")
+                    b.Property<double?>("Weight")
                         .HasColumnType("double");
 
                     b.HasKey("Id");
@@ -296,10 +298,13 @@ namespace ManagementTalent.Infra.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
+                    b.Property<DateTime>("CreateAt")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<DateTime?>("NextAssessment")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("Result")
+                    b.Property<int?>("Result")
                         .HasColumnType("int");
 
                     b.Property<string>("SupervisorId")
@@ -317,6 +322,10 @@ namespace ManagementTalent.Infra.Migrations
                 {
                     b.Property<string>("Id")
                         .HasColumnType("varchar(255)");
+
+                    b.Property<string>("ActualSeniorityId")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("AssessmentResultId")
                         .IsRequired()

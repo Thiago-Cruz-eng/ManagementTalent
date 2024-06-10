@@ -35,13 +35,13 @@ public class AssessmentParamResultService
         {
             Description = assessmentParamResult.Description,
             Observation = assessmentParamResult.Observation,
-            Result = assessmentParamResult.RealityResult
+            Result = assessmentParamResult.RealityResult ?? 0
         };
     }
     
     public async Task<UpdateAssessmentParamResultResponse> UpdateAssessmentParamResult(Guid id, UpdateAssessmentParamResultRequest assessmentParamResultDto)
     {
-        var assessmentParamResult = await _assessmentParamResultRepositorySql.FindById(id);
+        var assessmentParamResult = await _assessmentParamResultRepositorySql.FindById(id.ToString());
         if (assessmentParamResult == null) throw new ApplicationException("exercise not found");
         assessmentParamResult.Description = assessmentParamResultDto.Description ?? assessmentParamResult.Description;
         assessmentParamResult.Observation = assessmentParamResultDto.Observation ?? assessmentParamResult.Observation;
@@ -59,18 +59,18 @@ public class AssessmentParamResultService
     
     public async Task<GetAssessmentParamResultResponse> GetAssessmentParamResult(Guid id)
     {
-        var assessmentParamResult = await _assessmentParamResultRepositorySql.FindById(id);
+        var assessmentParamResult = await _assessmentParamResultRepositorySql.FindById(id.ToString());
         return new GetAssessmentParamResultResponse
         {
             Description = assessmentParamResult.Description,
             Observation = assessmentParamResult.Observation,
-            Result = assessmentParamResult.RealityResult
+            Result = assessmentParamResult.RealityResult ?? 0
         };
     }
     
-    private async Task<AssessmentParamResult> GetAssessmentParamResultByGroupParameterResultId(Guid GroupParameterResultId)
+    private async Task<List<AssessmentParamResult>> GetAssessmentParamResultByGroupParameterResultId(Guid groupParameterResultId)
     {
-        var assessmentParamResult = await _assessmentParamResultRepositorySql.GetAssessmentParamResultByGroupParameterResul(GroupParameterResultId);
+        var assessmentParamResult = await _assessmentParamResultRepositorySql.GetAssessmentParamResultByGroupParameterResul(groupParameterResultId);
         return assessmentParamResult;
     }
     
@@ -79,7 +79,7 @@ public class AssessmentParamResultService
         var jobParams = new List<AssessmentParamResult>();
         foreach (var groupParamId in groupParamIds)
         {
-            jobParams.Add(await GetAssessmentParamResultByGroupParameterResultId(groupParamId));
+            jobParams.AddRange(await GetAssessmentParamResultByGroupParameterResultId(groupParamId));
         }
         
         return jobParams;
@@ -95,7 +95,7 @@ public class AssessmentParamResultService
             {
                 Description = x.Description,
                 Observation = x.Observation,
-                Result = x.RealityResult
+                Result = x.RealityResult ?? 0
             });
         });
         return assessmentParamResultResponses;
@@ -103,7 +103,7 @@ public class AssessmentParamResultService
     
     public async Task DeleteAssessmentParamResultById(Guid id)
     {
-        var assessmentParamResult = await _assessmentParamResultRepositorySql.FindById(id);
+        var assessmentParamResult = await _assessmentParamResultRepositorySql.FindById(id.ToString());
         _assessmentParamResultRepositorySql.Delete(assessmentParamResult);
         await _assessmentParamResultRepositorySql.SaveChange();
     }

@@ -14,8 +14,8 @@ public class AssessmentRepositorySql : EntityFrameworkRepositorySqlAbstract<Guid
         _context = context;
     }
 
-    public Task<Assessment> GetAssessmentByJobRole(string jobRoleId)
+    public async Task<Assessment> GetAssessmentByJobRole(string jobRoleId)
     {
-        throw new NotImplementedException();
+        return _context.Assessments.FirstOrDefault(x => x.JobRoleId.ToString() == jobRoleId)!;
     }
 }

@@ -34,29 +34,33 @@ public class AssessmentResultService
 
     public async Task<CreateAssessmentResultResponse> CreateAssessmentResult(CreateAssessmentResultRequest assessmentResultDto)
     {
-        var colab = await _colabRepositorySql.FindById(Guid.Parse(assessmentResultDto.CollaboratorId));
+        var colab = await _colabRepositorySql.FindById(assessmentResultDto.CollaboratorId);
         var getJobRole = await _jobRoleRepositorySql.FindById(colab.JobRoleId);
-        var seniority = await _seniorityRepositorySql.FindById(Guid.Parse(colab.SeniorityId));
+        var seniority = await _seniorityRepositorySql.FindById(colab.SeniorityId);
         var getAssessmentByJobRole = await _assessmentRepositorySql.GetAssessmentByJobRole(getJobRole.Id.ToString());
         var getGroupParamsByAssessmentId =
             await _groupParameterRepositorySql.GetGroupParamsByAssessment(getAssessmentByJobRole.Id);
-
-        await SaveActualGroupParamResultInAssessmentResult(getGroupParamsByAssessmentId);
-
-        await SaveActualJobParamResultInAssessmentParamResult(getGroupParamsByAssessmentId, seniority);
-       
         
         var assessmentResult = new AssessmentResult
         {
             CollaboratorId = assessmentResultDto.CollaboratorId,
             SupervisorId = colab.SupervisorId,
-            NextAssessment = DateTime.UtcNow.AddYears(1)
+            NextAssessment = DateTime.UtcNow.AddYears(1),
+            Result = 0
         };
-        
         assessmentResult.Validate();
+        
         await _assessmentResultRepositorySql.Save(assessmentResult);
         await _assessmentResultRepositorySql.SaveChange();
+
+        var groupIds = await SaveActualGroupParamResultInAssessmentResult(getGroupParamsByAssessmentId, assessmentResult.Id, colab.SeniorityId);
         await _groupParameterResultRepositorySql.SaveChange();
+        
+        foreach (var groupId in groupIds)
+        {
+            await SaveActualJobParamResultInAssessmentParamResult(getGroupParamsByAssessmentId, seniority, groupId);
+        }
+        
         await _assessmentParamResultRepositorySql.SaveChange();
         
         return new CreateAssessmentResultResponse
@@ -67,7 +71,7 @@ public class AssessmentResultService
         };
     }
 
-    private async Task SaveActualJobParamResultInAssessmentParamResult(List<GroupParameter> getGroupParamsByAssessmentId, Seniority seniority)
+    private async Task SaveActualJobParamResultInAssessmentParamResult(List<GroupParameter> getGroupParamsByAssessmentId, Seniority seniority, string groupId)
     {
         var groupsList = getGroupParamsByAssessmentId.Select(x => x.Id).ToList();
         
@@ -75,12 +79,12 @@ public class AssessmentResultService
         {
             var allJobParamsByGroup = await _groupParameterRepositorySql.GetJobParameterByGroup(id);
             var jobParamsByActualSeniorityColab =
-                await _jobParameterBaseRepositorySql.GetActualParamByColabSeniority(allJobParamsByGroup, seniority.Id);
-            await SaveActualJobParamBase(jobParamsByActualSeniorityColab);
+                await _jobParameterBaseRepositorySql.GetActualJobParamByColabSeniority(allJobParamsByGroup, seniority.Id);
+            await SaveActualJobParamBase(jobParamsByActualSeniorityColab, groupId);
         }
     }
 
-    private async Task SaveActualGroupParamResultInAssessmentResult(List<GroupParameter> getGroupParamsByAssessmentId)
+    private async Task<List<string>> SaveActualGroupParamResultInAssessmentResult(List<GroupParameter> getGroupParamsByAssessmentId, string assessmentResultId, string seniorityId)
     {
         var groupsParamToMap = new List<GroupParameterResult>();
         getGroupParamsByAssessmentId?.ForEach(x =>
@@ -89,14 +93,17 @@ public class AssessmentResultService
             {
                 GroupParamTitle = x.GroupParamTitle,
                 Weight = x.Weight,
-                AssessmentTamplateId = x.AssessmentId
+                AssessmentResultId = assessmentResultId,
+                AssessmentTamplateId = x.AssessmentId,
+                ActualSeniorityId = seniorityId
             });
         });
 
         if (groupsParamToMap.Count > 0) await _groupParameterResultRepositorySql.SaveRange(groupsParamToMap);
+        return groupsParamToMap.Select(x => x.Id).ToList();
     }
 
-    private async Task SaveActualJobParamBase(List<JobParameterBase> getGroupParamsByAssessmentId)
+    private async Task SaveActualJobParamBase(List<JobParameterBase> getGroupParamsByAssessmentId,  string groupId)
     {
         var jobParamBaseToMap = new List<AssessmentParamResult>();
         getGroupParamsByAssessmentId?.ForEach(x =>
@@ -107,8 +114,8 @@ public class AssessmentResultService
                 Description = x.Description,
                 Observation = x.Observation,
                 Weight = x.Weight,
-                RealityResult = 0,
-                GroupParameterResultId = x.Id
+                RealityResult = 1,
+                GroupParameterResultId = groupId
             });
         });
         await _assessmentParamResultRepositorySql.SaveRange(jobParamBaseToMap);
@@ -116,8 +123,8 @@ public class AssessmentResultService
 
     public async Task<UpdateAssessmentResultResponse> UpdateAssessmentResult(Guid assessmentId, UpdateAssessmentResultRequest assessmentResultDto)
     {
-        var colab = await _colabRepositorySql.FindById(Guid.Parse(assessmentResultDto.CollaboratorId));
-        var assessmentResult = await _assessmentResultRepositorySql.FindById(assessmentId);
+        var colab = await _colabRepositorySql.FindById(assessmentResultDto.CollaboratorId);
+        var assessmentResult = await _assessmentResultRepositorySql.FindById(assessmentId.ToString());
         if (assessmentResult == null) throw new ApplicationException("exercise not found");
         assessmentResult.CollaboratorId = colab.Id;
         assessmentResult.SupervisorId = colab.SupervisorId;
@@ -129,11 +136,10 @@ public class AssessmentResultService
         
         foreach (var jobParam in assessmentResultDto.JobParams)
         {
-            await _assessmentParamResultRepositorySql.Update(new AssessmentParamResult
-            {
-                Id = Guid.Parse(jobParam.Id),
-                RealityResult = jobParam.RealityResult
-            });
+            var jobParamResult = await _assessmentParamResultRepositorySql.FindById(jobParam.Id);
+            if (string.IsNullOrWhiteSpace(jobParamResult.JobParamTitle)) continue;
+            jobParamResult.RealityResult = jobParam.RealityResult;
+            await _assessmentParamResultRepositorySql.Update(jobParamResult);
         } 
         
         await _assessmentResultRepositorySql.SaveChange();
@@ -146,13 +152,13 @@ public class AssessmentResultService
     
     public async Task<GetAssessmentResultResponse> GetAssessmentResult(Guid id)
     {
-        var assessmentResult = await _assessmentResultRepositorySql.FindById(id);
+        var assessmentResult = await _assessmentResultRepositorySql.FindById(id.ToString());
         return new GetAssessmentResultResponse
         {
             Id = assessmentResult.Id,
             CollaboratorId = assessmentResult.CollaboratorId,
             SupervisorId =  assessmentResult.SupervisorId,
-            Result = assessmentResult.Result,
+            Result = assessmentResult.Result ?? 0,
             NextAssessment = assessmentResult.NextAssessment
         };
     }
@@ -168,7 +174,7 @@ public class AssessmentResultService
                 Id = x.Id,
                 CollaboratorId = x.CollaboratorId,
                 SupervisorId = x.SupervisorId,
-                Result = x.Result,
+                Result = x.Result ?? 0,
                 NextAssessment = x.NextAssessment
             });
         });
@@ -177,7 +183,7 @@ public class AssessmentResultService
     
     public async Task DeleteAssessmentResultById(Guid id)
     {
-        var assessmentResult = await _assessmentResultRepositorySql.FindById(id);
+        var assessmentResult = await _assessmentResultRepositorySql.FindById(id.ToString());
         _assessmentResultRepositorySql.Delete(assessmentResult);
         await _assessmentResultRepositorySql.SaveChange();
     }

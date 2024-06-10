@@ -16,7 +16,7 @@ public class JobParameterBaseController : ControllerBase
     }
     
     [HttpPost]
-    public async Task<IActionResult> CreateExercise([FromBody] CreateJobParameterBaseRequest createExerciseDto)
+    public async Task<IActionResult> CreateExercise([FromBody] List<CreateJobParameterBaseRequest> createExerciseDto)
     {
         try
         {

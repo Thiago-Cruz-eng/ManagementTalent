@@ -41,13 +41,13 @@ public class ColabService
     
     public async Task<UpdateColabResponse> UpdateColab(Guid id, UpdateColabRequest colabDto)
     {
-        var colab = await _colabRepositorySql.FindById(id);
+        var colab = await _colabRepositorySql.FindById(id.ToString());
         if (colab == null) throw new ApplicationException("exercise not found");
         colab.Name = colabDto.Name ?? colab.Name;
         colab.StartAt = colabDto.StartAt ?? colab.StartAt;
         colab.SeniorityId = colabDto.SeniorityId.ToString() ?? colab.SeniorityId;
         colab.JobRoleId = colabDto.JobRoleId ?? colab.JobRoleId;
-        colab.SupervisorId = colabDto.SupervisorId;
+        colab.SupervisorId = colabDto.SupervisorId ?? colab.SupervisorId;
         
         colab.Validate();
  
@@ -61,7 +61,7 @@ public class ColabService
     
     public async Task<GetColabResponse> GetColab(Guid id)
     {
-        var colab = await _colabRepositorySql.FindById(id);
+        var colab = await _colabRepositorySql.FindById(id.ToString());
         return new GetColabResponse
         {
             Name = colab.Name,
@@ -92,7 +92,7 @@ public class ColabService
     
     public async Task DeleteColabById(Guid id)
     {
-        var colab = await _colabRepositorySql.FindById(id);
+        var colab = await _colabRepositorySql.FindById(id.ToString());
         _colabRepositorySql.Delete(colab);
         await _colabRepositorySql.SaveChange();
     }

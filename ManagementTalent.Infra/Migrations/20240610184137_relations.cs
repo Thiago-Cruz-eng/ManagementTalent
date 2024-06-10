@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ManagementTalent.Infra.Migrations
 {
     /// <inheritdoc />
-    public partial class relations2 : Migration
+    public partial class relations : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -412,7 +412,8 @@ namespace ManagementTalent.Infra.Migrations
                     CollaboratorId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     NextAssessment = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    Result = table.Column<int>(type: "int", nullable: false)
+                    CreateAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    Result = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -439,6 +440,8 @@ namespace ManagementTalent.Infra.Migrations
                     AssessmentResultId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     AssessmentTamplateId = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ActualSeniorityId = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -457,15 +460,17 @@ namespace ManagementTalent.Infra.Migrations
                 name: "AssessmentParamResults",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    Id = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     JobParamTitle = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Description = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Observation = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Weight = table.Column<double>(type: "double", nullable: false),
-                    RealityResult = table.Column<int>(type: "int", nullable: false),
+                    Weight = table.Column<double>(type: "double", nullable: true),
+                    RealityResult = table.Column<int>(type: "int", nullable: true),
+                    CreateAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     GroupParameterResultId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },

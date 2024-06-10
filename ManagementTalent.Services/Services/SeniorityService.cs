@@ -39,7 +39,7 @@ public class SeniorityService
     
     public async Task<UpdateSeniorityResponse> UpdateSeniority(Guid id, UpdateSeniorityRequest seniorityDto)
     {
-        var seniority = await _seniorityRepositorySql.FindById(id);
+        var seniority = await _seniorityRepositorySql.FindById(id.ToString());
         if (seniority == null) throw new ApplicationException("exercise not found");
         seniority.JobRoleId = seniorityDto.JobRoleId ?? seniority.JobRoleId;
         seniority.SeniorityRelevanceInWorkDay = seniorityDto.SeniorityRelevanceInWorkDay ?? seniority.SeniorityRelevanceInWorkDay;
@@ -58,7 +58,7 @@ public class SeniorityService
     
     public async Task<GetSeniorityResponse> GetSeniority(Guid id)
     {
-        var seniority = await _seniorityRepositorySql.FindById(id);
+        var seniority = await _seniorityRepositorySql.FindById(id.ToString());
         return new GetSeniorityResponse
         {
             JobRoleId = seniority.JobRoleId,
@@ -85,7 +85,7 @@ public class SeniorityService
     
     public async Task DeleteSeniorityById(Guid id)
     {
-        var seniority = await _seniorityRepositorySql.FindById(id);
+        var seniority = await _seniorityRepositorySql.FindById(id.ToString());
         _seniorityRepositorySql.Delete(seniority);
         await _seniorityRepositorySql.SaveChange();
     }

@@ -6,20 +6,21 @@ using ManagementTalent.Infra.MySql;
 
 namespace ManagementTalent.Infra.Repositories;
 
-public class AssessmentParamResultRepositorySql : EntityFrameworkRepositorySqlAbstract<Guid, AssessmentParamResult>, IAssessmentParamResultRepositorySql
+public class AssessmentParamResultRepositorySql : EntityFrameworkRepositorySqlAbstract<string, AssessmentParamResult>, IAssessmentParamResultRepositorySql
 {
     private MTDbContext _context;
     public AssessmentParamResultRepositorySql(MTDbContext context) : base(context)
     {
+        _context = context;
     }
 
-    public Task SaveRange(List<AssessmentParamResult> jobParamBaseToMap)
+    public async Task SaveRange(List<AssessmentParamResult> jobParamBaseToMap)
     {
-        throw new NotImplementedException();
+        await _context.AssessmentParamResults.AddRangeAsync(jobParamBaseToMap);
     }
 
-    public Task<AssessmentParamResult> GetAssessmentParamResultByGroupParameterResul(Guid groupParameterResultId)
+    public async Task<List<AssessmentParamResult>> GetAssessmentParamResultByGroupParameterResul(Guid groupParameterResultId)
     {
-        throw new NotImplementedException();
+        return _context.AssessmentParamResults.Where(x => x.GroupParameterResultId == groupParameterResultId.ToString()).ToList();
     }
 }

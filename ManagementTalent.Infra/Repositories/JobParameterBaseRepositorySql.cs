@@ -4,6 +4,7 @@ using ManagementTalent.Domain.Entity.ResultContext;
 using ManagementTalent.Infra.BaseRepository;
 using ManagementTalent.Infra.Interfaces;
 using ManagementTalent.Infra.MySql;
+using Microsoft.EntityFrameworkCore;
 
 namespace ManagementTalent.Infra.Repositories;
 
@@ -20,8 +21,17 @@ public class JobParameterBaseRepositorySql : EntityFrameworkRepositorySqlAbstrac
         throw new NotImplementedException();
     }
 
-    public Task<List<JobParameterBase>> GetActualParamByColabSeniority(List<JobParameterBase> jobParam, string seniorityId)
+    public async Task<List<JobParameterBase>> GetActualJobParamByColabSeniority(List<JobParameterBase> jobParam, string seniorityId)
     {
-        throw new NotImplementedException();
+        var jobParamIds = await _context.JobParameterSeniority
+            .Where(x => x.SeniorityId == seniorityId)
+            .Select(x => x.JobParametersBaseId)
+            .ToListAsync();
+        
+        var jobParams = await _context.JobParameterBases
+            .Where(param => jobParamIds.Contains(param.Id))
+            .ToListAsync();
+
+        return jobParams;
     }
 }

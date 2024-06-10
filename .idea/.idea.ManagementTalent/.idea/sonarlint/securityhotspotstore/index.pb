@@ -209,3 +209,15 @@ y
 IManagementTalent.Infra/Repositories/AssessmentParamResultRepositorySql.cs,5\d\5d0bdc1080f3821302415d8211c1e01fb35c335b
 t
 DManagementTalent.Infra/Repositories/AssessmentResultRepositorySql.cs,d\8\d87c6a8378a0a063bf55197ad1085ad098544b0f
+}
+MManagementTalent.Infra/BaseRepository/EntityFrameworkRepositorySqlAbstract.cs,2\9\29f15e6ede4398ceab7dd2148b552d408d7ef946
+k
+;ManagementTalent.Infra/BaseRepository/IBaseRepositorySql.cs,5\0\5012f43a5ca8852367884e38aec5be0b054b9d89
+i
+9ManagementTalent.Infra/Repositories/ColabRepositorySql.cs,5\8\5898be092c5f5d38956726400c872de193ef18d1
+m
+=ManagementTalent.Infra/Interfaces/ISupervisorRepositorySql.cs,5\e\5e722c2dc64a3cde4e6ba18b2cffbf4f8001f470
+l
+<ManagementTalent.Infra/Interfaces/ISeniorityRepositorySql.cs,d\0\d045807ee54b297ad70f5e78a24a91e2c597ed39
+s
+CManagementTalent.Infra/Interfaces/IAssessmentResultRepositorySql.cs,f\3\f38a0f94e389b9ae549fef6c49e061bf6f3dc510

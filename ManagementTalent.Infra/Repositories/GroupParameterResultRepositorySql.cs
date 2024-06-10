@@ -13,8 +13,8 @@ public class GroupParameterResultRepositorySql : EntityFrameworkRepositorySqlAbs
         _context = context;
     }
 
-    public Task SaveRange(List<GroupParameterResult> groups)
+    public async Task SaveRange(List<GroupParameterResult> groups)
     {
-        throw new NotImplementedException();
+        await _context.GroupParameterResults.AddRangeAsync(groups);
     }
 }

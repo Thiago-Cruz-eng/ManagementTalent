@@ -39,7 +39,7 @@ public class GroupParameterResultService
     
     public async Task<List<GroupParameterResult>> GetGroupParameterByAssessmentResult(Guid assessmentResultId)
     {
-        var assessmentResult = await _assessmentResultRepositorySql.FindById(assessmentResultId);
+        var assessmentResult = await _assessmentResultRepositorySql.FindById(assessmentResultId.ToString());
         var groups = await _groupParameterResultRepositorySql.FindAll();
         var groupsByAssessmentResult = groups
             .Select(x => x.AssessmentResultId)

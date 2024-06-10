@@ -4,7 +4,7 @@ using ManagementTalent.Infra.BaseRepository;
 
 namespace ManagementTalent.Infra.Interfaces;
 
-public interface ISeniorityRepositorySql : IBaseRepositorySql<Guid, Seniority>
+public interface ISeniorityRepositorySql : IBaseRepositorySql<string, Seniority>
 {
     
 }

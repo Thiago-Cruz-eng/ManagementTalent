@@ -9,7 +9,8 @@ public class AssessmentResult
     public string SupervisorId { get; set; }
     public string CollaboratorId { get; set; }
     public DateTime? NextAssessment { get; set; } = DateTime.UtcNow.AddYears(1);
-    public int Result { get; set; }
+    public DateTime CreateAt { get; set; } = DateTime.UtcNow;
+    public int? Result { get; set; }
     public Colab Collaborator { get; set; }
     public List<GroupParameterResult> GroupParameterResults { get; set; }
     
@@ -19,7 +20,7 @@ public class AssessmentResult
     {
         _validationErrors = new List<string>();
         
-        ValidateColab(Collaborator);
+        ValidateNullAndEmpty(CollaboratorId);
 
         if (_validationErrors.Any())
             throw new ArgumentException(string.Join(", ", _validationErrors));
