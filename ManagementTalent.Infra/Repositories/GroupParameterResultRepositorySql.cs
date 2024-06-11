@@ -2,6 +2,7 @@ using ManagementTalent.Domain.Entity.ResultContext;
 using ManagementTalent.Infra.BaseRepository;
 using ManagementTalent.Infra.Interfaces;
 using ManagementTalent.Infra.MySql;
+using Microsoft.EntityFrameworkCore;
 
 namespace ManagementTalent.Infra.Repositories;
 
@@ -16,5 +17,10 @@ public class GroupParameterResultRepositorySql : EntityFrameworkRepositorySqlAbs
     public async Task SaveRange(List<GroupParameterResult> groups)
     {
         await _context.GroupParameterResults.AddRangeAsync(groups);
+    }
+
+    public async Task<List<GroupParameterResult>> FindByAssessmentId(string assessmentId)
+    {
+        return await _context.GroupParameterResults.Where(x => x.AssessmentResultId == assessmentId).ToListAsync();
     }
 }

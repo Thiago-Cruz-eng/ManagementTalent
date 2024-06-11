@@ -8,7 +8,7 @@ public class GetAssessmentResultResponse
     public string Id { get; set; }
     public string CollaboratorId { get; set; }
     public string SupervisorId { get; set; }
-    public int Result { get; set; }
+    public double Result { get; set; }
     public DateTime? NextAssessment { get; set; }
 
     public List<GroupParam> GroupParams { get; set; }

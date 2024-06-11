@@ -13,7 +13,7 @@ public class AssessmentResult
     public string ActualSeniorityName { get; set; }
     public string ActualJobName { get; set; }
     public string ActualSupervisorName { get; set; }
-    public int? Result { get; set; }
+    public double? Result { get; set; }
     public Colab Collaborator { get; set; }
     public List<GroupParameterResult> GroupParameterResults { get; set; }
     

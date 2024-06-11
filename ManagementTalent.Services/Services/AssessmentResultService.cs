@@ -98,7 +98,6 @@ public class AssessmentResultService
         {
             groupsParamToMap.Add(new GroupParameterResult
             {
-                Id = x.Id,
                 GroupParamTitle = x.GroupParamTitle,
                 Weight = x.Weight,
                 AssessmentResultId = assessmentResultId,
@@ -117,13 +116,12 @@ public class AssessmentResultService
         {
             jobParamBaseToMap.Add(new AssessmentParamResult
             {
-                Id = x.Id,
                 JobParamTitle = x.JobParamTitle,
                 Description = x.Description,
                 Observation = x.Observation,
                 Weight = x.Weight,
                 RealityResult = 1,
-                Expected = 0,
+                Expected = x.Expected,
                 GroupParameterResultId = groupId
             });
         });
@@ -137,8 +135,7 @@ public class AssessmentResultService
         if (assessmentResult == null) throw new ApplicationException("exercise not found");
         assessmentResult.CollaboratorId = colab.Id;
         assessmentResult.SupervisorId = colab.SupervisorId;
-        assessmentResult.NextAssessment = assessmentResultDto.NextAssessment;
-        assessmentResult.Result = assessmentResultDto.Result;    
+        assessmentResult.NextAssessment = assessmentResultDto.NextAssessment;   
         
         assessmentResult.Validate();
         await _assessmentResultRepositorySql.Update(assessmentResult);
@@ -148,9 +145,27 @@ public class AssessmentResultService
             var jobParamResult = await _assessmentParamResultRepositorySql.FindById(jobParam.Id);
             if (string.IsNullOrWhiteSpace(jobParamResult.JobParamTitle)) continue;
             jobParamResult.RealityResult = jobParam.RealityResult;
-            jobParamResult.Expected = jobParamResult.Expected;
+            jobParamResult.Observation = jobParam.Observation;
             await _assessmentParamResultRepositorySql.Update(jobParamResult);
-        } 
+        }
+
+        var resultByGroup = new List<double?>();
+        var groupList = await _groupParameterResultRepositorySql.FindByAssessmentId(assessmentResult.Id);
+        foreach (var groupParameterResult in groupList)
+        {
+            var jobParams = await _assessmentParamResultRepositorySql.GetAssessmentParamResultByGroupParameterResul(Guid.Parse(groupParameterResult.Id));
+            var sumOfParam = new List<double?>();
+            foreach (var assessmentParamResult in jobParams)
+            {
+                var resultOfParam = assessmentParamResult.Weight *
+                                    (assessmentParamResult.RealityResult / assessmentParamResult.Expected);
+                sumOfParam.Add(resultOfParam);
+            }
+
+            resultByGroup.Add(sumOfParam.Sum() * groupParameterResult.Weight);
+        }
+
+        assessmentResult.Result = resultByGroup.Sum();
         
         await _assessmentResultRepositorySql.SaveChange();
         await _assessmentParamResultRepositorySql.SaveChange();
@@ -227,19 +242,43 @@ public class AssessmentResultService
         using var memoryStream = new MemoryStream();
         var document = new iTextSharp.text.Document(PageSize.A4);
         var writer = PdfWriter.GetInstance(document, memoryStream);
+        var par = new List<Paragraph>();
         document.Open();
         var firstRegisterToMakeMetrics =  listFullAssessmentResult.FirstOrDefault()!;
-        var paragraph = new Paragraph($"Colaborador: {firstRegisterToMakeMetrics.AssessmentResult.Collaborator.Name}" +
-                                      $"Supervisor {firstRegisterToMakeMetrics.AssessmentResult.ActualSupervisorName}" +
-                                      $"Cargo {firstRegisterToMakeMetrics.AssessmentResult.ActualJobName} " +
-                                      $"Senioridade {firstRegisterToMakeMetrics.AssessmentResult.ActualSeniorityName} " +
-                                      $"Ultima avaliação {firstRegisterToMakeMetrics.AssessmentResult.NextAssessment!.Value.Date} " +
-                                      $"Resultado da ultlima avalição {firstRegisterToMakeMetrics.AssessmentResult.Result}")
+        par.Add(new Paragraph("Relatorio de perfomance:", 
+            new Font(Font.FontFamily.TIMES_ROMAN, 14f, Font.BOLD)));
+       
+        par.Add(new Paragraph($"Colaborador: {firstRegisterToMakeMetrics.AssessmentResult.Collaborator.Name}")
         {
             Alignment = Element.ALIGN_CENTER,
             Font = new Font(Font.FontFamily.TIMES_ROMAN, 18f)
-        };
-        document.Add(paragraph);
+        });
+        par.Add(new Paragraph($"Supervisor: {firstRegisterToMakeMetrics.AssessmentResult.ActualSupervisorName}")
+        {
+            Alignment = Element.ALIGN_CENTER,
+            Font = new Font(Font.FontFamily.TIMES_ROMAN, 18f)
+        });
+        par.Add(new Paragraph($"Cargo: {firstRegisterToMakeMetrics.AssessmentResult.ActualJobName} ")
+        {
+            Alignment = Element.ALIGN_CENTER,
+            Font = new Font(Font.FontFamily.TIMES_ROMAN, 18f)
+        });
+        par.Add(new Paragraph($"Senioridade: {firstRegisterToMakeMetrics.AssessmentResult.ActualSeniorityName} ")
+        {
+            Alignment = Element.ALIGN_CENTER,
+            Font = new Font(Font.FontFamily.TIMES_ROMAN, 18f)
+        });
+        par.Add(new Paragraph($"Ultima avaliação: {firstRegisterToMakeMetrics.AssessmentResult.NextAssessment!.Value.Date} ")
+        {
+            Alignment = Element.ALIGN_CENTER,
+            Font = new Font(Font.FontFamily.TIMES_ROMAN, 18f)
+        });
+        par.Add(new Paragraph($"Resultado da ultlima avalição: {firstRegisterToMakeMetrics.AssessmentResult.Result}")
+        {
+            Alignment = Element.ALIGN_CENTER,
+            Font = new Font(Font.FontFamily.TIMES_ROMAN, 18f)
+        });
+        par.ForEach(x => document.Add(x));
         AddTableContent(document, listFullAssessmentResult);
         document.Close();
         writer.Close();
@@ -251,33 +290,37 @@ public class AssessmentResultService
     {
         foreach (var assessmentResult in assessment)
         {
-            var table = CreateItemTable(assessmentResult);
-        
-            document.Add(table);
+            document.Add(new Paragraph("______________________________________________________________________________"));
+            document.Add(new Paragraph($"Data: {assessmentResult.AssessmentResult.CreateAt}"));
+            document.Add(new Paragraph($"Cargo: {assessmentResult.AssessmentResult.ActualJobName}"));
+            document.Add(new Paragraph($"Senioridade: {assessmentResult.AssessmentResult.ActualSeniorityName}"));
+            document.Add(new Paragraph($"Resultado: {assessmentResult.AssessmentResult.Result}"));
+            CreateItemContent(document, assessmentResult);
+            CreateComparisonContent(document, assessmentResult);
         }
     }
-    
-    private PdfPTable CreateItemTable(FullAssessmentResult assessment)
+
+    private void CreateComparisonContent(iTextSharp.text.Document document, FullAssessmentResult assessmentResult)
     {
-        var table = new PdfPTable(7)
-        {
-            WidthPercentage = 100f
-        };
+        throw new NotImplementedException();
+    }
+
+    private void CreateItemContent(iTextSharp.text.Document document, FullAssessmentResult assessment)
+    {
         foreach (var groupParameter in assessment.GroupParameterResults)
         {
-            table.AddCell(groupParameter.GroupParamTitle);
-            foreach (var assessmentParamResult in assessment.AssessmentParamResults)
+            var paragraphHeader = new Paragraph(groupParameter.GroupParamTitle + ":", 
+                new Font(Font.FontFamily.TIMES_ROMAN, 14f, Font.BOLD));
+            document.Add(paragraphHeader);
+
+            foreach (var assessmentParamResult in assessment.AssessmentParamResults.Where(x => x.GroupParameterResultId == groupParameter.Id))
             {
-                table.AddCell(assessmentParamResult.JobParamTitle);
-                table.AddCell(assessmentParamResult.Description);
-                table.AddCell(assessmentParamResult.Observation);
-                table.AddCell(assessmentParamResult.Weight.ToString());
-                table.AddCell(assessmentParamResult.Expected.ToString());
-                table.AddCell(assessmentParamResult.RealityResult.ToString());
+                document.Add(new Paragraph($"{assessmentParamResult.Description}", new Font(Font.FontFamily.TIMES_ROMAN, 12f, Font.BOLD)));
+                document.Add(new Paragraph($"- Observação: {assessmentParamResult.Observation}"));
+                document.Add(new Paragraph($"- Esperado: {assessmentParamResult.Expected}"));
+                document.Add(new Paragraph($"- Realizado: {assessmentParamResult.RealityResult}"));
             }
         }
-
-        return table;
     }
 }
 

@@ -1,3 +1,4 @@
+using ManagementTalent.Domain.Entity.ResultContext;
 using ManagementTalent.Services.Services;
 using ManagementTalent.Services.Services.Dtos.Requests;
 using Microsoft.AspNetCore.Mvc;
@@ -57,12 +58,12 @@ public class AssessmentResultController : ControllerBase
         }
     }
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateExerciseById(Guid id, [FromBody] UpdateAssessmentResultRequest updateExerciseDto)
+    [HttpPut()]
+    public async Task<IActionResult> UpdateExerciseById(Guid assessmentId, [FromBody] UpdateAssessmentResultRequest updateExerciseDto)
     {
         try
         {
-            var training = await _assessmentResultService.UpdateAssessmentResult(id, updateExerciseDto);
+            var training = await _assessmentResultService.UpdateAssessmentResult(assessmentId, updateExerciseDto);
             return Ok(training);
         }
         catch (Exception e)
