@@ -31,6 +31,7 @@ public class SupervisorService
         await _supervisorRepositorySql.SaveChange();
         return new CreateSupervisorResponse
         {
+            Id = sup.Id,
             SupFather = sup.SupFatherId,
             Name = sup.Name,
             Company = sup.Company,
@@ -55,12 +56,7 @@ public class SupervisorService
         await _supervisorRepositorySql.SaveChange();
         return new UpdateSupervisorResponse
         {
-            SupFather = sup.SupFatherId,
-            Name = sup.Name,
-            Company = sup.Company,
-            SinceAtInJob = sup.SinceAtInJob,
-            Age = sup.Age,
-            Colabs = sup.Colabs
+            Success = true
         };
     }
     
@@ -69,6 +65,7 @@ public class SupervisorService
         var sup = await _supervisorRepositorySql.FindById(id.ToString());
         return new GetSupervisorResponse
         {
+            Id = sup.Id,
             SupFather = sup.SupFatherId,
             Name = sup.Name,
             Company = sup.Company,
@@ -85,6 +82,7 @@ public class SupervisorService
         {
             supResponse.Add(new GetSupervisorResponse
             {
+                Id = x.Id,
                 SupFather = x.SupFatherId,
                 Name = x.Name,
                 Company = x.Company,

@@ -4,6 +4,7 @@ namespace ManagementTalent.Services.Services.Dtos.Response;
 
 public class GetAssessmentParamResultResponse
 {
+    public string Id { get; set; }
     public string Description { get; set; }
     public string Observation { get; set; }
     [Range(1, 4, ErrorMessage = "O valor de 'Resultado' deve estar entre 1 e 100.")]

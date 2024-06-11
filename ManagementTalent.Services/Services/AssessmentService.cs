@@ -28,6 +28,7 @@ public class AssessmentService
         await _assessmentRepositorySql.SaveChange();
         return new CreateAssessmentResponse
         {
+            Id = assessment.Id,
             JobRoleId = assessment.JobRoleId
         };
     }
@@ -53,6 +54,7 @@ public class AssessmentService
         var assessment = await _assessmentRepositorySql.FindById(id);
         return new GetAssessmentResponse
         {
+            Id = assessment.Id,
             JobRoleId = assessment.JobRoleId
         };
     }
@@ -65,6 +67,7 @@ public class AssessmentService
         {
             assessmentResponses.Add(new GetAssessmentResponse
             {
+                Id = x.Id,
                 JobRoleId = x.JobRoleId
             });
         });

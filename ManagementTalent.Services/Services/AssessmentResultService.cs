@@ -74,9 +74,7 @@ public class AssessmentResultService
         
         return new CreateAssessmentResultResponse
         {
-            Id = assessmentResult.Id,
-            CollaboratorId = assessmentResult.CollaboratorId,
-            SupervisorId = assessmentResult.SupervisorId
+            Id = assessmentResult.Id
         };
     }
 
@@ -100,6 +98,7 @@ public class AssessmentResultService
         {
             groupsParamToMap.Add(new GroupParameterResult
             {
+                Id = x.Id,
                 GroupParamTitle = x.GroupParamTitle,
                 Weight = x.Weight,
                 AssessmentResultId = assessmentResultId,
@@ -118,6 +117,7 @@ public class AssessmentResultService
         {
             jobParamBaseToMap.Add(new AssessmentParamResult
             {
+                Id = x.Id,
                 JobParamTitle = x.JobParamTitle,
                 Description = x.Description,
                 Observation = x.Observation,

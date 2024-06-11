@@ -37,6 +37,7 @@ public class JobParameterBaseService
             await _jobParameterBaseRepositorySql.SaveChange();
             jobParam.Add(new CreateJobParameterBaseResponse
             {
+                Id = jobParameterBase.Id,
                 JobParamTitle = jobParameterBase.JobParamTitle,
                 Description = jobParameterBase.Description,
                 Observation = jobParameterBase.Observation,
@@ -74,6 +75,7 @@ public class JobParameterBaseService
         var jobParameterBase = await _jobParameterBaseRepositorySql.FindById(id);
         return new GetJobParameterBaseResponse
         {
+            Id = jobParameterBase.Id,
             JobParamTitle = jobParameterBase.JobParamTitle,
             Description = jobParameterBase.Description,
             Observation = jobParameterBase.Observation,
@@ -89,6 +91,7 @@ public class JobParameterBaseService
         {
             jobParameterBaseResponses.Add(new GetJobParameterBaseResponse
             {
+                Id = x.Id,
                 JobParamTitle = x.JobParamTitle,
                 Description = x.Description,
                 Observation = x.Observation,

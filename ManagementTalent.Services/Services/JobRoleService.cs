@@ -27,6 +27,7 @@ public class JobRoleService
         await _jobRoleRepositorySql.SaveChange();
         return new CreateJobRoleResponse
         {
+            Id = jobRole.Id.ToString(),
             JobTitle = jobRole.JobTitle
         };
     }
@@ -52,8 +53,8 @@ public class JobRoleService
         var jobRole = await _jobRoleRepositorySql.FindById(id);
         return new GetJobRoleResponse
         {
+            Id = jobRole.Id.ToString(),
             JobTitle = jobRole.JobTitle,
-
         };
     }
 
@@ -65,6 +66,7 @@ public class JobRoleService
         {
             jobRoleResponses.Add(new GetJobRoleResponse
             {
+                Id = x.Id.ToString(),
                 JobTitle = x.JobTitle
             });
         });

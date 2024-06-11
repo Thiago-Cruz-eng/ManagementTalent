@@ -32,6 +32,7 @@ public class GroupParameterService
        
         return new CreateGroupParameterResponse
         {
+            Id = groupParameter.Id,
             GroupParamTitle = groupParameter.GroupParamTitle,
             Weight = groupParameter.Weight,
             AssessmentId = groupParameterDto.AssessmentId
@@ -62,6 +63,7 @@ public class GroupParameterService
         var groupParameter = await _groupParameterRepositorySql.FindById(id);
         return new GetGroupParameterResponse
         {
+            Id = groupParameter.Id,
             GroupParamTitle = groupParameter.GroupParamTitle,
             Weight = groupParameter.Weight,
             AssessmentId = Guid.Parse(groupParameter.AssessmentId)
@@ -76,6 +78,7 @@ public class GroupParameterService
         {
             groupParameterResponses.Add(new GetGroupParameterResponse
             {
+                Id = x.Id,
                 GroupParamTitle = x.GroupParamTitle,
                 Weight = x.Weight,
                 AssessmentId = Guid.Parse(x.AssessmentId)

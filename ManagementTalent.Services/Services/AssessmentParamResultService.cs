@@ -34,6 +34,7 @@ public class AssessmentParamResultService
         await _assessmentParamResultRepositorySql.SaveChange();
         return new CreateAssessmentParamResultResponse
         {
+            Id = assessmentParamResult.Id,
             Description = assessmentParamResult.Description,
             Observation = assessmentParamResult.Observation,
             Result = assessmentParamResult.RealityResult ?? 0,
@@ -65,6 +66,7 @@ public class AssessmentParamResultService
         var assessmentParamResult = await _assessmentParamResultRepositorySql.FindById(id.ToString());
         return new GetAssessmentParamResultResponse
         {
+            Id = assessmentParamResult.Id,
             Description = assessmentParamResult.Description,
             Observation = assessmentParamResult.Observation,
             Result = assessmentParamResult.RealityResult ?? 0,
@@ -97,6 +99,7 @@ public class AssessmentParamResultService
         {
             assessmentParamResultResponses.Add(new GetAssessmentParamResultResponse
             {
+                Id = x.Id,
                 Description = x.Description,
                 Observation = x.Observation,
                 Result = x.RealityResult ?? 0,

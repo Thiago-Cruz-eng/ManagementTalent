@@ -31,6 +31,7 @@ public class SeniorityService
         await _seniorityRepositorySql.SaveChange();
         return new CreateSeniorityResponse
         {
+            Id = seniority.Id,
             SeniorityName = seniority.SeniorityName,
             SeniorityRelevanceInWorkDay = seniority.SeniorityRelevanceInWorkDay,
             JobRoleName = seniority.JobRoleName
@@ -61,6 +62,7 @@ public class SeniorityService
         var seniority = await _seniorityRepositorySql.FindById(id.ToString());
         return new GetSeniorityResponse
         {
+            Id = seniority.Id,
             JobRoleId = seniority.JobRoleId,
             SeniorityRelevanceInWorkDay = seniority.SeniorityRelevanceInWorkDay,
             SeniorityName = seniority.SeniorityName
@@ -75,6 +77,7 @@ public class SeniorityService
         {
             seniorityResponses.Add(new GetSeniorityResponse
             {
+                Id = x.Id,
                 JobRoleId = x.JobRoleId,
                 SeniorityRelevanceInWorkDay = x.SeniorityRelevanceInWorkDay,
                 SeniorityName = x.SeniorityName

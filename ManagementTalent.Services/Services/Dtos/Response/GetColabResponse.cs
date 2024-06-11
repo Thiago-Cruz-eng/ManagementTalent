@@ -6,6 +6,7 @@ namespace ManagementTalent.Services.Services.Dtos.Response;
 
 public class GetColabResponse
 {
+    public string Id { get; set; }
     public string Supervisor { get; set; }
     public string Name { get; set; }
     public DateTime StartAt { get; set; }

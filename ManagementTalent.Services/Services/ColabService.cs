@@ -31,6 +31,7 @@ public class ColabService
         await _colabRepositorySql.SaveChange();
         return new CreateColabResponse
         {
+            Id = colab.Id,
             Name = colab.Name,
             StartAt = colab.StartAt,
             SeniorityId = colab.SeniorityId,
@@ -64,6 +65,7 @@ public class ColabService
         var colab = await _colabRepositorySql.FindById(id.ToString());
         return new GetColabResponse
         {
+            Id = colab.Id,
             Name = colab.Name,
             StartAt = colab.StartAt,
             SeniorityId = colab.SeniorityId,
@@ -80,6 +82,7 @@ public class ColabService
         {
             colabResponse.Add(new GetColabResponse
             {
+                Id = x.Id,
                 Name = x.Name,
                 StartAt = x.StartAt,
                 SeniorityId = x.SeniorityId,

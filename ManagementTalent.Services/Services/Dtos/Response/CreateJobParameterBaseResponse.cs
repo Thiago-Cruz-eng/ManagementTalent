@@ -5,6 +5,7 @@ namespace ManagementTalent.Services.Services.Dtos.Response;
 
 public class CreateJobParameterBaseResponse
 {
+    public string Id { get; set; }
     public string? JobParamTitle { get; set; }
     public string? Description { get; set; }
     public string? Observation { get; set; }
