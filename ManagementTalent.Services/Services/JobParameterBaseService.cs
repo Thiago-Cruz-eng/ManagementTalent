@@ -9,10 +9,12 @@ namespace ManagementTalent.Services.Services;
 public class JobParameterBaseService
 {
     private readonly IJobParameterBaseRepositorySql _jobParameterBaseRepositorySql;
+    private readonly IGroupParameterRepositorySql _groupParameterRepositorySql;
 
-    public JobParameterBaseService(IJobParameterBaseRepositorySql jobParameterBaseRepositorySql)
+    public JobParameterBaseService(IJobParameterBaseRepositorySql jobParameterBaseRepositorySql, IGroupParameterRepositorySql groupParameterRepositorySql)
     {
         _jobParameterBaseRepositorySql = jobParameterBaseRepositorySql;
+        _groupParameterRepositorySql = groupParameterRepositorySql;
     }
 
     public async Task<List<CreateJobParameterBaseResponse>> CreateJobParameterBase(List<CreateJobParameterBaseRequest> jobParameterBases)
@@ -101,6 +103,19 @@ public class JobParameterBaseService
         });
         return jobParameterBaseResponses;
     }
+    
+    public async Task<List<JobParameterBase>> GetAllJobParameterBaseByGroupId(List<string> groupsList, string seniorityId)
+    {
+        var jobs = new List<JobParameterBase>();
+        foreach (var id in groupsList)
+        {
+            var allJobParamsByGroup = await _groupParameterRepositorySql.GetJobParameterByGroup(id);
+            jobs = await _jobParameterBaseRepositorySql.GetActualJobParamByColabSeniority(allJobParamsByGroup, seniorityId);
+        }
+
+        return jobs;
+    }
+    
     
     public async Task DeleteJobParameterBaseById(Guid id)
     {

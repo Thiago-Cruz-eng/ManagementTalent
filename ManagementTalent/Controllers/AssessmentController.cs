@@ -56,6 +56,20 @@ public class AssessmentController : ControllerBase
             throw new Exception("error on get Assessment",e);
         }
     }
+    
+    [HttpGet("jobrole/{id}")]
+    public async Task<IActionResult> GetAssessmentByJobRole(string id)
+    {
+        try
+        {
+            var assessment = await _assessmentService.GetAssessmentByJobRoleId(id);
+            return Ok(assessment);
+        }
+        catch (Exception e)
+        {
+            throw new Exception("error on get Assessment",e);
+        }
+    }
 
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateAssessmentById(Guid id, [FromBody] UpdateAssessmentRequest updateAssessmentDto)

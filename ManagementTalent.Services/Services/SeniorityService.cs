@@ -86,6 +86,23 @@ public class SeniorityService
         return seniorityResponses;
     }
     
+    public async Task<List<GetSeniorityResponse>> GetAllSeniorityByJobRole(string jobroleId)
+    {
+        var seniorityResponses = new List<GetSeniorityResponse>();
+        var seniority = await _seniorityRepositorySql.GetAssessmentByJobRole(jobroleId);
+        seniority.ForEach(x =>
+        {
+            seniorityResponses.Add(new GetSeniorityResponse
+            {
+                Id = x.Id,
+                JobRoleId = x.JobRoleId,
+                SeniorityRelevanceInWorkDay = x.SeniorityRelevanceInWorkDay,
+                SeniorityName = x.SeniorityName
+            });
+        });
+        return seniorityResponses;
+    }
+    
     public async Task DeleteSeniorityById(Guid id)
     {
         var seniority = await _seniorityRepositorySql.FindById(id.ToString());

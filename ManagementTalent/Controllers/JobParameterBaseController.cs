@@ -56,6 +56,20 @@ public class JobParameterBaseController : ControllerBase
             throw new Exception("error on get Exercise",e);
         }
     }
+    
+    [HttpPost("all-by-group/seniority/{seniorityId}")]
+    public async Task<IActionResult> GetAllJobParameterBaseByJobParam(string seniorityId, [FromBody]List<string> groupId)
+    {
+        try
+        {
+            var training = await _jobParameterBaseService.GetAllJobParameterBaseByGroupId(groupId, seniorityId);
+            return Ok(training);
+        }
+        catch (Exception e)
+        {
+            throw new Exception("error on get Exercise",e);
+        }
+    }
 
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateExerciseById(Guid id, [FromBody] UpdateJobParameterBaseRequest updateExerciseDto)

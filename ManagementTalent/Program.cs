@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionMySql = builder.Configuration.GetConnectionString("MysqlConn");
-
+var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 builder.Services.AddDbContext<MTDbContext>(opts =>
 {
     opts.UseMySql(connectionMySql, ServerVersion.AutoDetect(connectionMySql));
@@ -34,6 +34,16 @@ builder.Services.AddScoped<JobRoleService>();
 builder.Services.AddScoped<SeniorityService>();
 builder.Services.AddScoped<SupervisorService>();
 builder.Services.AddScoped<GroupParameterResultService>();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+        policy  =>
+        {
+            policy.WithOrigins("http://localhost:5173") 
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -52,5 +62,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.MapControllers();
+app.UseCors(MyAllowSpecificOrigins);
 
 app.Run();

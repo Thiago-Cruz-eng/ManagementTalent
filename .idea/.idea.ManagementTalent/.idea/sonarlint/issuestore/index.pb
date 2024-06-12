@@ -33,14 +33,6 @@ d
 4ManagementTalent.Infra/ManagementTalent.Infra.csproj,9\4\94255206f04037d1b28ad3939ef588936f6f3125
 f
 6ManagementTalent.Domain/ManagementTalent.Domain.csproj,a\2\a2103dfd0d5d56d65b4e72f7699e607a51860f94
-\
-,ManagementTalent.Domain/Entity/Assessment.cs,d\6\d6b429f8e1283043f77447d6042dcaad931b09bd
-`
-0ManagementTalent.Domain/Entity/GroupParameter.cs,8\e\8ec051e02f61d42b491afcdd34b816746fb010b7
-b
-2ManagementTalent.Domain/Entity/JobParameterBase.cs,5\f\5ff1ed0e361bc294bc0887070a4ffecc6080b419
-[
-+ManagementTalent.Domain/Entity/Seniority.cs,9\6\960ddf6e50229e29150efa4d591c64bec0cefd11
 d
 4ManagementTalent.Services/Services/JobRoleService.cs,c\f\cf8858b5382a388a8b70514087aa66cba000c0c1
 f
@@ -55,16 +47,12 @@ x
 HManagementTalent.Services/Services/Dtos/Response/GetSeniorityResponse.cs,b\2\b28ad65c641f1a90620be6814352935088894c55
 \
 ,ManagementTalent.Domain/Entity/Supervisor.cs,9\5\95bc75bf83a281a5e3b54b50c682a56895320215
-t
-DManagementTalent.Infra/Migrations/20240604165853_initialMigration.cs,7\8\78eba5a730b834fc867250d573397245f2a3d7b5
 m
 =ManagementTalent.Infra/Migrations/MTDbContextModelSnapshot.cs,3\f\3f7dfa1c966a77d470643fca91417e5185c93c65
 j
 :ManagementTalent.Infra/ConfigModel/GroupParameterConfig.cs,0\e\0e696fd1e64e1adb283854e1045f1db73caf1747
 l
 <ManagementTalent.Infra/ConfigModel/JobParameterBaseConfig.cs,4\9\49f5dabfad010b998b4f8ff9bfb0ded5e48b95c2
-g
-7ManagementTalent.Domain/Entity/JobParameterSeniority.cs,6\e\6ec797b2d5e34e35c53b989b0c87185d13fa6a6d
 m
 =ManagementTalent.Services/Services/JobParameterBaseService.cs,a\4\a474a633cacd911c635cbfa9f86c5c99f161dc12
 
@@ -229,3 +217,5 @@ VManagementTalent.Services/Services/Dtos/Requests/CreateAssessmentParamResultReq
 WManagementTalent.Services/Services/Dtos/Response/CreateAssessmentParamResultResponse.cs,3\7\37e48cf63cb7bfe95f02e16edb19142949ee82f3
 „
 TManagementTalent.Services/Services/Dtos/Response/GetAssessmentParamResultResponse.cs,a\1\a19413b3db3bbf2fd2ff2ff3bf6b3bc62f099e05
+k
+;ManagementTalent.Infra/Repositories/JobRoleRepositorySql.cs,e\8\e8c9ee3d78a241cb8b2f041959c8d0e807f8ccc3

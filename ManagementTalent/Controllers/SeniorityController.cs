@@ -56,6 +56,20 @@ public class SeniorityController : ControllerBase
             throw new Exception("error on get Exercise",e);
         }
     }
+    
+    [HttpGet("get-by-jobroleid/{id}")]
+    public async Task<IActionResult> GetAllSeniorityByJobRole(string id)
+    {
+        try
+        {
+            var training = await _seniorityService.GetAllSeniorityByJobRole(id);
+            return Ok(training);
+        }
+        catch (Exception e)
+        {
+            throw new Exception("error on get Exercise",e);
+        }
+    }
 
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateExerciseById(Guid id, [FromBody] UpdateSeniorityRequest updateExerciseDto)

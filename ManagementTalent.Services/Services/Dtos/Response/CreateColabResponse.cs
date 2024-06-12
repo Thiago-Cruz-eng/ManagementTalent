@@ -11,4 +11,7 @@ public class CreateColabResponse
     public Guid JobRoleId { get; set; }
     public string SeniorityId { get; set; }
     public string SupervisorId { get; set; }
+    public string JobRoleName { get; set; }
+    public string SeniorityName { get; set; }
+    public string SupervisorName { get; set; }
 }

@@ -69,6 +69,23 @@ public class GroupParameterService
             AssessmentId = Guid.Parse(groupParameter.AssessmentId)
         };
     }
+    
+    public async Task<List<GetGroupParameterResponse>> GetGroupParamsByAssessment(string id)
+    {
+        var groupParameterResponses = new List<GetGroupParameterResponse>();
+        var groupParameter = await _groupParameterRepositorySql.GetGroupParamsByAssessment(id);
+        groupParameter.ForEach(x =>
+        {
+            groupParameterResponses.Add(new GetGroupParameterResponse
+            {
+                Id = x.Id,
+                GroupParamTitle = x.GroupParamTitle,
+                Weight = x.Weight,
+                AssessmentId = Guid.Parse(x.AssessmentId)
+            });
+        });
+        return groupParameterResponses;
+    }
 
     public async Task<List<GetGroupParameterResponse>> GetAllGroupParameter()
     {

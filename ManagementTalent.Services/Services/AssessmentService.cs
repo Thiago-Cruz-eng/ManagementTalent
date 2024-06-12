@@ -58,6 +58,16 @@ public class AssessmentService
             JobRoleId = assessment.JobRoleId
         };
     }
+    
+    public async Task<GetAssessmentResponse> GetAssessmentByJobRoleId(string id)
+    {
+        var assessment = await _assessmentRepositorySql.GetAssessmentByJobRole(id);
+        return new GetAssessmentResponse
+        {
+            Id = assessment.Id,
+            JobRoleId = assessment.JobRoleId
+        };
+    }
 
     public async Task<List<GetAssessmentResponse>> GetAllAssessment()
     {

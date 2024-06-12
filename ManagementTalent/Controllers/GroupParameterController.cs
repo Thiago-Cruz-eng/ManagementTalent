@@ -43,6 +43,20 @@ public class GroupParameterController : ControllerBase
             throw new Exception("error on get GroupParameter", e);
         }
     }
+    
+    [HttpGet("assessment/{id}")]
+    public async Task<IActionResult> GetGroupParamsByAssessment(string id)
+    {
+        try
+        {
+            var groupParameter = await _groupParameterService.GetGroupParamsByAssessment(id);
+            return Ok(groupParameter);
+        }
+        catch (Exception e)
+        {
+            throw new Exception("error on get GroupParameter", e);
+        }
+    }
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetGroupParameterById(Guid id)

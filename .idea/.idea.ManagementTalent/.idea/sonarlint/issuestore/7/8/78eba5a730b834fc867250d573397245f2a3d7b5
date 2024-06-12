@@ -1,17 +1,0 @@
-
-fcsharpsquid:S1192"IDefine a constant instead of using this literal 'MySql:CharSet' 65 times.(Û¨ò¨
-`csharpsquid:S1192"CDefine a constant instead of using this literal 'utf8mb4' 65 times.(Û¨ò¨
-hcsharpsquid:S1192"FDefine a constant instead of using this literal 'AspNetRoles' 5 times.(ÅÔ¨çúÿÿÿÿ
-ecsharpsquid:S1192"HDefine a constant instead of using this literal 'varchar(255)' 16 times.(ÇóŞß
-dcsharpsquid:S1192"GDefine a constant instead of using this literal 'varchar(256)' 6 times.(«åß
-fcsharpsquid:S1192"DDefine a constant instead of using this literal 'longtext' 27 times.(¸Ì€Õøÿÿÿÿ
-acsharpsquid:S1192)"DDefine a constant instead of using this literal 'char(36)' 12 times.(èƒ ½
-icsharpsquid:S1192)"LDefine a constant instead of using this literal 'ascii_general_ci' 12 times.(èƒ ½
-ccsharpsquid:S1192C"FDefine a constant instead of using this literal 'Supervisors' 5 times.(ÉÜƒ
-hcsharpsquid:S1192N"FDefine a constant instead of using this literal 'datetime(6)' 7 times.(’ÇÀÿÿÿÿÿ
-dcsharpsquid:S1192v"GDefine a constant instead of using this literal 'AspNetUsers' 10 times.(ÏÍºê
-ccsharpsquid:S1192‹"EDefine a constant instead of using this literal 'tinyint(1)' 4 times.(òç†
-jcsharpsquid:S1192"LDefine a constant instead of using this literal 'AssessmentResults' 4 times.(ËÙª
-ccsharpsquid:S1192§"FDefine a constant instead of using this literal 'Assessments' 4 times.(˜ Ø%
-hcsharpsquid:S1192Ó"JDefine a constant instead of using this literal 'GroupParameters' 5 times.(¯ñ¢º
-jcsharpsquid:S1192ï"LDefine a constant instead of using this literal 'JobParameterBases' 4 times.(à¡¼
