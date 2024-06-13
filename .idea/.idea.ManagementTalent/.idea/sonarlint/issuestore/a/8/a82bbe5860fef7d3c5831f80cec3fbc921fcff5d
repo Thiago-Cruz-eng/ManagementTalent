@@ -1,3 +1,6 @@
 
-Šcsharpsquid:S112‡"@'System.ApplicationException' should not be thrown by user code.(Ğ’¸8ğÇ‰œÿ1J$ddc6ba8e-85db-479d-a111-32afc3e590f9
-csharpsquid:S107"FConstructor has 10 parameters, which is greater than the 7 authorized.(´å8ª«ÕŸ€2J$5e5d277a-d8ed-4870-b493-8e6567772b7f
+Šcsharpsquid:S1854T"@Remove this useless assignment to local variable 'jobParamBase'.(ö‚Ïù8ÉÁ½š2J$0c4bf126-2d5e-4723-b466-1c03836a9903
+Šcsharpsquid:S112ˆ"@'System.ApplicationException' should not be thrown by user code.(Ğ’¸8ğÇ‰œÿ1J$7e39028d-2211-4c27-8e33-c19910e9b13b
+csharpsquid:S107"FConstructor has 10 parameters, which is greater than the 7 authorized.(´å8ª«ÕŸ€2J$5de2bdc4-d4e1-45b2-b8e0-b10c3d59c46b
+†csharpsquid:S1144°";Remove the unused private method 'CreateComparisonContent'.(ƒàÍã8åú¾2J$2582c5e7-2a57-4767-8e6f-6a10ee892bca
+ncsharpsquid:S125¬"Remove this commented out code.(Öšú¥ûÿÿÿÿ8æú¾2J$1eb58075-4dea-4e61-b4ad-0ba035bfd6e2

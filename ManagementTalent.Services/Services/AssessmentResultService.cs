@@ -47,7 +47,7 @@ public class AssessmentResultService
         var getGroupParamsByAssessmentId =
             await _groupParameterRepositorySql.GetGroupParamsByAssessment(getAssessmentByJobRole.Id);
         
-        var assessmentResult = new AssessmentResult
+        var assessmentResult = new AssessmentResult //mapeamento da entidade de dominio
         {
             CollaboratorId = assessmentResultDto.CollaboratorId,
             SupervisorId = colab.SupervisorId,
@@ -78,20 +78,21 @@ public class AssessmentResultService
         };
     }
 
-    private async Task SaveActualJobParamResultInAssessmentParamResult(List<GroupParameter> getGroupParamsByAssessmentId, Seniority seniority, string groupId)
+    private async Task SaveActualJobParamResultInAssessmentParamResult(List<GroupParameter> getGroupParamsByAssessmentId, Seniority seniority, GroupParameterResult groupParamResult)
     {
-        var groupsList = getGroupParamsByAssessmentId.Select(x => x.Id).ToList();
-        
-        foreach (var id in groupsList)
+        var groupsList = getGroupParamsByAssessmentId;
+        var jobParamBase = new List<JobParameterBase>();
+        foreach (var gptamplate in groupsList)
         {
-            var allJobParamsByGroup = await _groupParameterRepositorySql.GetJobParameterByGroup(id);
-            var jobParamsByActualSeniorityColab =
-                await _jobParameterBaseRepositorySql.GetActualJobParamByColabSeniority(allJobParamsByGroup, seniority.Id);
-            await SaveActualJobParamBase(jobParamsByActualSeniorityColab, groupId);
+            var allJobParamsByGroup = await _groupParameterRepositorySql.GetJobParameterByGroup(gptamplate.Id);
+            jobParamBase = await _jobParameterBaseRepositorySql.GetActualJobParamByColabSeniority(allJobParamsByGroup, seniority.Id);
+      
+            if(gptamplate.GroupParamTitle == groupParamResult.GroupParamTitle)
+                await SaveActualJobParamBase(jobParamBase, groupParamResult.Id);
         }
     }
 
-    private async Task<List<string>> SaveActualGroupParamResultInAssessmentResult(List<GroupParameter> getGroupParamsByAssessmentId, string assessmentResultId)
+    private async Task<List<GroupParameterResult>> SaveActualGroupParamResultInAssessmentResult(List<GroupParameter> getGroupParamsByAssessmentId, string assessmentResultId)
     {
         var groupsParamToMap = new List<GroupParameterResult>();
         getGroupParamsByAssessmentId?.ForEach(x =>
@@ -106,7 +107,7 @@ public class AssessmentResultService
         });
 
         if (groupsParamToMap.Count > 0) await _groupParameterResultRepositorySql.SaveRange(groupsParamToMap);
-        return groupsParamToMap.Select(x => x.Id).ToList();
+        return groupsParamToMap;
     }
 
     private async Task SaveActualJobParamBase(List<JobParameterBase> getGroupParamsByAssessmentId,  string groupId)
@@ -296,7 +297,7 @@ public class AssessmentResultService
             document.Add(new Paragraph($"Senioridade: {assessmentResult.AssessmentResult.ActualSeniorityName}"));
             document.Add(new Paragraph($"Resultado: {assessmentResult.AssessmentResult.Result}"));
             CreateItemContent(document, assessmentResult);
-            CreateComparisonContent(document, assessmentResult);
+            //CreateComparisonContent(document, assessmentResult);
         }
     }
 

@@ -56,6 +56,20 @@ public class AssessmentParamResultController : ControllerBase
             throw new Exception("error on get Exercise",e);
         }
     }
+    
+    [HttpGet("assessment-param-result/by-group/{id}")]
+    public async Task<IActionResult> GetAssessmentParamResultByGroupParameterResultId(Guid id)
+    {
+        try
+        {
+            var training = await _assessmentParamResultService.GetAssessmentParamResultByGroupParameterResultId(id);
+            return Ok(training);
+        }
+        catch (Exception e)
+        {
+            throw new Exception("error on get Exercise",e);
+        }
+    }
 
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateExerciseById(Guid id, [FromBody] UpdateAssessmentParamResultRequest updateExerciseDto)

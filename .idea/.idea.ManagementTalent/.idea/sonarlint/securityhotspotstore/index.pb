@@ -219,3 +219,5 @@ WManagementTalent.Services/Services/Dtos/Response/CreateAssessmentParamResultRes
 TManagementTalent.Services/Services/Dtos/Response/GetAssessmentParamResultResponse.cs,a\1\a19413b3db3bbf2fd2ff2ff3bf6b3bc62f099e05
 k
 ;ManagementTalent.Infra/Repositories/JobRoleRepositorySql.cs,e\8\e8c9ee3d78a241cb8b2f041959c8d0e807f8ccc3
+p
+@ManagementTalent-Front/src/presentation/components/TrackForm.vue,d\2\d2dd4b78af39035854bae37d02169e778140574f

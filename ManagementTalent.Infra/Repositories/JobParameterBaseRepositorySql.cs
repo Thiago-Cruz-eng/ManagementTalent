@@ -23,15 +23,18 @@ public class JobParameterBaseRepositorySql : EntityFrameworkRepositorySqlAbstrac
 
     public async Task<List<JobParameterBase>> GetActualJobParamByColabSeniority(List<JobParameterBase> jobParam, string seniorityId)
     {
-        var jobParamIds = await _context.JobParameterSeniority
-            .Where(x => x.SeniorityId == seniorityId)
-            .Select(x => x.JobParametersBaseId)
-            .ToListAsync();
-        
-        var jobParams = await _context.JobParameterBases
-            .Where(param => jobParamIds.Contains(param.Id))
-            .ToListAsync();
+        var job = new List<string>();
+        foreach (var jobParameterBase in jobParam)
+        {
+            job.AddRange(await _context.JobParameterSeniority
+                .Where(x => x.SeniorityId == seniorityId && x.JobParametersBaseId == jobParameterBase.Id)
+                .Select(x => x.JobParametersBaseId)
+                .ToListAsync());
 
-        return jobParams;
+        }
+
+        return await _context.JobParameterBases
+            .Where(param => job.Contains(param.Id))
+            .ToListAsync();
     }
 }

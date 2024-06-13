@@ -74,7 +74,7 @@ public class AssessmentParamResultService
         };
     }
     
-    private async Task<List<AssessmentParamResult>> GetAssessmentParamResultByGroupParameterResultId(Guid groupParameterResultId)
+    public async Task<List<AssessmentParamResult>> GetAssessmentParamResultByGroupParameterResultId(Guid groupParameterResultId)
     {
         var assessmentParamResult = await _assessmentParamResultRepositorySql.GetAssessmentParamResultByGroupParameterResul(groupParameterResultId);
         return assessmentParamResult;

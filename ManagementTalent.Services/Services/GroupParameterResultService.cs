@@ -21,7 +21,7 @@ public class GroupParameterResultService
         return groupParameterResultDto;
     }
     
-    public async Task<GroupParameterResult> UpdateGroupParameterResult(Guid id, GroupParameterResult groupParameterResultDto)
+    public async Task<GroupParameterResult> UpdateGroupParameterResult(string id, GroupParameterResult groupParameterResultDto)
     {
         var groupParameterResult = await _groupParameterResultRepositorySql.FindById(id);
         if (groupParameterResult == null) throw new ApplicationException("exercise not found");
@@ -31,26 +31,15 @@ public class GroupParameterResultService
         return groupParameterResultDto;
     }
     
-    public async Task<GroupParameterResult> GetGroupParameterResult(Guid id)
+    public async Task<GroupParameterResult> GetGroupParameterResult(string id)
     {
         var groupParameterResult = await _groupParameterResultRepositorySql.FindById(id);
         return groupParameterResult;
     }
     
-    public async Task<List<GroupParameterResult>> GetGroupParameterByAssessmentResult(Guid assessmentResultId)
+    public async Task<List<GroupParameterResult>> GetGroupParameterByAssessmentResult(string assessmentResultId)
     {
-        var assessmentResult = await _assessmentResultRepositorySql.FindById(assessmentResultId.ToString());
-        var groups = await _groupParameterResultRepositorySql.FindAll();
-        var groupsByAssessmentResult = groups
-            .Select(x => x.AssessmentResultId)
-            .Where(assessmentId => assessmentResult.Id == assessmentId)
-            .ToList();
-        var group = new List<GroupParameterResult>();
-        foreach (var id in groupsByAssessmentResult)
-        {
-            group.Add(await GetGroupParameterResult(Guid.Parse(id)));
-        }
-        return group;
+        return await _groupParameterResultRepositorySql.FindByAssessmentId(assessmentResultId);
     }
 
     public async Task<List<GroupParameterResult>> GetAllGroupParameterResult()
@@ -58,7 +47,7 @@ public class GroupParameterResultService
         return await _groupParameterResultRepositorySql.FindAll();
     }
     
-    public async Task DeleteGroupParameterResultById(Guid id)
+    public async Task DeleteGroupParameterResultById(string id)
     {
         var groupParameterResult = await _groupParameterResultRepositorySql.FindById(id);
         _groupParameterResultRepositorySql.Delete(groupParameterResult);

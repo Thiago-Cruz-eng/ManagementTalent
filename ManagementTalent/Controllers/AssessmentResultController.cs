@@ -10,10 +10,12 @@ namespace ManagementTalent.Controllers;
 public class AssessmentResultController : ControllerBase
 {
     private readonly AssessmentResultService _assessmentResultService;
+    private readonly GroupParameterResultService _groupParameterResultService;
 
-    public AssessmentResultController(AssessmentResultService assessmentResultService)
+    public AssessmentResultController(AssessmentResultService assessmentResultService, GroupParameterResultService groupParameterResultService)
     {
         _assessmentResultService = assessmentResultService;
+        _groupParameterResultService = groupParameterResultService;
     }
     
     [HttpPost]
@@ -98,6 +100,18 @@ public class AssessmentResultController : ControllerBase
             throw new Exception("error on get Exercise",e);
         }
     }
-
     
+    [HttpGet("group-br-assessment-result/{id}")]
+    public async Task<IActionResult> GetGroupParameterByAssessmentResult(string id)
+    {
+        try
+        {
+            var pdf = await _groupParameterResultService.GetGroupParameterByAssessmentResult(id);
+            return Ok(pdf);
+        }
+        catch (Exception e)
+        {
+            throw new Exception("error on get Exercise",e);
+        }
+    }
 }

@@ -1,7 +1,9 @@
 
-ƒcsharpsquid:S112"5'System.Exception' should not be thrown by user code.(¸•Õøúÿÿÿÿ8™¸ï›ş1J$0b05254d-55c4-45cd-b9e1-c4484045a994
-ƒcsharpsquid:S112+"5'System.Exception' should not be thrown by user code.(í„¢şÿÿÿÿ8™¸ï›ş1J$6ca1092f-6de6-41a6-a75e-b87fb15340eb
-ƒcsharpsquid:S1129"5'System.Exception' should not be thrown by user code.(í„¢şÿÿÿÿ8™¸ï›ş1J$e7c647cc-5472-4bfb-b639-1398b804cec3
-}csharpsquid:S112G"5'System.Exception' should not be thrown by user code.(†úâ38š¸ï›ş1J$ac847713-0c3a-4ff2-940e-928082d0fa91
-ƒcsharpsquid:S112U"5'System.Exception' should not be thrown by user code.(Ûï¼øıÿÿÿÿ8ı¶î›ş1J$83da9b91-db66-4111-bcd9-71d64c87e3b3
-ƒcsharpsquid:S112b"5'System.Exception' should not be thrown by user code.(í„¢şÿÿÿÿ8ÚÓÿ€2J$105efc5a-57fe-46af-8c74-12b8a09e113e
+Ÿcsharpsquid:S1192-"PDefine a constant instead of using this literal 'error on get Exercise' 4 times.(í„¢şÿÿÿÿ8…Ì‘2J$b597de55-059a-445a-845c-ae98f3e5101c
+ƒcsharpsquid:S112"5'System.Exception' should not be thrown by user code.(¸•Õøúÿÿÿÿ8™¸ï›ş1J$6633b5a7-1bd2-4993-8803-3b37be2917ac
+ƒcsharpsquid:S112-"5'System.Exception' should not be thrown by user code.(í„¢şÿÿÿÿ8™¸ï›ş1J$25b19691-b8fd-454c-b197-866dd59eb8f8
+ƒcsharpsquid:S112;"5'System.Exception' should not be thrown by user code.(í„¢şÿÿÿÿ8™¸ï›ş1J$c3f71997-fcff-439e-9e8d-672a45778d07
+}csharpsquid:S112I"5'System.Exception' should not be thrown by user code.(†úâ38š¸ï›ş1J$e9671da4-7889-4106-9eca-70aa6e9cf79d
+ƒcsharpsquid:S112W"5'System.Exception' should not be thrown by user code.(Ûï¼øıÿÿÿÿ8ı¶î›ş1J$d22fd890-1d73-4806-81c1-3304ec353c01
+ƒcsharpsquid:S112d"5'System.Exception' should not be thrown by user code.(í„¢şÿÿÿÿ8ÚÓÿ€2J$ff989b0a-d43d-4338-8bae-265f82dbd3ca
+ƒcsharpsquid:S112r"5'System.Exception' should not be thrown by user code.(í„¢şÿÿÿÿ8…Ì‘2J$22f68620-5adc-4bfd-8f32-0c18df427299

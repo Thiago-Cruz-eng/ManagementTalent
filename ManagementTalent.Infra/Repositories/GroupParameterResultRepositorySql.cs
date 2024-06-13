@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ManagementTalent.Infra.Repositories;
 
-public class GroupParameterResultRepositorySql : EntityFrameworkRepositorySqlAbstract<Guid, GroupParameterResult>, IGroupParameterResultRepositorySql
+public class GroupParameterResultRepositorySql : EntityFrameworkRepositorySqlAbstract<string, GroupParameterResult>, IGroupParameterResultRepositorySql
 {
     private MTDbContext _context;
     public GroupParameterResultRepositorySql(MTDbContext context) : base(context)
