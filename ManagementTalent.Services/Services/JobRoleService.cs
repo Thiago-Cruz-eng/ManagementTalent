@@ -57,6 +57,16 @@ public class JobRoleService
             JobTitle = jobRole.JobTitle,
         };
     }
+    
+    public async Task<GetJobRoleResponse> GetJobRoleByName(string name)
+    {
+        var jobRole = await _jobRoleRepositorySql.GetJobRoleByName(name);
+        return new GetJobRoleResponse
+        {
+            Id = jobRole.Id.ToString(),
+            JobTitle = jobRole.JobTitle,
+        };
+    }
 
     public async Task<List<GetJobRoleResponse>> GetAllJobRole()
     {

@@ -56,6 +56,20 @@ public class JobRoleController : ControllerBase
             throw new Exception("error on get Exercise",e);
         }
     }
+    
+    [HttpGet("get-by-name")]
+    public async Task<IActionResult> GetJobRoleByName(string name)
+    {
+        try
+        {
+            var training = await _jobRoleService.GetJobRoleByName(name);
+            return Ok(training);
+        }
+        catch (Exception e)
+        {
+            throw new Exception("error on get Exercise",e);
+        }
+    }
 
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateExerciseById(Guid id, [FromBody] UpdateJobRoleRequest updateExerciseDto)

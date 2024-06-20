@@ -11,5 +11,9 @@ public class JobRoleConfig : IEntityTypeConfiguration<JobRole>
         builder
             .HasMany(jr => jr.Seniorities)
             .WithOne(s => s.JobRoleName);
+        
+        builder
+            .HasIndex(e => e.JobTitle)
+            .IsUnique();
     }
 }
