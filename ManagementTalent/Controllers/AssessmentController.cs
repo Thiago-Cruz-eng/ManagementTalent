@@ -48,7 +48,7 @@ public class AssessmentController : ControllerBase
     {
         try
         {
-            var assessment = await _assessmentService.GetAssessment(id);
+            var assessment = await _assessmentService.GetAssessment(id.ToString());
             return Ok(assessment);
         }
         catch (Exception e)

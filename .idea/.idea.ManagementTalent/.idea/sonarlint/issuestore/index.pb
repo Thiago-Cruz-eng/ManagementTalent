@@ -221,3 +221,5 @@ k
 ;ManagementTalent.Infra/Repositories/JobRoleRepositorySql.cs,e\8\e8c9ee3d78a241cb8b2f041959c8d0e807f8ccc3
 j
 :ManagementTalent.Infra/Interfaces/IJobRoleRepositorySql.cs,d\1\d13ae5c95b022a20315f992e05bb54b992ef3541
+{
+KManagementTalent.Services/Services/Dtos/Requests/UpdateSupervisorRequest.cs,2\0\2074905d9744ff7711f036608a3f0bba1586424f

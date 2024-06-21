@@ -17,6 +17,8 @@ public class AssessmentService
 
     public async Task<CreateAssessmentResponse> CreateAssessment(CreateAssessmentRequest assessmentDto)
     {
+        var exist = await GetAssessment(assessmentDto.JobRoleId.ToString());
+        if (exist.Id.Length == 0) return new CreateAssessmentResponse();
         var assessment = new Assessment
         {
             JobRoleId = assessmentDto.JobRoleId
@@ -35,7 +37,7 @@ public class AssessmentService
     
     public async Task<UpdateAssessmentResponse> UpdateAssessment(Guid id, UpdateAssessmentRequest assessmentDto)
     {
-        var assessment = await _assessmentRepositorySql.FindById(id);
+        var assessment = await _assessmentRepositorySql.FindById(id.ToString());
         if (assessment == null) throw new ApplicationException("exercise not found");
         assessment.JobRoleId = assessmentDto.JobRoleId ?? assessment.JobRoleId;
         
@@ -49,9 +51,10 @@ public class AssessmentService
         };
     }
     
-    public async Task<GetAssessmentResponse> GetAssessment(Guid id)
+    public async Task<GetAssessmentResponse> GetAssessment(string id)
     {
         var assessment = await _assessmentRepositorySql.FindById(id);
+        if (assessment is null) return new GetAssessmentResponse();
         return new GetAssessmentResponse
         {
             Id = assessment.Id,
@@ -62,6 +65,7 @@ public class AssessmentService
     public async Task<GetAssessmentResponse> GetAssessmentByJobRoleId(string id)
     {
         var assessment = await _assessmentRepositorySql.GetAssessmentByJobRole(id);
+        if (assessment?.Id is null) return new GetAssessmentResponse();
         return new GetAssessmentResponse
         {
             Id = assessment.Id,
@@ -86,7 +90,7 @@ public class AssessmentService
     
     public async Task DeleteAssessmentById(Guid id)
     {
-        var assessment = await _assessmentRepositorySql.FindById(id);
+        var assessment = await _assessmentRepositorySql.FindById(id.ToString());
         _assessmentRepositorySql.Delete(assessment);
         await _assessmentRepositorySql.SaveChange();
     }

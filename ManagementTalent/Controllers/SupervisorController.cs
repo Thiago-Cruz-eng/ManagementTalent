@@ -70,6 +70,20 @@ public class SupervisorController : ControllerBase
             throw new Exception("error on update Exercise",e);
         }
     }
+    
+    [HttpGet("get-by-name")]
+    public async Task<IActionResult> GetJobRoleByName([FromQuery]string name)
+    {
+        try
+        {
+            var training = await _supervisorService.GetSupervisorByName(name);
+            return Ok(training);
+        }
+        catch (Exception e)
+        {
+            throw new Exception("error on get Exercise",e);
+        }
+    }
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteExerciseById(Guid id)

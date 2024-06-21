@@ -58,7 +58,7 @@ public class JobRoleController : ControllerBase
     }
     
     [HttpGet("get-by-name")]
-    public async Task<IActionResult> GetJobRoleByName(string name)
+    public async Task<IActionResult> GetJobRoleByName([FromQuery]string name)
     {
         try
         {

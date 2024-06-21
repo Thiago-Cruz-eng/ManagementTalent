@@ -4,7 +4,7 @@ using ManagementTalent.Infra.BaseRepository;
 
 namespace ManagementTalent.Infra.Interfaces;
 
-public interface IAssessmentRepositorySql : IBaseRepositorySql<Guid, Assessment>
+public interface IAssessmentRepositorySql : IBaseRepositorySql<string, Assessment>
 {
     public Task<Assessment> GetAssessmentByJobRole(string jobRoleId);
 }

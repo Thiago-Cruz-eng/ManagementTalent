@@ -40,6 +40,20 @@ public class SupervisorService
         };
     }
     
+    public async Task<GetSupervisorResponse> GetSupervisorByName(string name)
+    {
+        var sup = await _supervisorRepositorySql.GetSupervisorByName(name);
+        return new GetSupervisorResponse
+        {
+            Id = sup.Id,
+            Name = sup.Name,
+            SupFather = sup.SupFatherId,
+            Age = sup.Age,
+            Company = sup.Company,
+            SinceAtInJob = sup.SinceAtInJob
+        };
+    }
+    
     public async Task<UpdateSupervisorResponse> UpdateSupervisor(Guid id, UpdateSupervisorRequest supervisorDto)
     {
         var sup = await _supervisorRepositorySql.FindById(id.ToString());
@@ -48,7 +62,6 @@ public class SupervisorService
         sup.Age = supervisorDto.Age ?? 0;
         sup.SinceAtInJob = supervisorDto.SinceAtInJob ?? DateTime.MinValue;
         sup.Company = supervisorDto.Company;
-        sup.Colabs = supervisorDto.Colabs ?? sup.Colabs;
         
         sup.Validate();
  

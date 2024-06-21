@@ -6,7 +6,7 @@ using ManagementTalent.Infra.MySql;
 
 namespace ManagementTalent.Infra.Repositories;
 
-public class AssessmentRepositorySql : EntityFrameworkRepositorySqlAbstract<Guid, Assessment>, IAssessmentRepositorySql
+public class AssessmentRepositorySql : EntityFrameworkRepositorySqlAbstract<string, Assessment>, IAssessmentRepositorySql
 {
     private MTDbContext _context;
     public AssessmentRepositorySql(MTDbContext context) : base(context)
