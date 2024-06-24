@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ManagementTalent.Infra.Repositories;
 
-public class JobParameterBaseRepositorySql : EntityFrameworkRepositorySqlAbstract<Guid, JobParameterBase>, IJobParameterBaseRepositorySql
+public class JobParameterBaseRepositorySql : EntityFrameworkRepositorySqlAbstract<string, JobParameterBase>, IJobParameterBaseRepositorySql
 {
     private MTDbContext _context;
     public JobParameterBaseRepositorySql(MTDbContext context) : base(context)

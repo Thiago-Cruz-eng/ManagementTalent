@@ -18,7 +18,7 @@ public class AssessmentService
     public async Task<CreateAssessmentResponse> CreateAssessment(CreateAssessmentRequest assessmentDto)
     {
         var exist = await GetAssessment(assessmentDto.JobRoleId.ToString());
-        if (exist.Id.Length == 0) return new CreateAssessmentResponse();
+        if (exist.Id is not null) return new CreateAssessmentResponse();
         var assessment = new Assessment
         {
             JobRoleId = assessmentDto.JobRoleId

@@ -50,7 +50,7 @@ public class JobParameterBaseService
         return jobParam;
     }
     
-    public async Task<UpdateJobParameterBaseResponse> UpdateJobParameterBase(Guid id, UpdateJobParameterBaseRequest jobParameterBaseDto)
+    public async Task<UpdateJobParameterBaseResponse> UpdateJobParameterBase(string id, UpdateJobParameterBaseRequest jobParameterBaseDto)
     {
         var jobParameterBase = await _jobParameterBaseRepositorySql.FindById(id);
         if (jobParameterBase == null) throw new ApplicationException("exercise not found");
@@ -72,7 +72,7 @@ public class JobParameterBaseService
         };
     }
     
-    public async Task<GetJobParameterBaseResponse> GetJobParameterBase(Guid id)
+    public async Task<GetJobParameterBaseResponse> GetJobParameterBase(string id)
     {
         var jobParameterBase = await _jobParameterBaseRepositorySql.FindById(id);
         return new GetJobParameterBaseResponse
@@ -117,7 +117,7 @@ public class JobParameterBaseService
     }
     
     
-    public async Task DeleteJobParameterBaseById(Guid id)
+    public async Task DeleteJobParameterBaseById(string id)
     {
         var jobParameterBase = await _jobParameterBaseRepositorySql.FindById(id);
         _jobParameterBaseRepositorySql.Delete(jobParameterBase);

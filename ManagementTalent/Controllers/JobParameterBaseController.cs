@@ -44,7 +44,7 @@ public class JobParameterBaseController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetExerciseById(Guid id)
+    public async Task<IActionResult> GetExerciseById(string id)
     {
         try
         {
@@ -72,7 +72,7 @@ public class JobParameterBaseController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateExerciseById(Guid id, [FromBody] UpdateJobParameterBaseRequest updateExerciseDto)
+    public async Task<IActionResult> UpdateExerciseById(string id, [FromBody] UpdateJobParameterBaseRequest updateExerciseDto)
     {
         try
         {
@@ -86,7 +86,7 @@ public class JobParameterBaseController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteExerciseById(Guid id)
+    public async Task<IActionResult> DeleteExerciseById(string id)
     {
         try
         {
