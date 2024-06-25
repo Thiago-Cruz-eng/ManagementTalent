@@ -48,8 +48,7 @@ public class AssessmentParamResultService
         if (assessmentParamResult == null) throw new ApplicationException("exercise not found");
         assessmentParamResult.Description = assessmentParamResultDto.Description ?? assessmentParamResult.Description;
         assessmentParamResult.Observation = assessmentParamResultDto.Observation ?? assessmentParamResult.Observation;
-        assessmentParamResult.RealityResult = assessmentParamResultDto.Result ?? assessmentParamResult.RealityResult;    
-        assessmentParamResult.Expected = assessmentParamResultDto.Result ?? assessmentParamResult.Expected;    
+        assessmentParamResult.RealityResult = assessmentParamResultDto.Result ?? assessmentParamResult.RealityResult;        
         
         assessmentParamResult.Validate();
  

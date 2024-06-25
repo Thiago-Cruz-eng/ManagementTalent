@@ -230,13 +230,16 @@ public class AssessmentResultService
             var fullAssessmentResult = new FullAssessmentResult();
             fullAssessmentResult.AssessmentResult = result;
             var groups = await _groupParameterResultRepositorySql.FindAll();
-            fullAssessmentResult.GroupParameterResults = groups.Where(x => x.AssessmentResultId == result.Id).ToList();
-            foreach (var groupParameterResult in groups.Where(x => x.AssessmentResultId == result.Id))
+            var jobparam = await _assessmentParamResultRepositorySql.FindAll();
+            var actualGruopInAssessment = groups.Where(x => x.AssessmentResultId == result.Id).ToList();
+            foreach (var groupParameterResult in actualGruopInAssessment)
             {
-                var jobParams = await _assessmentParamResultRepositorySql.FindAll();
-                fullAssessmentResult.AssessmentParamResults =
-                    jobParams.Where(x => x.GroupParameterResultId == groupParameterResult.Id).ToList();
+                var actualJobParamResultInGroupParamResult =
+                    jobparam.Where(x => x.GroupParameterResultId == groupParameterResult.Id).ToList();
+                
+                fullAssessmentResult.GroupJobParam.Add(groupParameterResult);
             }
+            
             listFullAssessmentResult.Add(fullAssessmentResult);
         }
 
@@ -308,13 +311,13 @@ public class AssessmentResultService
 
     private void CreateItemContent(iTextSharp.text.Document document, FullAssessmentResult assessment)
     {
-        foreach (var groupParameter in assessment.GroupParameterResults)
+        foreach (var groupParameterJobParam in assessment.GroupJobParam)
         {
-            var paragraphHeader = new Paragraph(groupParameter.GroupParamTitle + ":", 
+            var paragraphHeader = new Paragraph(groupParameterJobParam.GroupParamTitle + ":", 
                 new Font(Font.FontFamily.TIMES_ROMAN, 14f, Font.BOLD));
             document.Add(paragraphHeader);
 
-            foreach (var assessmentParamResult in assessment.AssessmentParamResults.Where(x => x.GroupParameterResultId == groupParameter.Id))
+            foreach (var assessmentParamResult in groupParameterJobParam.AssessmentParam.Where(x => x.GroupParameterResultId == groupParameterJobParam.Id))
             {
                 document.Add(new Paragraph($"{assessmentParamResult.Description}", new Font(Font.FontFamily.TIMES_ROMAN, 12f, Font.BOLD)));
                 document.Add(new Paragraph($"- Observação: {assessmentParamResult.Observation}"));
@@ -328,6 +331,5 @@ public class AssessmentResultService
 internal class FullAssessmentResult
 {
     public AssessmentResult AssessmentResult { get; set; }
-    public List<GroupParameterResult> GroupParameterResults { get; set; }
-    public List<AssessmentParamResult> AssessmentParamResults { get; set; }
+    public List<GroupParameterResult> GroupJobParam { get; set; } = new();
 }
