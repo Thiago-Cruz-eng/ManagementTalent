@@ -136,7 +136,6 @@ public class AssessmentResultService
         if (assessmentResult == null) throw new ApplicationException("exercise not found");
         assessmentResult.CollaboratorId = colab.Id;
         assessmentResult.SupervisorId = colab.SupervisorId;
-        assessmentResult.NextAssessment = assessmentResultDto.NextAssessment;   
         
         assessmentResult.Validate();
         await _assessmentResultRepositorySql.Update(assessmentResult);
@@ -248,7 +247,7 @@ public class AssessmentResultService
         var writer = PdfWriter.GetInstance(document, memoryStream);
         var par = new List<Paragraph>();
         document.Open();
-        var firstRegisterToMakeMetrics =  listFullAssessmentResult.FirstOrDefault()!;
+        var firstRegisterToMakeMetrics =  listFullAssessmentResult.MaxBy(x => x.AssessmentResult.CreateAt)!;
         par.Add(new Paragraph("Relatorio de perfomance:", 
             new Font(Font.FontFamily.TIMES_ROMAN, 14f, Font.BOLD)));
        
@@ -283,6 +282,7 @@ public class AssessmentResultService
             Font = new Font(Font.FontFamily.TIMES_ROMAN, 18f)
         });
         par.ForEach(x => document.Add(x));
+        CreateComparisonContent(document, listFullAssessmentResult);
         AddTableContent(document, listFullAssessmentResult);
         document.Close();
         writer.Close();
@@ -292,7 +292,7 @@ public class AssessmentResultService
 
     private void AddTableContent(iTextSharp.text.Document document, List<FullAssessmentResult> assessment)
     {
-        foreach (var assessmentResult in assessment)
+        foreach (var assessmentResult in assessment.OrderByDescending(x => x.AssessmentResult.CreateAt))
         {
             document.Add(new Paragraph("______________________________________________________________________________"));
             document.Add(new Paragraph($"Data: {assessmentResult.AssessmentResult.CreateAt}"));
@@ -300,13 +300,65 @@ public class AssessmentResultService
             document.Add(new Paragraph($"Senioridade: {assessmentResult.AssessmentResult.ActualSeniorityName}"));
             document.Add(new Paragraph($"Resultado: {assessmentResult.AssessmentResult.Result}"));
             CreateItemContent(document, assessmentResult);
-            //CreateComparisonContent(document, assessmentResult);
         }
     }
 
-    private void CreateComparisonContent(iTextSharp.text.Document document, FullAssessmentResult assessmentResult)
+    private void CreateComparisonContent(iTextSharp.text.Document document, List<FullAssessmentResult> assessment)
     {
-        throw new NotImplementedException();
+        var sortedAssessments = assessment.OrderByDescending(x => x.AssessmentResult.CreateAt).ToList();
+        
+        if (sortedAssessments.Count < 2)
+        {
+            document.Add(new Paragraph("Não há avaliações suficientes para comparação."));
+            return;
+        }
+        
+        var currentAssessment = sortedAssessments[0];
+        var previousAssessment = sortedAssessments[1];
+        
+        var comparisons = CompareAssessments(currentAssessment, previousAssessment);
+
+        document.Add(new Paragraph("______________________________________________________________________________"));
+        document.Add(new Paragraph($"Evolução em comparação com a última avaliação: {comparisons.Evolution}"));
+        document.Add(new Paragraph($"Pilar com maior destaque: {comparisons.TopGroupParamTitle}"));
+        document.Add(new Paragraph($"Parâmetro de maior destaque: {comparisons.TopEvolvedParamTitle}"));
+        document.Add(new Paragraph($"Parâmetro de menor destaque: {comparisons.LeastEvolvedParamTitle}"));
+    }
+
+    private ComparisonResult CompareAssessments(FullAssessmentResult current, FullAssessmentResult previous)
+    {
+        var betterPillar = 0;
+        var betterParamResult = 0;
+        var worstParamResult = 999;
+        double? diff = 0.0;
+        var betterPillarName = "";
+        var betterParamResultName = "";
+        var worstParamResultName = "";
+        
+        foreach (var currentGroup in current.GroupJobParam)
+        {
+            var previousGroup = previous.GroupJobParam.FirstOrDefault(g => g.GroupParamTitle == currentGroup.GroupParamTitle);
+            if (previousGroup != null)
+            {
+                var actualRealityResult = currentGroup.AssessmentParam.Sum(x => x.RealityResult);
+                var prevRealityResult = previousGroup.AssessmentParam.Sum(x => x.RealityResult);
+                if (actualRealityResult > betterPillar) betterPillarName = currentGroup.GroupParamTitle;
+                diff = ((prevRealityResult - actualRealityResult) / prevRealityResult) * 100;
+
+                var worstParam = currentGroup.AssessmentParam.MinBy(x => x.RealityResult);
+                if(worstParamResult > worstParam?.RealityResult) worstParamResultName = worstParam.JobParamTitle;
+                var betterParam = currentGroup.AssessmentParam.MaxBy(x => x.RealityResult);
+                if(betterParamResult < betterParam?.RealityResult) betterParamResultName = betterParam.JobParamTitle;
+            }
+        }
+
+        return new ComparisonResult
+        {
+            Evolution = diff,
+            TopGroupParamTitle = betterPillarName,
+            TopEvolvedParamTitle = betterParamResultName,
+            LeastEvolvedParamTitle = worstParamResultName
+        };
     }
 
     private void CreateItemContent(iTextSharp.text.Document document, FullAssessmentResult assessment)
@@ -319,7 +371,8 @@ public class AssessmentResultService
 
             foreach (var assessmentParamResult in groupParameterJobParam.AssessmentParam.Where(x => x.GroupParameterResultId == groupParameterJobParam.Id))
             {
-                document.Add(new Paragraph($"{assessmentParamResult.Description}", new Font(Font.FontFamily.TIMES_ROMAN, 12f, Font.BOLD)));
+                document.Add(new Paragraph($"{assessmentParamResult.JobParamTitle}", new Font(Font.FontFamily.TIMES_ROMAN, 16f, Font.BOLD)));
+                document.Add(new Paragraph($"- Observação: {assessmentParamResult.Description}"));
                 document.Add(new Paragraph($"- Observação: {assessmentParamResult.Observation}"));
                 document.Add(new Paragraph($"- Esperado: {assessmentParamResult.Expected}"));
                 document.Add(new Paragraph($"- Realizado: {assessmentParamResult.RealityResult}"));
@@ -332,4 +385,12 @@ internal class FullAssessmentResult
 {
     public AssessmentResult AssessmentResult { get; set; }
     public List<GroupParameterResult> GroupJobParam { get; set; } = new();
+}
+
+internal class ComparisonResult
+{
+    public double? Evolution { get; set; }
+    public string TopGroupParamTitle { get; set; }
+    public string TopEvolvedParamTitle { get; set; }
+    public string LeastEvolvedParamTitle { get; set; }
 }

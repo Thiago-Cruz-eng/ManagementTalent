@@ -60,7 +60,7 @@ public class AssessmentResultController : ControllerBase
         }
     }
 
-    [HttpPut()]
+    [HttpPut("{assessmentId}")]
     public async Task<IActionResult> UpdateExerciseById(Guid assessmentId, [FromBody] UpdateAssessmentResultRequest updateExerciseDto)
     {
         try

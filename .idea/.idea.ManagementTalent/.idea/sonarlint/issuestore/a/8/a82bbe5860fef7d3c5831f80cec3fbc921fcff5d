@@ -1,7 +1,6 @@
 
-Šcsharpsquid:S1854T"@Remove this useless assignment to local variable 'jobParamBase'.(ö‚Ïù8ÉÁ½š2J$210db214-4c8e-48ea-a10f-4c53be8620d6
-Šcsharpsquid:S112ˆ"@'System.ApplicationException' should not be thrown by user code.(Ğ’¸8ğÇ‰œÿ1J$e3049c96-9ff8-45f8-8f71-d2d2fe1b9b01
-csharpsquid:S107"FConstructor has 10 parameters, which is greater than the 7 authorized.(´å8ª«ÕŸ€2J$8d19c874-d1dd-4515-9e3e-a46536e08ae4
-†csharpsquid:S1144³";Remove the unused private method 'CreateComparisonContent'.(ƒàÍã8ûàãø„2J$3762242f-d0a1-4078-8611-9d22b060e53a
-šcsharpsquid:S1481í"JRemove the unused local variable 'actualJobParamResultInGroupParamResult'.(ğÜ‘—şÿÿÿÿ8ÿ¸œù„2J$01234b67-2ed4-43fd-b803-ce6b4846d2ab
-ncsharpsquid:S125¯"Remove this commented out code.(Öšú¥ûÿÿÿÿ8üàãø„2J$a68f56d5-c64e-404f-87c2-6160d95da70b
+Šcsharpsquid:S1854T"@Remove this useless assignment to local variable 'jobParamBase'.(ö‚Ïù8ÉÁ½š2J$396d1627-70e4-463d-a42e-bdcb98b46246
+csharpsquid:S6602Ô"N"Find" method should be used instead of the "FirstOrDefault" extension method.(æ©¶²ıÿÿÿÿ8ñæ¥Ô…2J$9eb782b9-66be-4c90-8980-4bb67415458e
+Šcsharpsquid:S112ˆ"@'System.ApplicationException' should not be thrown by user code.(Ğ’¸8ğÇ‰œÿ1J$9e102086-5fb0-4db7-a6b6-115a7649411f
+csharpsquid:S107"FConstructor has 10 parameters, which is greater than the 7 authorized.(´å8ª«ÕŸ€2J$e49605c1-580a-4d65-aff9-6da84771d9cd
+šcsharpsquid:S1481ì"JRemove the unused local variable 'actualJobParamResultInGroupParamResult'.(ğÜ‘—şÿÿÿÿ8ÿ¸œù„2J$1302326d-a729-4645-a224-327b975b5dc9
