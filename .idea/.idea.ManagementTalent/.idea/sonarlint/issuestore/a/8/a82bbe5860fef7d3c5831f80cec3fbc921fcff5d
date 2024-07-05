@@ -1,6 +1,6 @@
 
-Šcsharpsquid:S1854T"@Remove this useless assignment to local variable 'jobParamBase'.(ö‚Ïù8ÉÁ½š2J$396d1627-70e4-463d-a42e-bdcb98b46246
-csharpsquid:S6602Ô"N"Find" method should be used instead of the "FirstOrDefault" extension method.(æ©¶²ıÿÿÿÿ8ñæ¥Ô…2J$9eb782b9-66be-4c90-8980-4bb67415458e
-Šcsharpsquid:S112ˆ"@'System.ApplicationException' should not be thrown by user code.(Ğ’¸8ğÇ‰œÿ1J$9e102086-5fb0-4db7-a6b6-115a7649411f
-csharpsquid:S107"FConstructor has 10 parameters, which is greater than the 7 authorized.(´å8ª«ÕŸ€2J$e49605c1-580a-4d65-aff9-6da84771d9cd
-šcsharpsquid:S1481ì"JRemove the unused local variable 'actualJobParamResultInGroupParamResult'.(ğÜ‘—şÿÿÿÿ8ÿ¸œù„2J$1302326d-a729-4645-a224-327b975b5dc9
+Šcsharpsquid:S1854T"@Remove this useless assignment to local variable 'jobParamBase'.(ö‚Ïù8ÉÁ½š2J$ef32a90a-b403-4545-985f-0c310f0ca1e6
+csharpsquid:S6602Ô"N"Find" method should be used instead of the "FirstOrDefault" extension method.(æ©¶²ıÿÿÿÿ8ñæ¥Ô…2J$3649134c-a5ff-46dc-b5c3-8de80da0de0f
+Šcsharpsquid:S112ˆ"@'System.ApplicationException' should not be thrown by user code.(Ğ’¸8ğÇ‰œÿ1J$ac305d55-9998-455a-83a9-2ac71fd5ac8e
+csharpsquid:S107"FConstructor has 10 parameters, which is greater than the 7 authorized.(´å8ª«ÕŸ€2J$99c073e8-57df-43ba-9ba9-a8cc58a1c656
+šcsharpsquid:S1481ì"JRemove the unused local variable 'actualJobParamResultInGroupParamResult'.(ğÜ‘—şÿÿÿÿ8ÿ¸œù„2J$76b30936-5b1b-4c1e-9049-72ebec23b2e4

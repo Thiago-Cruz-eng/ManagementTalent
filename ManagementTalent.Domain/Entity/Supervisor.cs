@@ -3,11 +3,13 @@ namespace ManagementTalent.Domain.Entity;
 public class Supervisor
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
+    public string Email { get; set; }
     public Guid? SupFatherId { get; set; }
     public string Name { get; set; }
     public string Company { get; set; }
     public DateTime SinceAtInJob { get; set; }
     public int Age { get; set; }
+    public bool Active { get; set; }
     public ICollection<Colab> Colabs { get; set; }
     
     private List<string> _validationErrors;

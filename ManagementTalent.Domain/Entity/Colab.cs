@@ -5,12 +5,14 @@ namespace ManagementTalent.Domain.Entity;
 
 public class Colab : IdentityUser
 {
+    public string Email { get; set; }
     public string Name { get; set; }
     public DateTime DateOfCreation { get; set; } = DateTime.UtcNow;
     public DateTime StartAt { get; set; }
     public Guid JobRoleId { get; set; }
     public string SeniorityId { get; set; }
     public string SupervisorId { get; set; }
+    public bool Active { get; set; }
     public Seniority Seniority { get; set; }
     public JobRole JobRole { get; set; }
     public Supervisor Supervisor { get; set; }

@@ -12,6 +12,7 @@ namespace ManagementTalent.Infra.MySql
         public MTDbContext(DbContextOptions options) : base (options) { }
         
         public DbSet<Colab> Colabs { get; set; }
+        public DbSet<UserSystem> UserSystems { get; set; }
         public DbSet<Supervisor> Supervisors { get; set; }
         public DbSet<Seniority> Senioritys { get; set; }
         public DbSet<JobRole> JobRoles { get; set; }
@@ -38,6 +39,7 @@ namespace ManagementTalent.Infra.MySql
             modelBuilder.ApplyConfiguration(new AssessmentConfig());
             modelBuilder.ApplyConfiguration(new GroupParameterJobParameterConfig());
             modelBuilder.ApplyConfiguration(new JobParameterSeniorityConfig());
+            modelBuilder.ApplyConfiguration(new UserSystemConfig());
             
             base.OnModelCreating(modelBuilder);
         }
