@@ -56,6 +56,20 @@ public class UserSystemController : ControllerBase
             throw new Exception("error on get UserSystem",e);
         }
     }
+    
+    [HttpPost("getlogin")]
+    public async Task<IActionResult> GetUserSystemByLogin(LoginUserSystemRequest login)
+    {
+        try
+        {
+            var userSystem = await _userSystemService.GetUserSystemByLogin(login);
+            return Ok(userSystem);
+        }
+        catch (Exception e)
+        {
+            throw new Exception("error on get UserSystem",e);
+        }
+    }
 
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateUserSystemById(Guid id, [FromBody] UpdateUserSystemRequest updateUserSystemDto)

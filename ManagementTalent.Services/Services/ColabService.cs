@@ -28,7 +28,8 @@ public class ColabService
             StartAt = colabDto.StartAt,
             SeniorityId = colabDto.SeniorityId.ToString(),
             JobRoleId = colabDto.JobRoleId,
-            SupervisorId = colabDto.SupervisorId
+            SupervisorId = colabDto.SupervisorId,
+            Role = colabDto.Role
         };
         
         colab.Validate();
@@ -61,6 +62,7 @@ public class ColabService
         colab.SeniorityId = colabDto.SeniorityId.ToString() ?? colab.SeniorityId;
         colab.JobRoleId = colabDto.JobRoleId ?? colab.JobRoleId;
         colab.SupervisorId = colabDto.SupervisorId ?? colab.SupervisorId;
+        colab.Role = colabDto.Role ?? colab.Role;
         
         colab.Validate();
  
@@ -89,6 +91,7 @@ public class ColabService
             SeniorityName = colabSeniority.SeniorityName,
             JobRoleName = colabJobRole.JobTitle,
             SupervisorName = colabSup.Name,
+            Role = colab.Role
         };
     }
 
@@ -112,6 +115,7 @@ public class ColabService
                 SeniorityName = colabSeniority.SeniorityName,
                 JobRoleName = colabJobRole.JobTitle,
                 SupervisorName = colabSup.Name,
+                Role = x.Role
             });
         }
         return colabResponse;
@@ -120,7 +124,8 @@ public class ColabService
     public async Task DeleteColabById(Guid id)
     {
         var colab = await _colabRepositorySql.FindById(id.ToString());
-        _colabRepositorySql.Delete(colab);
+        colab.Active = false;
+        await _colabRepositorySql.Update(colab);
         await _colabRepositorySql.SaveChange();
     }
 }

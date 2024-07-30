@@ -1,3 +1,4 @@
+using System.Net;
 using ManagementTalent.Domain.Entity;
 using ManagementTalent.Domain.Entity.AvaliationContext;
 using ManagementTalent.Infra.Interfaces;
@@ -25,6 +26,8 @@ public class UserSystemService
             Email = userSystemDto.Email,
             Password = userSystemDto.Password,
             Role = userSystemDto.Role,
+            ColabId = userSystemDto.ColabId,
+            Active = true
         };
         
         userSystem.Validate();
@@ -37,6 +40,7 @@ public class UserSystemService
             Email = userSystem.Email,
             Password = userSystem.Password,
             Role = userSystem.Role,
+            ColabId = userSystemDto.ColabId
         };
     }
     
@@ -46,6 +50,8 @@ public class UserSystemService
         if (userSystem == null) throw new ApplicationException("exercise not found");
         userSystem.Email = userSystemDto.Email ?? userSystem.Email;
         userSystem.Password = userSystemDto.Password ?? userSystem.Password;
+        userSystem.ColabId = userSystemDto.ColabId ?? userSystem.ColabId;
+        userSystem.Role = userSystemDto.Role ?? userSystem.Role;
         
         userSystem.Validate();
  
@@ -67,6 +73,23 @@ public class UserSystemService
             Email = userSystem.Email,
             Password = userSystem.Password,
             Role = userSystem.Role,
+            ColabId = userSystem.ColabId
+        };
+    }
+    
+    public async Task<GetUserSystemResponse> GetUserSystemByLogin(LoginUserSystemRequest login)
+    {
+        if (string.IsNullOrWhiteSpace(login.Email) || string.IsNullOrWhiteSpace(login.Password))
+            return new GetUserSystemResponse();
+        var userSystem = await _userSystemRepositorySql.GetLogin(login.Email, login.Password);
+        if (userSystem is null) return new GetUserSystemResponse();
+        return new GetUserSystemResponse
+        {
+            Id = userSystem.Id,
+            Email = userSystem.Email,
+            Password = userSystem.Password,
+            Role = userSystem.Role,
+            ColabId = userSystem.ColabId
         };
     }
 
@@ -76,13 +99,17 @@ public class UserSystemService
         var userSystem = await _userSystemRepositorySql.FindAll();
         userSystem.ForEach(x =>
         {
-            userSystemResponses.Add(new GetUserSystemResponse
+            if (x.Active)
             {
-                Id = x.Id,
-                Email = x.Email,
-                Password = x.Password,
-                Role = x.Role,
-            });
+                userSystemResponses.Add(new GetUserSystemResponse
+                {
+                    Id = x.Id,
+                    Email = x.Email,
+                    Password = x.Password,
+                    Role = x.Role,
+                    ColabId = x.ColabId
+                });
+            }
         });
         return userSystemResponses;
     }
@@ -90,7 +117,8 @@ public class UserSystemService
     public async Task DeleteUserSystemById(Guid id)
     {
         var userSystem = await _userSystemRepositorySql.FindById(id.ToString());
-        _userSystemRepositorySql.Delete(userSystem);
+        userSystem.Active = false;
+        await _userSystemRepositorySql.Update(userSystem);
         await _userSystemRepositorySql.SaveChange();
     }
 }

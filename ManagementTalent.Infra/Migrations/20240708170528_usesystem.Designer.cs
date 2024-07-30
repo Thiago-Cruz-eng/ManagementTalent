@@ -4,6 +4,7 @@ using ManagementTalent.Infra.MySql;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ManagementTalent.Infra.Migrations
 {
     [DbContext(typeof(MTDbContext))]
-    partial class MTDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240708170528_usesystem")]
+    partial class usesystem
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -412,14 +415,7 @@ namespace ManagementTalent.Infra.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("varchar(255)");
 
-                    b.Property<bool>("Active")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("ColabId")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime>("CreateAt")
+                    b.Property<DateTime>("Creat_at")
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Email")

@@ -1,5 +1,3 @@
-using System.Runtime.InteropServices.JavaScript;
-
 namespace ManagementTalent.Domain.Entity;
 
 public class UserSystem
@@ -8,7 +6,9 @@ public class UserSystem
     public string Email { get; set; }
     public string Password { get; set; }
     public string Role { get; set; }
-    public DateTime Creat_at { get; set; } = DateTime.UtcNow;
+    public string ColabId { get; set; }
+    public bool Active { get; set; }
+    public DateTime CreateAt { get; set; } = DateTime.UtcNow;
     
     private List<string> _validationErrors;
 

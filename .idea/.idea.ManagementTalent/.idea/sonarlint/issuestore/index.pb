@@ -247,3 +247,5 @@ KManagementTalent.Services/Services/Dtos/Requests/UpdateUserSystemRequest.cs,6\
 ,ManagementTalent.Domain/Entity/UserSystem.cs,c\4\c4fa93c34690603d45cbc454f8c8618aa0075a69
 c
 3ManagementTalent/Controllers/UseSystemController.cs,e\4\e48d6a47479369faaa650434087ee54a734d469f
+z
+JManagementTalent.Services/Services/Dtos/Requests/LoginUserSystemRequest.cs,6\e\6e48360e5fc1ce65a8d9661bcd41ad0a7abcb432

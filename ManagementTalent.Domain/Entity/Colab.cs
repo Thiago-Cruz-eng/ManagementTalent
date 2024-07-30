@@ -5,7 +5,6 @@ namespace ManagementTalent.Domain.Entity;
 
 public class Colab : IdentityUser
 {
-    public string Email { get; set; }
     public string Name { get; set; }
     public DateTime DateOfCreation { get; set; } = DateTime.UtcNow;
     public DateTime StartAt { get; set; }
@@ -13,6 +12,8 @@ public class Colab : IdentityUser
     public string SeniorityId { get; set; }
     public string SupervisorId { get; set; }
     public bool Active { get; set; }
+    public string Role { get; set; }
+    
     public Seniority Seniority { get; set; }
     public JobRole JobRole { get; set; }
     public Supervisor Supervisor { get; set; }
@@ -24,6 +25,7 @@ public class Colab : IdentityUser
         _validationErrors = new List<string>();
 
         ValidateNullAndEmpty(Name);
+        ValidateNullAndEmpty(Role);
         ValidateStartAt();
 
         if (_validationErrors.Any())

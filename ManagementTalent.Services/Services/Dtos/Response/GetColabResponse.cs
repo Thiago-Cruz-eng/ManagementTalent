@@ -16,4 +16,5 @@ public class GetColabResponse
     public string JobRoleName { get; set; }
     public string SeniorityName { get; set; }
     public string SupervisorName { get; set; }
+    public string  Role { get; set; }
 }

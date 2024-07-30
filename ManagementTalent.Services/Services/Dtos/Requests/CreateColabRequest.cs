@@ -11,4 +11,5 @@ public class CreateColabRequest
     public Guid JobRoleId { get; set; }
     public Guid SeniorityId { get; set; }
     public string SupervisorId { get; set; }
+    public string Role { get; set; }
 }

@@ -23,6 +23,7 @@ builder.Services.AddScoped<IJobRoleRepositorySql, JobRoleRepositorySql>();
 builder.Services.AddScoped<ISeniorityRepositorySql, SeniorityRepositorySql>();
 builder.Services.AddScoped<ISupervisorRepositorySql, SupervisorRepositorySql>();
 builder.Services.AddScoped<IGroupParameterResultRepositorySql, GroupParameterResultRepositorySql>();
+builder.Services.AddScoped<IUserSystemRepositorySql, UserSystemRepositorySql>();
 
 builder.Services.AddScoped<AssessmentParamResultService>();
 builder.Services.AddScoped<AssessmentService>();
@@ -34,6 +35,7 @@ builder.Services.AddScoped<JobRoleService>();
 builder.Services.AddScoped<SeniorityService>();
 builder.Services.AddScoped<SupervisorService>();
 builder.Services.AddScoped<GroupParameterResultService>();
+builder.Services.AddScoped<UserSystemService>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: MyAllowSpecificOrigins,
